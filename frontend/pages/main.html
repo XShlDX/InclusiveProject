@@ -4,7 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>ТестЛаб — Задания</title>
-  <link rel="stylesheet" href="main.css" />
+  <link rel="stylesheet" href="/frontend/css/main.css" />
+  <link rel="stylesheet" href="/frontend/css/quiz-styles.css">
   <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;700;900&family=Mulish:wght@300;400;600&display=swap" rel="stylesheet"/>
 </head>
 <body class="page-scroll">
@@ -15,7 +16,7 @@
   <header class="header">
     <div class="header__inner">
 
-      <a href="index.html" class="header__back" aria-label="На главную">
+      <a href="/index.html" class="header__back" aria-label="На главную">
         <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
           <path d="M13 8H3M7 4L3 8l4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
@@ -116,27 +117,14 @@
     </section>
   </main>
 
-  <!-- MODAL -->
-  <div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+  <!-- MODAL — пустой контейнер, наполняется через JS -->
+  <div class="modal" id="modal" role="dialog" aria-modal="true" aria-label="Тест">
     <div class="modal__backdrop" id="modalBackdrop"></div>
     <div class="modal__box">
       <button class="modal__close" id="modalClose" aria-label="Закрыть">✕</button>
-      <div class="modal__tag-row" id="modalTags"></div>
-      <h2 class="modal__title" id="modalTitle"></h2>
-      <p class="modal__desc"  id="modalDesc"></p>
-      <div class="modal__code-block">
-        <div class="modal__code-header">
-          <span id="modalCodeLang">html</span>
-          <button class="copy-btn" id="copyBtn">Копировать</button>
-        </div>
-        <pre><code id="modalCode"></code></pre>
-      </div>
-      <div class="modal__footer">
-        <button class="btn-primary" id="modalStart">Начать задание</button>
-      </div>
     </div>
   </div>
 
-  <script src="main.js"></script>
+  <script src="/frontend/js/main.js"></script>
 </body>
 </html>
