@@ -1,7 +1,4 @@
-from operator import index
-
-from ollama import ChatResponse
-from sqlalchemy import Column, Integer, String, engine, select
+from sqlalchemy import engine, select
 from sqlalchemy.orm import Mapped, sessionmaker, DeclarativeBase
 from sqlalchemy.testing.schema import mapped_column
 

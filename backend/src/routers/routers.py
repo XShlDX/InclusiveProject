@@ -1,0 +1,30 @@
+from fastapi import APIRouter, Depends, Request
+from pydantic import BaseModel
+from src.ai import chat
+from typing import Annotated
+from src.models.models import add_user_data, get_user_requests
+router = APIRouter(
+    prefix="/requests",
+)
+
+
+class Prompt(BaseModel):
+    content: str
+
+class UsersPrompt(BaseModel):
+    content: str
+    prompt: str
+
+@router.post('/')
+async def get_answer(request: Request, prompt: Annotated[Prompt, Depends()]):
+    prompt = prompt.content
+    resp = await chat(prompt)
+    user_ip_address = request.client.host
+    add_user_data(ip_address=user_ip_address, prompt=prompt, response=resp)
+    return resp
+
+@router.get('/')
+def get_requests(request: Request):
+    user_ip_address = request.client.host
+    user_requests = get_user_requests(ip_address=user_ip_address)
+    return user_requests
