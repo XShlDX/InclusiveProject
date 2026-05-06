@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Инклюзивный режим — Специальный доступ</title>
+  <link rel="stylesheet" href="style.css" />
+  <!-- Screen reader live region -->
+  <div id="sr-announcer" aria-live="polite" aria-atomic="true" class="sr-only"></div>
+</head>
+<body>
+
+  <!-- Skip navigation -->
+  <a href="#main-content" class="skip-link" tabindex="0">Перейти к основному содержимому</a>
+
+  <!-- Accessibility Control Bar -->
+  <header class="a11y-bar" role="banner" aria-label="Панель доступности">
+    <div class="a11y-bar__inner">
+      <div class="a11y-bar__brand" aria-label="Инклюзивный режим активен">
+        <span class="brand-icon" aria-hidden="true">◉</span>
+        <span class="brand-label">Инклюзивный режим</span>
+      </div>
+
+      <nav class="a11y-controls" aria-label="Настройки доступности">
+        <button
+          id="btn-font-up"
+          class="a11y-btn"
+          aria-label="Увеличить размер текста"
+          title="Увеличить текст"
+          tabindex="0"
+        >
+          <span aria-hidden="true">А+</span>
+        </button>
+        <button
+          id="btn-font-down"
+          class="a11y-btn"
+          aria-label="Уменьшить размер текста"
+          title="Уменьшить текст"
+          tabindex="0"
+        >
+          <span aria-hidden="true">А−</span>
+        </button>
+        <button
+          id="btn-contrast"
+          class="a11y-btn"
+          aria-label="Переключить высокий контраст"
+          aria-pressed="false"
+          tabindex="0"
+        >
+          <span aria-hidden="true">◑</span> Контраст
+        </button>
+        <button
+          id="btn-spacing"
+          class="a11y-btn"
+          aria-label="Переключить увеличенные отступы"
+          aria-pressed="false"
+          tabindex="0"
+        >
+          <span aria-hidden="true">⇔</span> Отступы
+        </button>
+        <button
+          id="btn-hover"
+          class="a11y-btn"
+          aria-label="Включить озвучивание при наведении курсора"
+          aria-pressed="false"
+          tabindex="0"
+        >
+          <span aria-hidden="true">👆</span> Наведение
+        </button>
+        <button
+          id="btn-voice"
+          class="a11y-btn a11y-btn--primary"
+          aria-label="Включить голосовое озвучивание"
+          aria-pressed="false"
+          tabindex="0"
+        >
+          <span aria-hidden="true">🔊</span> Озвучить
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main id="main-content" tabindex="-1">
+
+    <!-- Hero Section -->
+    <section class="hero" aria-labelledby="hero-heading">
+      <div class="hero__bg" aria-hidden="true">
+        <div class="orb orb--1"></div>
+        <div class="orb orb--2"></div>
+      </div>
+      <div class="hero__content">
+        <p class="hero__eyebrow" aria-label="Категория: Специальный доступ">СПЕЦИАЛЬНЫЙ ДОСТУП</p>
+        <h1 id="hero-heading" class="hero__title">
+          Инклюзивный<br />режим
+        </h1>
+        <p class="hero__desc">
+          Адаптированный интерфейс с поддержкой доступности для людей с нарушением зрения.
+          Управляйте голосом, клавиатурой или касанием.
+        </p>
+        <a href="#features" class="hero__cta" aria-label="Перейти к возможностям инклюзивного режима">
+          <span aria-hidden="true">→</span> Узнать возможности
+        </a>
+      </div>
+    </section>
+
+    <!-- Keyboard Shortcut Guide -->
+    <section class="shortcuts-section" aria-labelledby="shortcuts-heading">
+      <div class="container">
+        <h2 id="shortcuts-heading" class="section-title">Горячие клавиши</h2>
+        <p class="section-desc">Управляйте интерфейсом без мыши</p>
+        <ul class="shortcuts-list" role="list" aria-label="Список горячих клавиш">
+          <li class="shortcut-item">
+            <kbd class="key" aria-label="Клавиша Alt плюс 1">Alt + 1</kbd>
+            <span class="shortcut-desc">Главная страница</span>
+          </li>
+          <li class="shortcut-item">
+            <kbd class="key" aria-label="Клавиша Alt плюс 2">Alt + 2</kbd>
+            <span class="shortcut-desc">Раздел возможностей</span>
+          </li>
+          <li class="shortcut-item">
+            <kbd class="key" aria-label="Клавиша Alt плюс плюс">Alt + +</kbd>
+            <span class="shortcut-desc">Увеличить текст</span>
+          </li>
+          <li class="shortcut-item">
+            <kbd class="key" aria-label="Клавиша Alt плюс минус">Alt + −</kbd>
+            <span class="shortcut-desc">Уменьшить текст</span>
+          </li>
+          <li class="shortcut-item">
+            <kbd class="key" aria-label="Клавиша Alt плюс C">Alt + C</kbd>
+            <span class="shortcut-desc">Высокий контраст</span>
+          </li>
+          <li class="shortcut-item">
+            <kbd class="key" aria-label="Клавиша Alt плюс H">Alt + H</kbd>
+            <span class="shortcut-desc">Озвучивание при наведении</span>
+          </li>
+          <li class="shortcut-item">
+            <kbd class="key" aria-label="Клавиша Alt плюс V">Alt + V</kbd>
+            <span class="shortcut-desc">Голосовое озвучивание</span>
+          </li>
+          <li class="shortcut-item">
+            <kbd class="key" aria-label="Клавиша Tab">Tab</kbd>
+            <span class="shortcut-desc">Следующий элемент</span>
+          </li>
+          <li class="shortcut-item">
+            <kbd class="key" aria-label="Клавиши Shift плюс Tab">Shift + Tab</kbd>
+            <span class="shortcut-desc">Предыдущий элемент</span>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="features-section" aria-labelledby="features-heading">
+      <div class="container">
+        <h2 id="features-heading" class="section-title">Возможности</h2>
+        <p class="section-desc">Всё для комфортного взаимодействия</p>
+        <ul class="features-grid" role="list" aria-label="Список возможностей доступности">
+
+          <li class="feature-card" tabindex="0" aria-label="Голосовое озвучивание: озвучивание любого текста на странице синтезатором речи">
+            <div class="feature-icon" aria-hidden="true">🔊</div>
+            <h3 class="feature-title">Голосовое озвучивание</h3>
+            <p class="feature-text">Синтез речи для любого текста на странице. Нажмите «Озвучить» или Alt+V.</p>
+          </li>
+
+          <li class="feature-card" tabindex="0" aria-label="Масштаб текста: от 14 до 28 пикселей, без потери структуры">
+            <div class="feature-icon" aria-hidden="true">🔎</div>
+            <h3 class="feature-title">Масштаб текста</h3>
+            <p class="feature-text">Размер шрифта от 14 до 28px без потери структуры. Управление через кнопки А+ и А−.</p>
+          </li>
+
+          <li class="feature-card" tabindex="0" aria-label="Высокий контраст: чёрный фон с белым и жёлтым текстом">
+            <div class="feature-icon" aria-hidden="true">◑</div>
+            <h3 class="feature-title">Высокий контраст</h3>
+            <p class="feature-text">Чёрный фон, белый и жёлтый текст — максимальная читабельность для слабовидящих.</p>
+          </li>
+
+          <li class="feature-card" tabindex="0" aria-label="Клавиатурная навигация: полное управление без мыши">
+            <div class="feature-icon" aria-hidden="true">⌨</div>
+            <h3 class="feature-title">Клавиатурная навигация</h3>
+            <p class="feature-text">Полный доступ к любому элементу через Tab, Enter и горячие клавиши Alt.</p>
+          </li>
+
+          <li class="feature-card" tabindex="0" aria-label="Увеличенные отступы: увеличивает межстрочный интервал и отступы">
+            <div class="feature-icon" aria-hidden="true">⇔</div>
+            <h3 class="feature-title">Увеличенные отступы</h3>
+            <p class="feature-text">Межстрочный интервал и внутренние отступы увеличиваются для снижения нагрузки на восприятие.</p>
+          </li>
+
+          <li class="feature-card" tabindex="0" aria-label="ARIA разметка: совместимость со скринридерами NVDA и JAWS">
+            <div class="feature-icon" aria-hidden="true">♿</div>
+            <h3 class="feature-title">ARIA-разметка</h3>
+            <p class="feature-text">Полная совместимость со скринридерами NVDA, JAWS и VoiceOver. Все роли и метки заданы.</p>
+          </li>
+
+        </ul>
+      </div>
+    </section>
+
+    <!-- Voice Input Section -->
+    <section class="voice-section" aria-labelledby="voice-heading">
+      <div class="container">
+        <h2 id="voice-heading" class="section-title">Голосовое управление</h2>
+        <p class="section-desc">Скажите команду или нажмите кнопку</p>
+        <div class="voice-interface" role="region" aria-label="Интерфейс голосового управления">
+          <div class="voice-visualizer" id="voice-visualizer" aria-hidden="true">
+            <span class="bar"></span><span class="bar"></span><span class="bar"></span>
+            <span class="bar"></span><span class="bar"></span><span class="bar"></span>
+            <span class="bar"></span><span class="bar"></span>
+          </div>
+          <p id="voice-status" class="voice-status" aria-live="polite" aria-atomic="true">
+            Голосовое управление не активно
+          </p>
+          <button
+            id="btn-mic"
+            class="voice-btn"
+            aria-label="Активировать голосовое управление"
+            aria-pressed="false"
+            tabindex="0"
+          >
+            <span aria-hidden="true">🎙</span>
+            <span id="mic-label">Начать запись</span>
+          </button>
+          <p class="voice-commands" aria-label="Доступные голосовые команды">
+            Команды: <strong>«увеличить»</strong>, <strong>«уменьшить»</strong>,
+            <strong>«контраст»</strong>, <strong>«прочитать»</strong>, <strong>«стоп»</strong>
+          </p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer" role="contentinfo" aria-label="Нижний колонтитул">
+    <div class="container">
+      <p>Инклюзивный режим · Специальный доступ · WCAG 2.1 AA</p>
+      <p class="footer-hint">Нажмите <kbd>Tab</kbd> для навигации · <kbd>Enter</kbd> для активации</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
