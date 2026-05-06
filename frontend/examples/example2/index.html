@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Добро пожаловать</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;700;900&family=Mulish:wght@300;400;600&display=swap" rel="stylesheet"/>
+</head>
+<body>
+
+  <div class="noise"></div>
+
+  <section class="welcome" id="welcome">
+    <div class="welcome__glow"></div>
+    <div class="welcome__content">
+      <div class="welcome__eyebrow">Система распознавания жестов</div>
+      <h1 class="welcome__title">Добро<br/><span>пожаловать</span></h1>
+      <p class="welcome__slogan">Технологии, которые слышат руки</p>
+      <button class="welcome__btn" id="enterBtn">
+        <span>Войти</span>
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+          <path d="M3 9h12M10 4l5 5-5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+    </div>
+  </section>
+
+  <section class="split hidden" id="split">
+
+    <a href="main.html" class="panel panel--main">
+      <div class="panel__bg panel__bg--main"></div>
+      <div class="panel__content">
+        <span class="panel__tag">Стандартный доступ</span>
+        <h2 class="panel__title">Обычный<br/>режим</h2>
+        <p class="panel__desc">Классический интерфейс без адаптации</p>
+        <div class="panel__arrow">→</div>
+      </div>
+    </a>
+
+    <div class="divider">
+      <div class="divider__line"></div>
+      <span class="divider__label">или</span>
+      <div class="divider__line"></div>
+    </div>
+
+    <a href="forinclusive.html" class="panel panel--inclusive">
+      <div class="panel__bg panel__bg--inclusive"></div>
+      <div class="panel__content">
+        <span class="panel__tag">Специальный доступ</span>
+        <h2 class="panel__title">Инклюзивный<br/>режим</h2>
+        <p class="panel__desc">Адаптированный интерфейс с жестами</p>
+        <div class="panel__arrow">→</div>
+      </div>
+    </a>
+
+  </section>
+
+  <script>
+    const welcome  = document.getElementById('welcome');
+    const split    = document.getElementById('split');
+    const enterBtn = document.getElementById('enterBtn');
+
+    enterBtn.addEventListener('click', () => {
+      welcome.classList.add('fade-out');
+      setTimeout(() => {
+        welcome.classList.add('hidden');
+        split.classList.remove('hidden');
+        split.classList.add('fade-in');
+      }, 600);
+    });
+  </script>
+
+</body>
+</html>
