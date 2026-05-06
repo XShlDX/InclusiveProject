@@ -6,7 +6,7 @@ from pydantic import BaseModel
 from src.ai import chat
 
 app = FastAPI()
-
+#  uvicorn main:app --reload
 history = []
 
 class Prompt(BaseModel):
