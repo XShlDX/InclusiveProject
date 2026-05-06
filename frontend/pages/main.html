@@ -3,57 +3,68 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>ТестЛаб — Тестовые задания</title>
+  <title>ТестЛаб — Задания</title>
   <link rel="stylesheet" href="main.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;800&family=Manrope:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;700;900&family=Mulish:wght@300;400;600&display=swap" rel="stylesheet"/>
 </head>
-<body>
- 
+<body class="page-scroll">
+
+  <div class="noise"></div>
+
   <!-- HEADER -->
   <header class="header">
     <div class="header__inner">
+
+      <a href="index.html" class="header__back" aria-label="На главную">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+          <path d="M13 8H3M7 4L3 8l4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        На главную
+      </a>
+
       <div class="header__logo">
         <span class="logo-dot"></span>
         <span class="logo-text">ТестЛаб</span>
       </div>
+
       <nav class="header__nav">
-        <a href="#">Главная</a>
+        <a href="#">Задания</a>
         <a href="#">Курсы</a>
         <a href="#">О нас</a>
       </nav>
+
       <div class="header__accessibility" title="Настройки доступности" aria-label="Меню доступности">
         <button class="a11y-btn" id="a11yBtn" aria-expanded="false">
-          <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-            <!-- Person body -->
+          <svg width="24" height="24" viewBox="0 0 28 28" fill="none" aria-hidden="true">
             <circle cx="14" cy="5.5" r="3" fill="currentColor"/>
-            <!-- Arms spread -->
             <path d="M4 12h20" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
-            <!-- Torso -->
             <path d="M14 11v8" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
-            <!-- Legs -->
             <path d="M14 19l-4 5.5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
             <path d="M14 19l4 5.5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
           </svg>
         </button>
         <div class="a11y-dropdown" id="a11yDropdown" role="menu">
-          <button onclick="document.body.classList.toggle('large-text')" role="menuitem">🔠 Крупный шрифт</button>
+          <button onclick="document.body.classList.toggle('large-text')"    role="menuitem">🔠 Крупный шрифт</button>
           <button onclick="document.body.classList.toggle('high-contrast')" role="menuitem">🌗 Контраст</button>
           <button onclick="document.body.classList.toggle('dyslexia-font')" role="menuitem">🅰️ Шрифт дислексии</button>
         </div>
       </div>
+
     </div>
   </header>
- 
+
   <!-- MAIN -->
-  <main class="main">
+  <main class="page-main">
+
     <section class="hero">
+      <div class="hero__glow"></div>
       <div class="hero__label">6 заданий · HTML &amp; CSS</div>
       <h1 class="hero__title">Тестовые<br/><em>задания</em></h1>
       <p class="hero__sub">Выбери задание и проверь свои знания в вёрстке</p>
     </section>
- 
+
     <section class="cards" id="cards">
- 
+
       <article class="card" data-id="1" tabindex="0" role="button" aria-label="Открыть задание 1">
         <div class="card__num">01</div>
         <div class="card__tags"><span class="tag tag--html">HTML</span></div>
@@ -61,7 +72,7 @@
         <p class="card__desc">Расставь правильные семантические теги для новостной статьи.</p>
         <div class="card__arrow">→</div>
       </article>
- 
+
       <article class="card" data-id="2" tabindex="0" role="button" aria-label="Открыть задание 2">
         <div class="card__num">02</div>
         <div class="card__tags"><span class="tag tag--css">CSS</span></div>
@@ -69,7 +80,7 @@
         <p class="card__desc">Создай адаптивный навбар с помощью только flexbox.</p>
         <div class="card__arrow">→</div>
       </article>
- 
+
       <article class="card" data-id="3" tabindex="0" role="button" aria-label="Открыть задание 3">
         <div class="card__num">03</div>
         <div class="card__tags"><span class="tag tag--html">HTML</span><span class="tag tag--css">CSS</span></div>
@@ -77,7 +88,7 @@
         <p class="card__desc">Свёрстай доступную форму с валидацией и стилями фокуса.</p>
         <div class="card__arrow">→</div>
       </article>
- 
+
       <article class="card" data-id="4" tabindex="0" role="button" aria-label="Открыть задание 4">
         <div class="card__num">04</div>
         <div class="card__tags"><span class="tag tag--css">CSS</span></div>
@@ -85,7 +96,7 @@
         <p class="card__desc">Построй фото-галерею с масонри-эффектом через CSS Grid.</p>
         <div class="card__arrow">→</div>
       </article>
- 
+
       <article class="card" data-id="5" tabindex="0" role="button" aria-label="Открыть задание 5">
         <div class="card__num">05</div>
         <div class="card__tags"><span class="tag tag--html">HTML</span></div>
@@ -93,7 +104,7 @@
         <p class="card__desc">Создай таблицу данных с правильными ARIA-атрибутами.</p>
         <div class="card__arrow">→</div>
       </article>
- 
+
       <article class="card" data-id="6" tabindex="0" role="button" aria-label="Открыть задание 6">
         <div class="card__num">06</div>
         <div class="card__tags"><span class="tag tag--css">CSS</span></div>
@@ -101,18 +112,18 @@
         <p class="card__desc">Добавь плавные CSS-анимации к кнопкам и карточкам.</p>
         <div class="card__arrow">→</div>
       </article>
- 
+
     </section>
   </main>
- 
-  <!-- TASK MODAL -->
+
+  <!-- MODAL -->
   <div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
     <div class="modal__backdrop" id="modalBackdrop"></div>
     <div class="modal__box">
       <button class="modal__close" id="modalClose" aria-label="Закрыть">✕</button>
       <div class="modal__tag-row" id="modalTags"></div>
       <h2 class="modal__title" id="modalTitle"></h2>
-      <p class="modal__desc" id="modalDesc"></p>
+      <p class="modal__desc"  id="modalDesc"></p>
       <div class="modal__code-block">
         <div class="modal__code-header">
           <span id="modalCodeLang">html</span>
@@ -125,7 +136,7 @@
       </div>
     </div>
   </div>
- 
+
   <script src="main.js"></script>
 </body>
 </html>
