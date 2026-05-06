@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Depends, Request
+from typing import Annotated
 
 from src.ai import chat
-from typing import Annotated
 from src.models.models import add_user_data, get_user_requests
 from src.schemas.schemas import Prompt
 
