@@ -7,11 +7,7 @@ from starlette.staticfiles import StaticFiles
 from src.models.models import Base, engine
 from src.routers.routers import router as requests_router
 from src.schemas.file_loader import router as file_loader
-
-
-
-
-from src.services.config import FRONTEND_DIR
+from src.services.config import FRONTEND_DIR, join_path
 
 
 @asynccontextmanager
@@ -43,5 +39,6 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+
 #### ДЛЯ ЗАПУСКА index.html в папке frontend
-app.mount("/frontend", StaticFiles(directory=FRONTEND_DIR), name="frontend")
+app.mount("/frontend", StaticFiles(directory=join_path), name="frontend")

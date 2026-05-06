@@ -5,14 +5,12 @@ from typing import Annotated
 from src.services.ai import chat
 from src.models.models import add_user_data, get_user_requests
 from src.schemas.schemas import Prompt
-from src.services.config import join_path
+from src.services.config import HTML_FILE_PATH
 
-router = APIRouter(
-    prefix="/requests",
-)
+router = APIRouter()
 
 
-@router.post('/')
+@router.post('/requests')
 async def get_answer(request: Request, prompt: Annotated[Prompt, Depends()]):
     prompt = prompt.content
     resp = await chat(prompt)
@@ -20,7 +18,7 @@ async def get_answer(request: Request, prompt: Annotated[Prompt, Depends()]):
     add_user_data(ip_address=user_ip_address, prompt=prompt, response=resp)
     return resp
 
-@router.get('/')
+@router.get('/requests')
 def get_requests(request: Request):
     user_ip_address = request.client.host
     user_requests = get_user_requests(ip_address=user_ip_address)
@@ -28,4 +26,4 @@ def get_requests(request: Request):
 
 @router.get("/")
 async def serve_index():
-    return FileResponse(join_path)
+    return FileResponse(HTML_FILE_PATH)
