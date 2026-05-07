@@ -9,7 +9,3 @@ async function getData(url) {
     console.log("Ошибка при получении данных:", error);
   }
 }
-
-const TestURL = ""
-
-console.log()
