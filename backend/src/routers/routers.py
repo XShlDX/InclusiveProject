@@ -7,10 +7,10 @@ from src.models.models import add_user_data, get_user_requests
 from src.schemas.schemas import Prompt
 
 
-router = APIRouter()
+router = APIRouter(prefix="/requests",tags=["AI Chat"])
 
 
-@router.post('/requests')
+@router.post('/')
 async def get_answer(request: Request, prompt: Prompt):
     prompt = prompt.content
     resp = await chat(prompt)
@@ -18,7 +18,7 @@ async def get_answer(request: Request, prompt: Prompt):
     add_user_data(ip_address=user_ip_address, prompt=prompt, response=resp)
     return resp
 
-@router.get('/requests')
+@router.get('/')
 def get_requests(request: Request):
     user_ip_address = request.client.host
     user_requests = get_user_requests(ip_address=user_ip_address)

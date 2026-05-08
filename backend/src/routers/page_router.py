@@ -1,7 +1,7 @@
 from fastapi import APIRouter
 from fastapi.responses import FileResponse
 from src.services.config import HTML_FILE_PATH
-router = APIRouter()
+router = APIRouter(tags=["pages for frontend"])
 
 
 @router.get("/")

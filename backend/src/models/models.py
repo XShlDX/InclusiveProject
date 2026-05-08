@@ -16,9 +16,6 @@ class ResponseTable(Base):
     message : Mapped[str]
     response : Mapped[str]
 
-
-
-
 def get_user_requests(ip_address: str) -> list[ResponseTable]:
     with session() as new_session:
         query = select(ResponseTable).filter_by(ip_address=ip_address)
@@ -34,7 +31,3 @@ def add_user_data(ip_address: str, prompt: str, response: str) -> None:
         )
         new_session.add(new_request)
         new_session.commit()
-
-
-def get_response():
-    return session.query(ResponseTable).all()
