@@ -11,7 +11,7 @@ router = APIRouter()
 
 
 @router.post('/requests')
-async def get_answer(request: Request, prompt: Annotated[Prompt, Depends()]):
+async def get_answer(request: Request, prompt: Prompt):
     prompt = prompt.content
     resp = await chat(prompt)
     user_ip_address = request.client.host
