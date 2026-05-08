@@ -3,7 +3,6 @@
    ========================================================= */
 
 :root {
-  /* Kahoot-inspired palette */
   --red:     #e63950;
   --blue:    #1368ce;
   --yellow:  #d89e00;
@@ -13,7 +12,6 @@
   --yellow-l:#ffcc02;
   --green-l: #3dc93d;
 
-  /* Layout */
   --sidebar-w: 260px;
   --bg:        #10102a;
   --bg2:       #16163a;
@@ -48,6 +46,7 @@ html, body {
   flex-direction: column;
   z-index: 100;
   transition: transform .3s ease;
+  overflow: hidden; /* важно — ничего не вылезает */
 }
 
 .sidebar-logo {
@@ -56,6 +55,7 @@ html, body {
   gap: 12px;
   padding: 24px 20px 20px;
   border-bottom: 1px solid var(--border);
+  flex-shrink: 0;
 }
 .sidebar-logo-icon { font-size: 28px; }
 .sidebar-logo-text {
@@ -74,11 +74,24 @@ html, body {
   color: var(--muted);
   padding: 18px 20px 8px;
   text-transform: uppercase;
+  flex-shrink: 0;
 }
 
+/* Секция доступности — фиксированная высота, не растягивается */
+.a11y-controls {
+  flex: 0 0 auto;
+  overflow: hidden;
+  padding: 4px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+/* Секция тем — занимает оставшееся место */
 .sidebar-nav {
   flex: 1;
   overflow-y: auto;
+  overflow-x: hidden;
   padding: 4px 12px;
   display: flex;
   flex-direction: column;
@@ -100,6 +113,10 @@ html, body {
   color: var(--muted);
   border: 1px solid transparent;
   user-select: none;
+  width: 100%;
+  box-sizing: border-box;
+  min-width: 0;
+  background: none;
 }
 .nav-item:hover {
   background: var(--surface);
@@ -129,9 +146,44 @@ html, body {
 }
 .nav-item.done .nav-item-check { opacity: 1; }
 
+/* ── Группа кнопок А+ / А− ── */
+.a11y-group {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+  padding-bottom: 4px;
+  width: 100%;
+}
+
+.a11y-group .nav-item {
+  padding: 10px 6px;
+  justify-content: center;
+  flex-direction: column;
+  gap: 3px;
+  text-align: center;
+  font-size: 12px;
+}
+
+.a11y-group .nav-item-icon { font-size: 15px; }
+.a11y-group .nav-item-name { font-size: 11px; }
+
+/* ── Переключатели (контраст, отступы, наведение) ── */
+.nav-item.a11y-toggle {
+  justify-content: flex-start;
+}
+.nav-item.a11y-toggle[aria-pressed="true"] {
+  background: var(--surface);
+  border-color: var(--blue-l);
+  color: var(--text);
+}
+.nav-item.a11y-toggle[aria-pressed="true"] .nav-item-check {
+  opacity: 1;
+}
+
 .sidebar-footer {
   padding: 16px 20px;
   border-top: 1px solid var(--border);
+  flex-shrink: 0;
 }
 .sidebar-footer-note {
   font-size: 12px;
@@ -222,7 +274,6 @@ html, body {
 }
 .start-sub { font-size: 17px; color: var(--muted); font-weight: 600; }
 
-/* topic preview cards on start */
 .start-topics-preview {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
@@ -253,7 +304,6 @@ html, body {
 .topic-card-count { font-size: 12px; color: var(--muted); font-weight: 600; }
 .topic-card.done .topic-card-name::after { content: ' ✅'; }
 
-/* background orbs */
 .bg-orbs { position: fixed; inset: 0; pointer-events: none; overflow: hidden; }
 .orb {
   position: absolute;
@@ -327,7 +377,6 @@ html, body {
 .q-text { font-size: clamp(18px, 3vw, 26px); font-weight: 800; line-height: 1.4; }
 .q-hint { margin-top: 10px; font-size: 13px; color: var(--muted); font-weight: 600; }
 
-/* Answers */
 .answers-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -415,7 +464,6 @@ html, body {
   flex-direction: column;
 }
 
-/* GIF */
 .result-gif-wrap {
   position: relative;
   z-index: 2;
@@ -429,7 +477,6 @@ html, body {
   display: block;
 }
 
-/* card */
 .result-card {
   position: relative;
   z-index: 2;
@@ -454,7 +501,6 @@ html, body {
 
 .result-buttons { display: flex; gap: 12px; margin-top: 6px; flex-wrap: wrap; justify-content: center; }
 
-/* confetti */
 .confetti-layer { position: fixed; inset: 0; pointer-events: none; z-index: 1; }
 .confetti-piece {
   position: absolute;
@@ -517,8 +563,6 @@ html, body {
 /* =========================================================
    ПЛАВАЮЩИЙ ЧАТ
    ========================================================= */
-
-/* ── FAB кнопка ── */
 .chat-fab {
   position: fixed;
   bottom: 28px;
@@ -546,7 +590,6 @@ html, body {
 .chat-fab-icon { line-height: 1; transition: transform .25s; }
 .chat-fab.open .chat-fab-icon { transform: rotate(20deg) scale(.85); }
 
-/* значок непрочитанного */
 .chat-fab-badge {
   position: absolute;
   top: 4px; right: 4px;
@@ -564,7 +607,6 @@ html, body {
 }
 @keyframes badgePop { from{transform:scale(0)} to{transform:scale(1)} }
 
-/* ── Popup окно ── */
 .chat-popup {
   position: fixed;
   bottom: 100px;
@@ -590,7 +632,6 @@ html, body {
   to   { opacity: 1; transform: scale(1) translateY(0); }
 }
 
-/* ── Шапка ── */
 .cp-header {
   display: flex;
   align-items: center;
@@ -649,7 +690,6 @@ html, body {
 }
 .cp-btn:hover { background: rgba(255,255,255,.08); color: #fff; }
 
-/* ── Лента сообщений ── */
 .cp-messages {
   flex: 1;
   overflow-y: auto;
@@ -709,7 +749,6 @@ html, body {
 }
 .cp-user .cp-time { text-align: right; }
 
-/* ── Индикатор «печатает» ── */
 .cp-typing {
   padding: 0 14px 8px;
   flex-shrink: 0;
@@ -733,7 +772,6 @@ html, body {
   40%          { transform: scale(1);  opacity: 1;  }
 }
 
-/* ── Поле ввода ── */
 .cp-input-area {
   display: flex;
   align-items: flex-end;
@@ -784,7 +822,6 @@ html, body {
 .cp-send:active { transform: scale(.93); }
 .cp-send:disabled { opacity: .4; cursor: not-allowed; transform: none; }
 
-/* ── Подпись ── */
 .cp-footer {
   text-align: center;
   font-size: 10px;
@@ -795,7 +832,6 @@ html, body {
 }
 .cp-footer strong { color: rgba(255,255,255,.35); }
 
-/* ── Разделитель дата ── */
 .cp-date-divider {
   text-align: center;
   font-size: 11px;
@@ -805,7 +841,6 @@ html, body {
   letter-spacing: .5px;
 }
 
-/* мобильные */
 @media (max-width: 480px) {
   .chat-popup {
     right: 12px;
@@ -814,4 +849,35 @@ html, body {
     bottom: 90px;
   }
   .chat-fab { right: 16px; bottom: 20px; }
+}
+
+/* =========================================================
+   ДОСТУПНОСТЬ
+   ========================================================= */
+body.high-contrast {
+  --bg: #000000;
+  --bg2: #000000;
+  --surface: #1a1a1a;
+  --text: #ffffff;
+  --muted: #ffff00;
+  --border: #ffffff;
+}
+body.high-contrast .answer-tile {
+  border: 4px solid #fff !important;
+}
+
+body.wide-spacing .q-text {
+  line-height: 2;
+  letter-spacing: 1px;
+}
+body.wide-spacing .answer-tile {
+  margin-bottom: 12px;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0,0,0,0);
+  border: 0;
 }
