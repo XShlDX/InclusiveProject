@@ -8,7 +8,7 @@ from src.models.models import Base, engine
 from src.routers.routers import router as requests_router
 from src.routers.page_router import router as page_router
 from src.routers.tasks_router import router as tasks_router
-from src.services.config import join_path
+from src.services.page_connetion import join_path
 
 
 @asynccontextmanager
