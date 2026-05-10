@@ -6,28 +6,62 @@
   <title>KahoSound Quiz</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@700;800;900&family=Nunito+Sans:wght@400;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/frontend/examples/example1/Deaf.css"/>
+  <link rel="stylesheet" href="/frontend/pages/testfor/Deaf.css"/>
 </head>
 <body>
 
   <!-- ════════════════════════════════════════════════
        БОКОВОЕ МЕНЮ
   ════════════════════════════════════════════════ -->
-  <aside class="sidebar" id="sidebar">
-    <div class="sidebar-logo">
-      <span class="sidebar-logo-icon">🎵</span>
-      <span class="sidebar-logo-text">KahoSound</span>
+ <!-- index.html -->
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-logo">
+    <span class="sidebar-logo-icon">🎵</span>
+    <span class="sidebar-logo-text">KahoSound</span>
+  </div>
+
+  <!-- НОВЫЙ БЛОК: Панель инклюзивности -->
+  <div class="sidebar-section-label">ДОСТУПНОСТЬ</div>
+  <nav class="sidebar-nav a11y-controls" aria-label="Настройки доступности">
+    <div class="a11y-group">
+      <button id="btn-font-up" class="nav-item a11y-btn" title="Увеличить текст">
+        <span class="nav-item-icon">А+</span>
+        <span class="nav-item-name">Крупнее</span>
+      </button>
+      <button id="btn-font-down" class="nav-item a11y-btn" title="Уменьшить текст">
+        <span class="nav-item-icon">А−</span>
+        <span class="nav-item-name">Мельче</span>
+      </button>
     </div>
 
-    <div class="sidebar-section-label">ТЕМЫ</div>
-    <nav class="sidebar-nav" id="sidebar-nav">
-      <!-- заполняется JS -->
-    </nav>
+    <button id="btn-contrast" class="nav-item a11y-toggle" aria-pressed="false">
+      <span class="nav-item-icon">◑</span>
+      <span class="nav-item-name">Контраст</span>
+      <span class="nav-item-check">✅</span>
+    </button>
 
-    <div class="sidebar-footer">
-      <div class="sidebar-footer-note">🎯 Выбери тему и начни!</div>
-    </div>
-  </aside>
+    <button id="btn-spacing" class="nav-item a11y-toggle" aria-pressed="false">
+      <span class="nav-item-icon">⇔</span>
+      <span class="nav-item-name">Отступы</span>
+      <span class="nav-item-check">✅</span>
+    </button>
+    
+    <button id="btn-hover-speak" class="nav-item a11y-toggle" aria-pressed="false">
+      <span class="nav-item-icon">👆</span>
+      <span class="nav-item-name">Наведение</span>
+      <span class="nav-item-check">✅</span>
+    </button>
+  </nav>
+
+  <div class="sidebar-section-label">ТЕМЫ</div>
+  <nav class="sidebar-nav" id="sidebar-nav">
+    <!-- Темы заполняются JS -->
+  </nav>
+  <!-- ... остальной код ... -->
+</aside>
+
+<!-- Скрытый диктор для ARIA -->
+<div id="sr-announcer" aria-live="polite" aria-atomic="true" class="sr-only"></div>
 
   <!-- бургер для мобильных -->
   <button class="burger" id="burger" onclick="toggleSidebar()">☰</button>
@@ -189,7 +223,12 @@
 
   </div>
 
-  <script src="/frontend/examples/example1/Deaf.js"></script>
-  <script src="/frontend/examples/example1/Chat.js"></script>
+  <script src="/frontend/pages/testfor/Deaf.js"></script>
+<script type="module" src="/frontend/pages/testfor/Chat.js"></script>
+<script type="module">
+    import {RequestData} from "/frontend/modules/script.js"
+const data = await RequestData.getHistory();
+    console.log(data)
+</script>
 </body>
 </html>

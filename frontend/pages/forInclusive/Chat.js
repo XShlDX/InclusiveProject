@@ -1,4 +1,18 @@
-import { RequestData } from '/frontend/modules/script.js';
+let RequestData = {
+  async getHistory() {
+    return [];
+  },
+  async sendPrompt(prompt) {
+    return `Я локальный помощник KahoSound. Вопрос принят: "${prompt}". Подключите /frontend/modules/script.js, чтобы отвечал внешний AI-сервис.`;
+  }
+};
+
+try {
+  const module = await import('/frontend/modules/script.js');
+  if (module.RequestData) RequestData = module.RequestData;
+} catch (err) {
+  console.info('Внешний AI-модуль не найден, включён локальный режим чата.');
+}
 
 // ── НАСТРОЙКИ ──────────────────────────────────────────
 const CHAT_CONFIG = {
@@ -11,7 +25,7 @@ let chatBusy    = false;
 let chatHistory = [];
 
 // ── ИНИЦИАЛИЗАЦИЯ ──────────────────────────────────────
-document.addEventListener('DOMContentLoaded', async () => {
+async function initChat() {
   document.getElementById('cp-provider').textContent = CHAT_CONFIG.providerName;
 
   try {
@@ -26,7 +40,13 @@ document.addEventListener('DOMContentLoaded', async () => {
   } catch (err) {
     console.warn('Не удалось загрузить историю:', err);
   }
-});
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initChat);
+} else {
+  initChat();
+}
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 //  ОТКРЫТЬ / ЗАКРЫТЬ
