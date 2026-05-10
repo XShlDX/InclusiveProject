@@ -5,18 +5,33 @@
 
 
 const API_URL = 'http://127.0.0.1:8000';
+const AI_FUNCTIONS = {
+  toggleContrast:   () => window.toggleContrast?.(),
+  toggleSpacing:    () => window.toggleSpacing?.(),
+  increaseFontSize: () => window.increaseFontSize?.(),
+  decreaseFontSize: () => window.decreaseFontSize?.(),
+  toggleHoverSpeak: () => window.toggleHoverSpeak?.(),
+  toggleSpeech:     () => window.toggleSpeech?.(),
+  toggleMic:        () => window.toggleMic?.(),
+};
 
 export const RequestData = {
   async sendPrompt(content) {
     try {
       const response = await fetch(`${API_URL}/requests`, {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ content: content })
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ content })
       });
-      return await response.json();
+
+      const data = await response.json();
+
+      if (data.action && AI_FUNCTIONS[data.action]) {
+        AI_FUNCTIONS[data.action]();
+      }
+
+      return data.reply ?? data;
+
     } catch (error) {
       console.error("Ошибка при отправке:", error);
     }

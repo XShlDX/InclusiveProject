@@ -1,5 +1,5 @@
 from pydantic import BaseModel
-
+from typing import Optional
 
 class Prompt(BaseModel):
     content: str
@@ -15,3 +15,7 @@ class Base(BaseModel):
 class AnswersModel(Base):
     prompt: str
     response: str
+
+class AIResponse(BaseModel):
+    action: Optional[str] = None
+    reply: str
