@@ -2,6 +2,7 @@
 from contextlib import asynccontextmanager
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.middleware.gzip import GZipMiddleware
 from starlette.staticfiles import StaticFiles
 
 from src.models.models import Base, engine
@@ -21,7 +22,7 @@ app = FastAPI(lifespan=lifespan,
               title="AI Chat API")
 
 
-
+app.add_middleware(GZipMiddleware, minimum_size=1000)
 app.include_router(requests_router)
 app.include_router(tasks_router)
 

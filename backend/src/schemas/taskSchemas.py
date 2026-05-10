@@ -38,3 +38,11 @@ class TaskResponseSchema(BaseModel):
 
     class Config:
         from_attributes = True
+
+class SubmitSchema(BaseModel):
+    answers: list[int]
+
+class SubmitResponseSchema(BaseModel):
+    score: int
+    total: int
+    correct: list[bool]

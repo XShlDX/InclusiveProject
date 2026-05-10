@@ -1,7 +1,6 @@
-from fastapi import APIRouter, HTTPException
-
+from fastapi import APIRouter, HTTPException, Depends
 from src.models.tasksDB import create_task, get_task
-from src.schemas.taskSchemas import TaskCreateSchema, TaskResponseSchema
+from src.schemas.taskSchemas import TaskCreateSchema, TaskResponseSchema, SubmitResponseSchema, SubmitSchema
 
 router = APIRouter(prefix="/tasks", tags=["tasks"])
 
@@ -34,3 +33,27 @@ def seed_tasks(data: list[TaskCreateSchema]):
         )
         result.append(task)
     return result
+
+@router.post("/{task_id}/submit", response_model=SubmitResponseSchema)
+def submit_task(task_id: int, data: SubmitSchema):
+    task = get_task(task_id)
+    if not task:
+        raise HTTPException(status_code=404, detail="Таск не найден")
+
+    if len(data.answers) != len(task.questions):
+        raise HTTPException(status_code=400, detail="Количество ответов не совпадает с количеством вопросов")
+
+    correct = []
+    score = 0
+
+    for question, user_answer in zip(task.questions, data.answers):
+        is_correct = question.correct_option == user_answer
+        correct.append(is_correct)
+        if is_correct:
+            score += 1
+
+    return SubmitResponseSchema(
+        score=score,
+        total=len(task.questions),
+        correct=correct
+    )

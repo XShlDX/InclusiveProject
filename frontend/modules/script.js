@@ -29,5 +29,29 @@ export const RequestData = {
     } catch (error) {
       console.error("Ошибка при получении:", error);
     }
+  },
+
+  async getTask(task_id) {
+    try {
+      const response = await fetch(`${API_URL}/tasks/${task_id}`)
+      return await response.json();
+    } catch (error) {
+      console.error("Ошибка при получении:", error)
+    }
+  },
+
+  async submitTask(task_id, answers) {
+    try {
+      const response = await fetch(`${API_URL}/tasks/${task_id}/submit`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ answers: answers })
+      });
+      return await response.json();
+    } catch (error) {
+      console.error("Ошибка при отправке ответов:", error);
+    }
   }
 };
