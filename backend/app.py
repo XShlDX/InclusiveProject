@@ -6,10 +6,9 @@ from starlette.staticfiles import StaticFiles
 
 from src.models.models import Base, engine
 from src.routers.routers import router as requests_router
-from src.routers.file_loader import router as file_loader
 from src.routers.page_router import router as page_router
-
-from src.services.config import join_path
+from src.routers.tasks_router import router as tasks_router
+from src.services.page_connetion import join_path
 
 
 @asynccontextmanager
@@ -24,7 +23,7 @@ app = FastAPI(lifespan=lifespan,
 
 
 app.include_router(requests_router)
-app.include_router(file_loader)
+app.include_router(tasks_router)
 
 
 #### ДЛЯ ЗАПУСКА index.html в папке frontend
