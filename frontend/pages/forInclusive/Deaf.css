@@ -326,6 +326,8 @@ body {
   padding: 22px 16px;
   cursor: pointer;
   text-align: center;
+  color: var(--text);
+  font-family: inherit;
   transition: transform .18s, box-shadow .18s, border-color .18s;
   display: flex;
   flex-direction: column;
@@ -412,6 +414,20 @@ body {
   margin: 16px auto 0;
   text-align: center;
   backdrop-filter: blur(12px);
+}
+.q-image {
+  display: block;
+  width: min(100%, 360px);
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  object-position: center;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  margin: 0 auto 18px;
+  box-shadow: 0 8px 28px rgba(0,0,0,.28);
+}
+.q-image[hidden] {
+  display: none !important;
 }
 .q-text { font-size: clamp(1rem, 3vw, 1.45rem); font-weight: 800; line-height: 1.4; }
 .q-hint { margin-top: 10px; font-size: .72rem; color: var(--muted); font-weight: 600; }

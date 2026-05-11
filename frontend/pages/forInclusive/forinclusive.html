@@ -59,6 +59,12 @@
       <span class="nav-item-check">✅</span>
     </button>
 
+    <button id="btn-tone-hints" class="nav-item a11y-toggle" aria-pressed="false">
+      <span class="nav-item-icon">🔇</span>
+      <span class="nav-item-name">Без тонов</span>
+      <span class="nav-item-check">✅</span>
+    </button>
+
     <button id="btn-voice" class="nav-item a11y-toggle" aria-pressed="false">
       <span class="nav-item-icon">🔊</span>
       <span class="nav-item-name">Озвучить</span>
@@ -122,6 +128,7 @@
       </div>
 
       <div class="q-card">
+        <img class="q-image" id="q-image" src="" alt="" hidden />
         <p class="q-text" id="q-text">Текст вопроса</p>
         <p class="q-hint"> Наведи на вариант — услышишь тон-подсказку</p>
       </div>
@@ -242,6 +249,8 @@
 
   </div>
 
+  <script src="audio.js"></script>
+  <script src="accessibility.js"></script>
   <script src="Deaf.js"></script>
   <script type="module" src="Chat.js"></script>
 </body>
