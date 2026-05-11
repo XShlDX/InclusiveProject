@@ -6,22 +6,22 @@
 
 const API_URL = 'http://127.0.0.1:8000';
 const AI_FUNCTIONS = {
-  toggleContrast:   () => window.toggleContrast?.(),
-  toggleSpacing:    () => window.toggleSpacing?.(),
+  toggleContrast: () => window.toggleContrast?.(),
+  toggleSpacing: () => window.toggleSpacing?.(),
   increaseFontSize: () => window.increaseFontSize?.(),
   decreaseFontSize: () => window.decreaseFontSize?.(),
   toggleHoverSpeak: () => window.toggleHoverSpeak?.(),
-  toggleSpeech:     () => window.toggleSpeech?.(),
-  toggleMic:        () => window.toggleMic?.(),
+  toggleSpeech: () => window.toggleSpeech?.(),
+  toggleMic: () => window.toggleMic?.(),
 };
 
 export const RequestData = {
-  async sendPrompt(content) {
+  async sendPrompt(content, page = "main") {
     try {
       const response = await fetch(`${API_URL}/requests`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ content })
+        body: JSON.stringify({ content, page })
       });
 
       const data = await response.json();

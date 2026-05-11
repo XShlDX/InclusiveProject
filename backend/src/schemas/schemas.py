@@ -3,6 +3,7 @@ from typing import Optional
 
 class Prompt(BaseModel):
     content: str
+    page: str = "main"
 
 class UsersPrompt(BaseModel):
     content: str

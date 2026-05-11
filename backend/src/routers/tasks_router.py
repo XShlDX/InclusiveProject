@@ -1,6 +1,7 @@
 from fastapi import APIRouter, HTTPException, Depends
-from src.models.tasksDB import create_task, get_task
-from src.schemas.taskSchemas import TaskCreateSchema, TaskResponseSchema, SubmitResponseSchema, SubmitSchema
+from src.models.tasksDB import create_task, get_task, seed_quiz_topics, get_all_quiz_topics
+from src.schemas.taskSchemas import TaskCreateSchema, TaskResponseSchema, SubmitResponseSchema, SubmitSchema, \
+    QuizTopicCreateSchema
 
 router = APIRouter(prefix="/tasks", tags=["tasks"])
 
@@ -14,6 +15,14 @@ def post_task(data: TaskCreateSchema):
     )
     return task
 
+@router.post("/quiz/seed")
+def seed_quiz(topics: list[QuizTopicCreateSchema]):
+    seed_quiz_topics([t.model_dump() for t in topics])
+    return {"detail": "Готово"}
+
+@router.get("/quiz/topics")
+def get_quiz_topics():
+    return get_all_quiz_topics()
 
 @router.get("/{task_id}", response_model=TaskResponseSchema)
 def fetch_task(task_id: int):

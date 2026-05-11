@@ -10,12 +10,14 @@ from src.routers.routers import router as requests_router
 from src.routers.page_router import router as page_router
 from src.routers.tasks_router import router as tasks_router
 from src.services.page_connetion import join_path
-
+from src.services.ai import init_chats
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     Base.metadata.create_all(engine)
     print("Tables created successfully.")
+    init_chats()
+    print("Chats initialized.")
     yield
 
 app = FastAPI(lifespan=lifespan,
