@@ -45,6 +45,14 @@ export const RequestData = {
       console.error("Ошибка при получении:", error);
     }
   },
+  async getQuizTopics() {
+    try {
+      const response = await fetch(`${API_URL}/tasks/quiz/topics`);
+      return await response.json();
+    } catch (error) {
+      console.error("Ошибка при получении топиков:", error);
+    }
+  },
 
   async getTask(task_id) {
     try {
