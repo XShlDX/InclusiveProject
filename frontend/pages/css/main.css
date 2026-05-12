@@ -831,3 +831,193 @@ body.dyslexia-font { font-family: 'Comic Sans MS', 'Chalkboard SE', cursive; }
   .header__nav   { display: none; }
   .page-main     { padding: 0 20px 60px; }
 }
+
+
+
+
+
+/* ================================================
+   TASK INTRO SCREEN
+================================================ */
+.task-intro {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  padding-top: 8px;
+}
+
+.task-intro__tags {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 16px;
+}
+
+.task-intro__num {
+  font-family: var(--font-display);
+  font-size: .68rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+
+.task-intro__title {
+  font-family: var(--font-display);
+  font-size: clamp(1.6rem, 3vw, 2.2rem);
+  font-weight: 900;
+  letter-spacing: -.03em;
+  line-height: 1.1;
+  margin-bottom: 14px;
+  background: linear-gradient(120deg, #fff 40%, var(--main-accent));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.task-intro__desc {
+  font-size: .95rem;
+  font-weight: 300;
+  color: var(--text-muted);
+  line-height: 1.7;
+  margin-bottom: 28px;
+}
+
+.task-intro__meta {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 28px;
+}
+
+.task-intro__meta-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: 100px;
+  padding: 8px 16px;
+  font-size: .82rem;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+.task-intro__meta-icon { font-size: 1rem; }
+
+.task-intro__divider {
+  height: 1px;
+  background: var(--border);
+  margin-bottom: 24px;
+}
+
+.task-intro__tips {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 32px;
+}
+
+.task-intro__tip {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: .875rem;
+  color: var(--text-muted);
+  font-weight: 400;
+}
+
+.task-intro__tip-icon { font-size: 1.1rem; flex-shrink: 0; }
+
+.task-intro__start-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background: var(--main-accent);
+  color: #0b0d12;
+  border: none;
+  border-radius: 100px;
+  padding: 16px 36px;
+  font-family: var(--font-display);
+  font-size: .9rem;
+  font-weight: 700;
+  cursor: pointer;
+  letter-spacing: -.01em;
+  transition: transform .15s, box-shadow .15s;
+  align-self: flex-start;
+}
+
+.task-intro__start-btn:hover {
+  transform: scale(1.03);
+  box-shadow: 0 8px 28px rgba(232,255,87,.3);
+}
+
+/* ================================================
+   QUIZ HEADER BACK BUTTON
+================================================ */
+.form-quiz__header-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.form-quiz__back {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  font-family: var(--font-body);
+  font-size: .82rem;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 6px 0;
+  transition: color .2s;
+}
+
+.form-quiz__back:hover { color: var(--text-light); }
+
+/* ================================================
+   LOADING & ERROR STATES
+================================================ */
+.modal-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  height: 200px;
+  color: var(--text-muted);
+  font-size: .95rem;
+}
+
+.modal-loading__spinner {
+  width: 36px;
+  height: 36px;
+  border: 3px solid var(--border);
+  border-top-color: var(--main-accent);
+  border-radius: 50%;
+  animation: spin .7s linear infinite;
+}
+
+@keyframes spin { to { transform: rotate(360deg); } }
+
+.modal-error {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  padding: 40px 20px;
+  text-align: center;
+}
+
+.modal-error__icon { font-size: 2.5rem; }
+.modal-error__text {
+  color: var(--text-muted);
+  font-size: .95rem;
+  line-height: 1.6;
+}
