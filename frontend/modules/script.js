@@ -16,24 +16,28 @@ const AI_FUNCTIONS = {
 };
 
 export const RequestData = {
-  async sendPrompt(content, page = "main") {
-    try {
-      const response = await fetch(`${API_URL}/requests`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ content, page })
-      }); 
+  // В script.js, sendPrompt — обернуть fetch в retry
+  async sendPrompt(content, page = "main", retries = 2) {
+    for (let i = 0; i <= retries; i++) {
+      try {
+        const response = await fetch(`${API_URL}/requests`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ content, page })
+        });
 
-      const data = await response.json();
+        if (response.status === 503 && i < retries) {
+          await new Promise(r => setTimeout(r, 3000)); // ждём 3 сек
+          continue;
+        }
 
-      if (data.action && AI_FUNCTIONS[data.action]) {
-        AI_FUNCTIONS[data.action]();
+        const data = await response.json();
+        if (data.action && AI_FUNCTIONS[data.action]) AI_FUNCTIONS[data.action]();
+        return data.reply ?? data;
+
+      } catch (error) {
+        if (i === retries) console.error("Ошибка при отправке:", error);
       }
-
-      return data.reply ?? data;
-
-    } catch (error) {
-      console.error("Ошибка при отправке:", error);
     }
   },
 
