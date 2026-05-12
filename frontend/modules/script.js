@@ -22,7 +22,7 @@ export const RequestData = {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ content, page })
-      });
+      }); 
 
       const data = await response.json();
 
