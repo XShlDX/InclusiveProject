@@ -84,5 +84,10 @@
   }
 });
   </script> 
+  <script type="module">
+    import {RequestData} from "/frontend/modules/script.js"
+    const resp = await RequestData.getTask(1);
+    console.log(resp)
+  </script>
 </body>
 </html>
