@@ -171,10 +171,11 @@ function renderFormQuiz(taskId) {
 /* =========================================
    SUBMIT & SCORE
 ========================================= */
-function submitForm(taskId) {
+async function submitForm(taskId) {
   const t = tasks[taskId];
   const box = document.querySelector('.modal__box');
 
+  // Проверяем что все отвечены
   let allAnswered = true;
   let firstUnanswered = null;
   t.quiz.forEach((q, qi) => {
@@ -194,35 +195,59 @@ function submitForm(taskId) {
     return;
   }
 
-  let score = 0;
+  // Собираем ответы
+  const answers = t.quiz.map((q, qi) => {
+    const selected = box.querySelector(`input[name="q${qi}"]:checked`);
+    const chosenPosition = parseInt(selected.value);
+    return q.originalIndexes[chosenPosition];
+  });
+
+  // Блокируем кнопку
+  document.getElementById('formSubmitBtn').disabled = true;
+  document.getElementById('formSubmitBtn').textContent = 'Проверяем...';
+
+  let result;
+  try {
+    result = await RequestData.submitTask(taskId, answers);
+    console.log('Ответ сервера:', JSON.stringify(result));
+  } catch (err) {
+    console.error('Ошибка отправки:', err);
+    document.getElementById('formSubmitBtn').disabled = false;
+    document.getElementById('formSubmitBtn').textContent = 'Отправить';
+    return;
+  }
+
+  // Подсвечиваем
   t.quiz.forEach((q, qi) => {
     const selected = box.querySelector(`input[name="q${qi}"]:checked`);
-    const chosen = parseInt(selected.value);
-    const isCorrect = chosen === q.answer;
-    if (isCorrect) score++;
+    const chosenPosition = parseInt(selected.value);
+    const isCorrect = result.correct[qi];
 
     const fq = document.getElementById(`fq-${qi}`);
     fq.classList.add(isCorrect ? 'form-question--correct' : 'form-question--wrong');
 
     fq.querySelectorAll('.form-option').forEach((optEl, oi) => {
       optEl.querySelector('input').disabled = true;
-      if (oi === q.answer) optEl.classList.add('form-option--correct');
-      else if (oi === chosen && !isCorrect) optEl.classList.add('form-option--wrong');
+      if (oi === chosenPosition && isCorrect) {
+        optEl.classList.add('form-option--correct');
+      } else if (oi === chosenPosition && !isCorrect) {
+        optEl.classList.add('form-option--wrong');
+      }
     });
   });
 
-  document.getElementById('formSubmitBtn').disabled = true;
+  const score = result.score;
+  const total = result.total;
+  const pct = Math.round((score / total) * 100);
+  const isGood = score >= Math.ceil(total * 0.6);
+
   const clearBtn = document.getElementById('formClearBtn');
   clearBtn.textContent = '↺ Пройти снова';
   clearBtn.onclick = () => renderFormQuiz(taskId);
 
-  const total = t.quiz.length;
-  const pct = Math.round((score / total) * 100);
-  const isGood = score >= Math.ceil(total * 0.6);
-
-  const result = document.createElement('div');
-  result.className = 'form-quiz__result';
-  result.innerHTML = `
+  const resultEl = document.createElement('div');
+  resultEl.className = 'form-quiz__result';
+  resultEl.innerHTML = `
     <div class="form-result__icon">${isGood ? '🏆' : '📚'}</div>
     <div class="form-result__title">${isGood ? 'Отличная работа!' : 'Нужно повторить'}</div>
     <div class="form-result__score">
@@ -233,11 +258,21 @@ function submitForm(taskId) {
     <div class="form-result__bar">
       <div class="form-result__bar-fill" style="width:0%;background:${isGood ? 'var(--main-accent)' : '#ff6b6b'}"></div>
     </div>
+    <button class="form-result__exit-btn" id="exitToCardsBtn">
+      <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
+        <path d="M13 8H3M7 4L3 8l4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      Вернуться к заданиям
+    </button>
   `;
 
-  box.querySelector('.form-quiz__footer').before(result);
-  result.scrollIntoView({ behavior: 'smooth', block: 'center' });
-  setTimeout(() => { result.querySelector('.form-result__bar-fill').style.width = pct + '%'; }, 100);
+  box.querySelector('.form-quiz__footer').before(resultEl);
+  resultEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+  setTimeout(() => {
+    resultEl.querySelector('.form-result__bar-fill').style.width = pct + '%';
+    document.getElementById('exitToCardsBtn')?.addEventListener('click', closeModal);
+  }, 100);
 }
 
 /* =========================================
@@ -267,12 +302,20 @@ async function openModal(id) {
       title: data.title,
       tags: tagMap[id] ?? ['HTML'],
       desc: data.description ?? 'Ответь на все вопросы и нажми «Отправить».',
-      quiz: data.questions.map(q => ({
-        q: q.text,
-        options: q.options.map(o => o.text),
-        answer: q.correct_index ?? q.correct_answer ?? q.answer ?? 0
-      }))
-    };
+      quiz: data.questions.map(q => {
+  const options = q.options.map((o) => ({ text: o.text, originalIndex: o.index }));
+  for (let i = options.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [options[i], options[j]] = [options[j], options[i]];
+  }
+  return {
+    q: q.text,
+    options: options.map(o => o.text),
+    originalIndexes: options.map(o => o.originalIndex),
+    answer: null
+  };
+})
+};
   } catch (err) {
     console.error('Ошибка загрузки:', err);
     document.querySelector('.modal__box').innerHTML = `
@@ -323,3 +366,119 @@ document.addEventListener('click', e => {
     a11yBtn.setAttribute('aria-expanded', false);
   }
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+const GEMINI_KEY = 'ТВОЙ_КЛЮЧ_СЮДА';
+const GEMINI_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${GEMINI_KEY}`;
+
+let aiOpen = false;
+let aiBusy = false;
+let aiHistory = [];
+
+function toggleAiChat() {
+  aiOpen = !aiOpen;
+  document.getElementById('aiChatPopup').classList.toggle('open', aiOpen);
+  document.getElementById('aiFab').classList.toggle('open', aiOpen);
+  if (aiOpen) {
+    document.getElementById('aiFabBadge').style.display = 'none';
+    setTimeout(() => document.getElementById('aiCpInput').focus(), 60);
+  }
+}
+
+async function aiChatSend() {
+  if (aiBusy) return;
+  const input = document.getElementById('aiCpInput');
+  const text = input.value.trim();
+  if (!text) return;
+  input.value = '';
+  input.style.height = '';
+
+  aiHistory.push({ role: 'user', parts: [{ text }] });
+  aiAppendMsg('user', text);
+  aiScrollBottom();
+  aiSetBusy(true);
+
+  let reply = '';
+  try {
+    const res = await fetch(GEMINI_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        system_instruction: { parts: [{ text: `Ты помощник учебной платформы ТестЛаб — тесты по HTML и CSS.
+Отвечай на русском, кратко и понятно.
+Помогай с вопросами о HTML тегах, CSS свойствах, семантике, flexbox, grid, формах, таблицах, анимациях.
+Если пользователь решает задание — подсказывай, но не давай готовый ответ сразу.` }] },
+        contents: aiHistory,
+        generationConfig: { temperature: 0.7, maxOutputTokens: 1024 }
+      })
+    });
+    const data = await res.json();
+    reply = data.candidates?.[0]?.content?.parts?.[0]?.text || '🤔 Нет ответа.';
+  } catch(e) {
+    reply = '⚠️ Ошибка соединения с AI.';
+  }
+
+  aiHistory.push({ role: 'model', parts: [{ text: reply }] });
+  aiSetBusy(false);
+  aiAppendMsg('ai', reply);
+  aiScrollBottom();
+}
+
+function aiChatKey(e) {
+  if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); aiChatSend(); }
+}
+function aiChatResize(el) {
+  el.style.height = '';
+  el.style.height = Math.min(el.scrollHeight, 100) + 'px';
+}
+function aiAppendMsg(role, text) {
+  const feed = document.getElementById('aiCpMessages');
+  const row = document.createElement('div');
+  row.className = `ai-cp-row ${role === 'ai' ? 'ai-cp-ai' : 'ai-cp-user'}`;
+  const bubble = document.createElement('div');
+  bubble.className = `ai-cp-bubble ${role === 'ai' ? 'ai-cp-bubble-ai' : 'ai-cp-bubble-user'}`;
+  bubble.innerHTML = text.split('\n').filter(l=>l.trim()).map(l=>`<p>${l}</p>`).join('') +
+    `<span class="ai-cp-time">${new Date().toLocaleTimeString('ru-RU',{hour:'2-digit',minute:'2-digit'})}</span>`;
+  row.appendChild(bubble);
+  feed.appendChild(row);
+}
+function clearAiChat() {
+  aiHistory = [];
+  document.getElementById('aiCpMessages').innerHTML = `
+    <div class="ai-cp-row ai-cp-ai">
+      <div class="ai-cp-bubble ai-cp-bubble-ai">
+        <p>Чат очищен. Задай новый вопрос!</p>
+        <span class="ai-cp-time">${new Date().toLocaleTimeString('ru-RU',{hour:'2-digit',minute:'2-digit'})}</span>
+      </div>
+    </div>`;
+}
+function aiSetBusy(busy) {
+  aiBusy = busy;
+  document.getElementById('aiCpTyping').style.display = busy ? 'block' : 'none';
+  document.querySelector('.ai-cp-send').disabled = busy;
+  document.getElementById('aiCpInput').disabled = busy;
+  document.getElementById('aiCpStatus').textContent = busy ? 'Печатает...' : 'Онлайн';
+  if (busy) aiScrollBottom();
+}
+function aiScrollBottom() {
+  const f = document.getElementById('aiCpMessages');
+  f.scrollTop = f.scrollHeight;
+}
+
+window.toggleAiChat = toggleAiChat;
+window.aiChatSend   = aiChatSend;
+window.aiChatKey    = aiChatKey;
+window.aiChatResize = aiChatResize;
+window.clearAiChat  = clearAiChat;

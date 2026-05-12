@@ -245,6 +245,59 @@
       </div>
     </div>
 
+
+
+    <!-- AI FAB -->
+<button class="ai-fab" id="aiFab" onclick="toggleAiChat()" title="Спросить AI">
+  🤖
+  <span class="ai-fab-badge" id="aiFabBadge" style="display:none">1</span>
+</button>
+
+<!-- AI CHAT POPUP -->
+<div class="ai-chat-popup" id="aiChatPopup">
+  <div class="ai-cp-header">
+    <div class="ai-cp-header-left">
+      <div class="ai-cp-avatar">🤖<span class="ai-cp-dot"></span></div>
+      <div>
+        <div class="ai-cp-name">ТестЛаб AI</div>
+        <div class="ai-cp-status" id="aiCpStatus">Онлайн</div>
+      </div>
+    </div>
+    <div style="display:flex;gap:4px">
+      <button class="ai-cp-btn" onclick="clearAiChat()">🗑</button>
+      <button class="ai-cp-btn" onclick="toggleAiChat()">✕</button>
+    </div>
+  </div>
+
+  <div class="ai-cp-messages" id="aiCpMessages">
+    <div class="ai-cp-row ai-cp-ai">
+      <div class="ai-cp-bubble ai-cp-bubble-ai">
+        <p>Привет! 👋 Я помогу с заданиями по HTML и CSS.</p>
+        <p>Спроси что-нибудь!</p>
+        <span class="ai-cp-time">сейчас</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="ai-cp-typing" id="aiCpTyping" style="display:none">
+    <div class="ai-cp-bubble ai-cp-bubble-ai ai-cp-typing-bubble">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+
+  <div class="ai-cp-input-area">
+    <textarea id="aiCpInput" class="ai-cp-input" placeholder="Напиши вопрос..." rows="1" maxlength="1000"
+      onkeydown="aiChatKey(event)" oninput="aiChatResize(this)"></textarea>
+    <button class="ai-cp-send" onclick="aiChatSend()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="22" y1="2" x2="11" y2="13"/>
+        <polygon points="22 2 15 22 11 13 2 9 22 2"/>
+      </svg>
+    </button>
+  </div>
+  <div class="ai-cp-footer">Powered by <strong>Gemini AI</strong></div>
+</div>
+
     <script type="module" src="/frontend/pages/main/js/main.js"></script>
   </body>
 </html>
