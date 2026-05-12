@@ -1,0 +1,419 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Курсы — ТестЛаб</title>
+  <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;700;900&family=Mulish:wght@300;400;600&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="/frontend/pages/css/course.css">
+</head>
+<body>
+<div class="noise"></div>
+
+<header>
+  <div class="hdr">
+    <a href="about.html" class="hdr__back">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M13 8H3M7 4L3 8l4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      Назад
+    </a>
+    <div class="hdr__logo">
+      <span class="logo-dot"></span>
+      <span class="logo-txt">ТестЛаб</span>
+    </div>
+    <nav>
+      <a href="/frontend/pages/main/main.html">Задания</a>
+      <a href="courses.html" class="active">Курсы</a>
+      <a href="about.html">О нас</a>
+    </nav>
+  </div>
+</header>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero__eyebrow">3 трека обучения</div>
+  <h1 class="hero__title">Учись по<br/><em>своему пути</em></h1>
+  <p class="hero__sub">HTML, CSS или JavaScript — выбери с чего начать. Каждый трек ведёт от нуля до уверенного применения технологии в реальных проектах.</p>
+</div>
+
+<!-- TABS -->
+<div class="tracks-nav">
+  <button class="track-tab active-html" onclick="showTrack('html')">🏗️ HTML</button>
+  <button class="track-tab" onclick="showTrack('css')">🎨 CSS</button>
+  <button class="track-tab" onclick="showTrack('js')">⚙️ JavaScript</button>
+</div>
+
+<!-- ===== HTML TRACK ===== -->
+<div class="track-section visible" id="track-html">
+  <div class="track-hero">
+    <div class="track-intro">
+      <div class="track-intro__badge badge-html">HTML · 12 уроков</div>
+      <h2 class="track-intro__title">HTML с нуля до профи</h2>
+      <p class="track-intro__desc">Начни с основ разметки и дойди до сложных семантических структур, доступных форм и работы с мультимедиа. HTML — фундамент, без которого не работает ни один сайт.</p>
+      <div class="track-meta">
+        <div class="meta-pill">📚 12 уроков</div>
+        <div class="meta-pill">⏱ ~10 часов</div>
+        <div class="meta-pill">🎯 Начинающий</div>
+        <div class="meta-pill">✅ 6 заданий</div>
+      </div>
+      <a href="/frontend/pages/main/lessons/html.html" class="track-cta">Перейти к курсу →</a>
+    </div>
+    <div class="progress-card">
+      <h3>Программа курса</h3>
+      <div class="prog-item">
+        <div class="prog-circle done">✓</div>
+        <div class="prog-text"><strong>Введение в HTML</strong>Теги, атрибуты, структура</div>
+      </div>
+      <div class="prog-item">
+        <div class="prog-circle active">2</div>
+        <div class="prog-text"><strong>Семантика</strong>header, nav, main, article</div>
+      </div>
+      <div class="prog-item">
+        <div class="prog-circle locked">3</div>
+        <div class="prog-text"><strong>Формы</strong>input, select, textarea</div>
+      </div>
+      <div class="prog-item">
+        <div class="prog-circle locked">4</div>
+        <div class="prog-text"><strong>Таблицы</strong>thead, tbody, ARIA</div>
+      </div>
+      <div class="prog-item">
+        <div class="prog-circle locked">5</div>
+        <div class="prog-text"><strong>Мультимедиа</strong>img, video, audio</div>
+      </div>
+      <div class="prog-bar-wrap">
+        <div class="prog-bar-label"><span>Прогресс</span><span>1 / 5 модулей</span></div>
+        <div class="prog-bar"><div class="prog-bar-fill" style="width:20%"></div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="curriculum">
+    <div class="sec-lbl">Учебный план</div>
+    <div class="cur-title">Что тебя ждёт в курсе</div>
+    <div class="cur-list">
+      <div class="cur-item">
+        <div class="cur-num">01</div>
+        <div class="cur-info"><strong>Первый HTML-документ</strong><span>DOCTYPE, html, head, body — создаём первую страницу</span></div>
+        <span class="cur-tag ct-html">HTML</span>
+        <div class="cur-arrow">→</div>
+      </div>
+      <div class="cur-item">
+        <div class="cur-num">02</div>
+        <div class="cur-info"><strong>Текст и типографика</strong><span>Заголовки, параграфы, списки, цитаты</span></div>
+        <span class="cur-tag ct-html">HTML</span>
+        <div class="cur-arrow">→</div>
+      </div>
+      <div class="cur-item">
+        <div class="cur-num">03</div>
+        <div class="cur-info"><strong>Ссылки и навигация</strong><span>Якоря, абсолютные и относительные пути</span></div>
+        <span class="cur-tag ct-html">HTML</span>
+        <div class="cur-arrow">→</div>
+      </div>
+      <div class="cur-item">
+        <div class="cur-num">04</div>
+        <div class="cur-info"><strong>Семантическая разметка</strong><span>HTML5 элементы и их правильное применение</span></div>
+        <span class="cur-tag ct-html">HTML</span>
+        <div class="cur-arrow">→</div>
+      </div>
+      <div class="cur-item">
+        <div class="cur-num">05</div>
+        <div class="cur-info"><strong>Формы и ввод данных</strong><span>Все типы полей, валидация, доступность</span></div>
+        <span class="cur-tag ct-html">HTML</span>
+        <div class="cur-arrow">→</div>
+      </div>
+      <div class="cur-item">
+        <div class="cur-num">06</div>
+        <div class="cur-info"><strong>Таблицы и ARIA</strong><span>Структурированные данные, доступность для скринридеров</span></div>
+        <span class="cur-tag ct-html">HTML</span>
+        <div class="cur-arrow">→</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="learn-grid">
+    <div class="learn-card">
+      <div class="learn-icon">🧱</div>
+      <div class="learn-title">Структура любого сайта</div>
+      <div class="learn-desc">Научишься строить правильную HTML-структуру для лендингов, блогов и веб-приложений.</div>
+    </div>
+    <div class="learn-card">
+      <div class="learn-icon">♿</div>
+      <div class="learn-title">Доступность (a11y)</div>
+      <div class="learn-desc">Поймёшь как делать сайты удобными для всех пользователей, включая тех, кто пользуется скринридерами.</div>
+    </div>
+    <div class="learn-card">
+      <div class="learn-icon">📋</div>
+      <div class="learn-title">Формы без боли</div>
+      <div class="learn-desc">Освоишь все типы полей ввода и встроенную валидацию HTML5, которую часто игнорируют новички.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== CSS TRACK ===== -->
+<div class="track-section" id="track-css">
+  <div class="track-hero">
+    <div class="track-intro">
+      <div class="track-intro__badge badge-css">CSS · 14 уроков</div>
+      <h2 class="track-intro__title">CSS & Вёрстка</h2>
+      <p class="track-intro__desc">Flexbox, Grid, переменные, анимации, адаптивность — полный арсенал современного вёрстальщика. После этого курса ты сможешь реализовать любой макет из Figma.</p>
+      <div class="track-meta">
+        <div class="meta-pill">📚 14 уроков</div>
+        <div class="meta-pill">⏱ ~14 часов</div>
+        <div class="meta-pill">🎯 Средний</div>
+        <div class="meta-pill">✅ 6 заданий</div>
+      </div>
+      <a href="/frontend/pages/main/lessons/css.html" class="track-cta green">Перейти к курсу →</a>
+    </div>
+    <div class="progress-card">
+      <h3>Программа курса</h3>
+      <div class="prog-item">
+        <div class="prog-circle done">✓</div>
+        <div class="prog-text"><strong>Основы CSS</strong>Селекторы, каскад, специфичность</div>
+      </div>
+      <div class="prog-item">
+        <div class="prog-circle active">2</div>
+        <div class="prog-text"><strong>Box model</strong>margin, padding, border</div>
+      </div>
+      <div class="prog-item">
+        <div class="prog-circle locked">3</div>
+        <div class="prog-text"><strong>Flexbox</strong>Одномерные раскладки</div>
+      </div>
+      <div class="prog-item">
+        <div class="prog-circle locked">4</div>
+        <div class="prog-text"><strong>CSS Grid</strong>Двумерные раскладки</div>
+      </div>
+      <div class="prog-item">
+        <div class="prog-circle locked">5</div>
+        <div class="prog-text"><strong>Анимации</strong>transitions, keyframes</div>
+      </div>
+      <div class="prog-bar-wrap">
+        <div class="prog-bar-label"><span>Прогресс</span><span>1 / 5 модулей</span></div>
+        <div class="prog-bar"><div class="prog-bar-fill" style="width:20%"></div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="curriculum">
+    <div class="sec-lbl">Учебный план</div>
+    <div class="cur-title">Что тебя ждёт в курсе</div>
+    <div class="cur-list">
+      <div class="cur-item">
+        <div class="cur-num">01</div>
+        <div class="cur-info"><strong>Подключение и селекторы</strong><span>Как CSS применяется к HTML-элементам</span></div>
+        <span class="cur-tag ct-css">CSS</span>
+        <div class="cur-arrow">→</div>
+      </div>
+      <div class="cur-item">
+        <div class="cur-num">02</div>
+        <div class="cur-info"><strong>Цвета и типографика</strong><span>Шрифты, размеры, line-height, Google Fonts</span></div>
+        <span class="cur-tag ct-css">CSS</span>
+        <div class="cur-arrow">→</div>
+      </div>
+      <div class="cur-item">
+        <div class="cur-num">03</div>
+        <div class="cur-info"><strong>Flexbox</strong><span>justify-content, align-items, flex-wrap и т.д.</span></div>
+        <span class="cur-tag ct-css">CSS</span>
+        <div class="cur-arrow">→</div>
+      </div>
+      <div class="cur-item">
+        <div class="cur-num">04</div>
+        <div class="cur-info"><strong>CSS Grid</strong><span>grid-template, areas, auto-fit, masonry</span></div>
+        <span class="cur-tag ct-css">CSS</span>
+        <div class="cur-arrow">→</div>
+      </div>
+      <div class="cur-item">
+        <div class="cur-num">05</div>
+        <div class="cur-info"><strong>Адаптивный дизайн</strong><span>Media queries, min/max, clamp()</span></div>
+        <span class="cur-tag ct-css">CSS</span>
+        <div class="cur-arrow">→</div>
+      </div>
+      <div class="cur-item">
+        <div class="cur-num">06</div>
+        <div class="cur-info"><strong>Анимации и переходы</strong><span>transition, @keyframes, animation-timing</span></div>
+        <span class="cur-tag ct-css">CSS</span>
+        <div class="cur-arrow">→</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="learn-grid">
+    <div class="learn-card">
+      <div class="learn-icon">📐</div>
+      <div class="learn-title">Любой макет из Figma</div>
+      <div class="learn-desc">После Flexbox и Grid ты сможешь сверстать любой дизайн — от простого лендинга до сложного дашборда.</div>
+    </div>
+    <div class="learn-card">
+      <div class="learn-icon">📱</div>
+      <div class="learn-title">Адаптивность</div>
+      <div class="learn-desc">Научишься делать сайты, которые одинаково хорошо выглядят на телефоне, планшете и десктопе.</div>
+    </div>
+    <div class="learn-card">
+      <div class="learn-icon">✨</div>
+      <div class="learn-title">Анимации</div>
+      <div class="learn-desc">Добавишь жизни в интерфейсы с помощью плавных переходов, hover-эффектов и CSS-анимаций.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== JS TRACK ===== -->
+<div class="track-section" id="track-js">
+  <div class="track-hero">
+    <div class="track-intro">
+      <div class="track-intro__badge badge-js">JavaScript · 16 уроков</div>
+      <h2 class="track-intro__title">JavaScript для фронтенда</h2>
+      <p class="track-intro__desc">DOM-манипуляции, события, асинхронность, работа с API — всё, что нужно чтобы страницы ожили. Превратишь статичный HTML в полноценное интерактивное приложение.</p>
+      <div class="track-meta">
+        <div class="meta-pill">📚 16 уроков</div>
+        <div class="meta-pill">⏱ ~20 часов</div>
+        <div class="meta-pill">🎯 Средний+</div>
+        <div class="meta-pill">✅ 8 заданий</div>
+      </div>
+      <a href="/frontend/pages/main/lessons/js.html" class="track-cta">Перейти к курсу →</a>
+    </div>
+    <div class="progress-card">
+      <h3>Программа курса</h3>
+      <div class="prog-item">
+        <div class="prog-circle locked">1</div>
+        <div class="prog-text"><strong>Основы JS</strong>Переменные, типы, функции</div>
+      </div>
+      <div class="prog-item">
+        <div class="prog-circle locked">2</div>
+        <div class="prog-text"><strong>DOM</strong>querySelector, createElement</div>
+      </div>
+      <div class="prog-item">
+        <div class="prog-circle locked">3</div>
+        <div class="prog-text"><strong>События</strong>click, input, submit</div>
+      </div>
+      <div class="prog-item">
+        <div class="prog-circle locked">4</div>
+        <div class="prog-text"><strong>Fetch & API</strong>async/await, JSON</div>
+      </div>
+      <div class="prog-item">
+        <div class="prog-circle locked">5</div>
+        <div class="prog-text"><strong>Модули</strong>import/export, структура</div>
+      </div>
+      <div class="prog-bar-wrap">
+        <div class="prog-bar-label"><span>Прогресс</span><span>0 / 5 модулей</span></div>
+        <div class="prog-bar"><div class="prog-bar-fill" style="width:0%"></div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="curriculum">
+    <div class="sec-lbl">Учебный план</div>
+    <div class="cur-title">Что тебя ждёт в курсе</div>
+    <div class="cur-list">
+      <div class="cur-item">
+        <div class="cur-num">01</div>
+        <div class="cur-info"><strong>Переменные и типы данных</strong><span>let, const, string, number, boolean, null</span></div>
+        <span class="cur-tag ct-js">JS</span>
+        <div class="cur-arrow">→</div>
+      </div>
+      <div class="cur-item">
+        <div class="cur-num">02</div>
+        <div class="cur-info"><strong>Функции и области видимости</strong><span>Стрелочные функции, замыкания, hoisting</span></div>
+        <span class="cur-tag ct-js">JS</span>
+        <div class="cur-arrow">→</div>
+      </div>
+      <div class="cur-item">
+        <div class="cur-num">03</div>
+        <div class="cur-info"><strong>Работа с DOM</strong><span>Поиск, создание и изменение элементов</span></div>
+        <span class="cur-tag ct-js">JS</span>
+        <div class="cur-arrow">→</div>
+      </div>
+      <div class="cur-item">
+        <div class="cur-num">04</div>
+        <div class="cur-info"><strong>События</strong><span>addEventListener, делегирование, preventDefault</span></div>
+        <span class="cur-tag ct-js">JS</span>
+        <div class="cur-arrow">→</div>
+      </div>
+      <div class="cur-item">
+        <div class="cur-num">05</div>
+        <div class="cur-info"><strong>Fetch и работа с API</strong><span>Promise, async/await, обработка ошибок</span></div>
+        <span class="cur-tag ct-js">JS</span>
+        <div class="cur-arrow">→</div>
+      </div>
+      <div class="cur-item">
+        <div class="cur-num">06</div>
+        <div class="cur-info"><strong>Модули и структура проекта</strong><span>import/export, разбивка кода на файлы</span></div>
+        <span class="cur-tag ct-js">JS</span>
+        <div class="cur-arrow">→</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="learn-grid">
+    <div class="learn-card">
+      <div class="learn-icon">🖱️</div>
+      <div class="learn-title">Интерактивность</div>
+      <div class="learn-desc">Научишься реагировать на действия пользователя: клики, ввод текста, отправка форм.</div>
+    </div>
+    <div class="learn-card">
+      <div class="learn-icon">🌐</div>
+      <div class="learn-title">Работа с API</div>
+      <div class="learn-desc">Подключишь реальные бэкенд-сервисы, научишься работать с JSON и обрабатывать ошибки сети.</div>
+    </div>
+    <div class="learn-card">
+      <div class="learn-icon">📦</div>
+      <div class="learn-title">Модульный код</div>
+      <div class="learn-desc">Разобьёшь проект на чистые модули — так, как это делается в реальных командных проектах.</div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+    <!-- AI FAB -->
+<button class="ai-fab" id="aiFab" onclick="toggleAiChat()" title="Спросить AI">
+  🤖
+  <span class="ai-fab-badge" id="aiFabBadge" style="display:none">1</span>
+</button>
+
+<!-- AI CHAT POPUP -->
+<div class="ai-chat-popup" id="aiChatPopup">
+  <div class="ai-cp-header">
+    <div class="ai-cp-header-left">
+      <div class="ai-cp-avatar">🤖<span class="ai-cp-dot"></span></div>
+      <div>
+        <div class="ai-cp-name">ТестЛаб AI</div>
+        <div class="ai-cp-status" id="aiCpStatus">Онлайн</div>
+      </div>
+    </div>
+    <div style="display:flex;gap:4px">
+      <button class="ai-cp-btn" onclick="clearAiChat()">🗑</button>
+      <button class="ai-cp-btn" onclick="toggleAiChat()">✕</button>
+    </div>
+  </div>
+
+  <div class="ai-cp-messages" id="aiCpMessages">
+    <div class="ai-cp-row ai-cp-ai">
+      <div class="ai-cp-bubble ai-cp-bubble-ai">
+        <p>Привет! 👋 Я помогу с заданиями по HTML и CSS.</p>
+        <p>Спроси что-нибудь!</p>
+        <span class="ai-cp-time">сейчас</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="ai-cp-typing" id="aiCpTyping" style="display:none">
+    <div class="ai-cp-bubble ai-cp-bubble-ai ai-cp-typing-bubble">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+
+  <div class="ai-cp-input-area">
+    <textarea id="aiCpInput" class="ai-cp-input" placeholder="Напиши вопрос..." rows="1" maxlength="1000"
+      onkeydown="aiChatKey(event)" oninput="aiChatResize(this)"></textarea>
+    <button class="ai-cp-send" onclick="aiChatSend()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="22" y1="2" x2="11" y2="13"/>
+        <polygon points="22 2 15 22 11 13 2 9 22 2"/>
+      </svg>
+    </button>
+  </div>
+  <div class="ai-cp-footer">Powered by <strong>Gemini AI</strong></div>
+</div>
+<script src="/frontend/pages/main/js/course.js"></script>
+</body>
+</html>

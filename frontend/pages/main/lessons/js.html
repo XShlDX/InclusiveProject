@@ -1,0 +1,470 @@
+<!doctype html>
+<html lang="ru" data-them="JS>
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>JavaScript · Урок — ТестЛаб</title>
+  <link rel="stylesheet" href="/frontend/pages/css/lesson.css">
+  <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;700;900&family=Mulish:wght@300;400;600&display=swap" rel="stylesheet"/>
+</head>
+<body>
+<div class="noise"></div>
+
+<!-- HEADER -->
+<header>
+  <div class="hdr">
+    <a href="/frontend/pages/main/courses.html" class="hdr__back">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+        <path d="M13 8H3M7 4L3 8l4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      Курсы
+    </a>
+    <div class="hdr__logo">
+      <span class="logo-dot"></span>
+      <span class="logo-txt">ТестЛаб</span>
+    </div>
+    <div class="lesson-progress">
+      <span class="lp-label">Прогресс урока</span>
+      <div class="lp-bar"><div class="lp-fill" id="lpFill" style="width:0%"></div></div>
+      <span class="lp-count" id="lpCount">0 / 4</span>
+    </div>
+  </div>
+</header>
+
+<!-- LAYOUT -->
+<div class="lesson-wrap">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="sidebar-title">Содержание</div>
+    <div class="step-list">
+      <div class="step-item active" data-step="0" onclick="goStep(0)">
+        <div class="step-icon" id="si0">1</div>
+        <span class="step-label">Что такое JavaScript</span>
+      </div>
+      <div class="step-item" data-step="1" onclick="goStep(1)">
+        <div class="step-icon" id="si1">2</div>
+        <span class="step-label">Переменные и типы</span>
+      </div>
+      <div class="step-item" data-step="2" onclick="goStep(2)">
+        <div class="step-icon" id="si2">3</div>
+        <span class="step-label">Функции и DOM</span>
+      </div>
+      <div class="step-item" data-step="3" onclick="goStep(3)">
+        <div class="step-icon" id="si3">4</div>
+        <span class="step-label">Проверь себя</span>
+      </div>
+      <div class="step-item" data-step="4" onclick="goStep(4)">
+        <div class="step-icon" id="si4">🏁</div>
+        <span class="step-label">Результат</span>
+      </div>
+    </div>
+
+    <div class="sidebar-divider"></div>
+
+    <a href="/frontend/pages/main/main.html" class="sidebar-cta" id="gotoTasksBtn">
+      Перейти к заданиям →
+    </a>
+  </aside>
+
+  <!-- CONTENT -->
+  <main>
+
+    <!-- ── STEP 0: Что такое JavaScript ── -->
+    <div class="lesson-step visible" id="step-0">
+      <div class="step-badge badge-js">JS · Урок 1</div>
+      <h1 class="step-heading">Что такое<br/>JavaScript?</h1>
+      <p class="step-lead">JavaScript — язык программирования браузера. Если HTML — это скелет страницы, CSS — её внешность, то JS — это мозг: он делает страницы живыми и интерактивными.</p>
+
+      <div class="theory-block">
+        <h3>🤔 Зачем нужен JS?</h3>
+        <p>Без JS страницы были бы статичными документами. JavaScript позволяет:</p>
+        <ul>
+          <li>Реагировать на действия пользователя — клики, ввод, прокрутку</li>
+          <li>Изменять содержимое страницы без перезагрузки</li>
+          <li>Отправлять запросы на сервер и получать данные (AJAX / fetch)</li>
+          <li>Создавать анимации, игры, интерфейсы любой сложности</li>
+        </ul>
+      </div>
+
+      <div class="tip">
+        <div class="tip-icon">💡</div>
+        <div class="tip-text">
+          <strong>JS запускается прямо в браузере</strong> — никакой установки не нужно. Открой консоль DevTools (<strong>F12 → Console</strong>) и можешь сразу писать код. Попробуй: <code>alert('Привет, мир!')</code>
+        </div>
+      </div>
+
+      <div class="theory-block">
+        <h3>📋 Как подключить JS к странице?</h3>
+        <p>Есть два способа: встроенный тег <strong>&lt;script&gt;</strong> и подключение внешнего файла. Второй способ — лучшая практика для любого реального проекта.</p>
+      </div>
+
+      <div class="code-example">
+        <div class="code-header">
+          <span class="code-lang">❌ Встроенный — только для экспериментов</span>
+          <button class="code-copy" onclick="copyCode(this)">Копировать</button>
+        </div>
+        <div class="code-body"><code><span class="c-op">&lt;</span><span class="c-fn">script</span><span class="c-op">&gt;</span>
+  <span class="c-kw">console</span>.<span class="c-met">log</span>(<span class="c-str">'Привет из встроенного скрипта'</span>);
+<span class="c-op">&lt;/</span><span class="c-fn">script</span><span class="c-op">&gt;</span></code></div>
+      </div>
+
+      <div class="code-example">
+        <div class="code-header">
+          <span class="code-lang">✅ Внешний файл — правильный способ</span>
+          <button class="code-copy" onclick="copyCode(this)">Копировать</button>
+        </div>
+        <div class="code-body"><code><span class="c-cmt">&lt;!-- В конце &lt;body&gt;, перед &lt;/body&gt; --&gt;</span>
+<span class="c-op">&lt;</span><span class="c-fn">script</span> <span class="c-kw">src</span>=<span class="c-str">"script.js"</span> <span class="c-kw">defer</span><span class="c-op">&gt;&lt;/</span><span class="c-fn">script</span><span class="c-op">&gt;</span>
+
+<span class="c-cmt">// В файле script.js:</span>
+<span class="c-kw">console</span>.<span class="c-met">log</span>(<span class="c-str">'Страница загружена!'</span>);
+<span class="c-cmt">// defer — дождаться загрузки HTML перед запуском</span></code></div>
+      </div>
+
+      <div class="demo-box">
+        <div class="demo-label">Вывод в консоль браузера</div>
+        <div class="demo-inner">
+          <div class="console-demo">
+            <div class="con-input">console.log('Привет, мир!')</div>
+            <div class="con-output">Привет, мир!</div>
+            <div class="con-sep"></div>
+            <div class="con-input">2 + 2</div>
+            <div class="con-output">4</div>
+            <div class="con-sep"></div>
+            <div class="con-input">typeof 'текст'</div>
+            <div class="con-output">"string"</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="step-nav">
+        <button class="btn-prev" disabled>← Назад</button>
+        <button class="btn-next" onclick="goStep(1)">Переменные и типы →</button>
+      </div>
+    </div>
+
+    <!-- ── STEP 1: Переменные и типы ── -->
+    <div class="lesson-step" id="step-1">
+      <div class="step-badge badge-js">JS · Урок 1</div>
+      <h1 class="step-heading">Переменные<br/>и типы данных</h1>
+      <p class="step-lead">Переменные — это именованные контейнеры для данных. В современном JS используют <code>const</code> и <code>let</code>. Данные бывают разных типов — числа, строки, булевы значения и другие.</p>
+
+      <div class="theory-block">
+        <h3>📦 const vs let vs var</h3>
+        <ul>
+          <li><strong>const</strong> — значение нельзя переназначить. Используй по умолчанию.</li>
+          <li><strong>let</strong> — значение можно менять. Используй когда нужно переназначение.</li>
+          <li><strong>var</strong> — устаревший способ. Не используй в новом коде.</li>
+        </ul>
+      </div>
+
+      <div class="code-example">
+        <div class="code-header">
+          <span class="code-lang">JavaScript · Объявление переменных</span>
+          <button class="code-copy" onclick="copyCode(this)">Копировать</button>
+        </div>
+        <div class="code-body"><code><span class="c-kw">const</span> <span class="c-var">name</span> = <span class="c-str">'Алексей'</span>;       <span class="c-cmt">// строка — нельзя переназначить</span>
+<span class="c-kw">const</span> <span class="c-var">age</span>  = <span class="c-num">25</span>;              <span class="c-cmt">// число</span>
+<span class="c-kw">const</span> <span class="c-var">isStudent</span> = <span class="c-bool">true</span>;     <span class="c-cmt">// булево</span>
+
+<span class="c-kw">let</span> <span class="c-var">score</span> = <span class="c-num">0</span>;                <span class="c-cmt">// можно менять</span>
+<span class="c-var">score</span> = <span class="c-num">10</span>;                   <span class="c-cmt">// переназначение — ок</span>
+
+<span class="c-cmt">// name = 'Иван'; — ОШИБКА! const нельзя переназначить</span></code></div>
+      </div>
+
+      <div class="theory-block">
+        <h3>🏷️ Основные типы данных</h3>
+        <p>JavaScript определяет тип значения автоматически. Проверить тип можно оператором <strong>typeof</strong>.</p>
+        <div class="type-grid" style="margin-top:14px;">
+          <div class="type-card">
+            <div class="type-card-name">String</div>
+            <div class="type-card-ex">'текст'<br/>"строка"</div>
+          </div>
+          <div class="type-card">
+            <div class="type-card-name">Number</div>
+            <div class="type-card-ex">42<br/>3.14</div>
+          </div>
+          <div class="type-card">
+            <div class="type-card-name">Boolean</div>
+            <div class="type-card-ex">true<br/>false</div>
+          </div>
+          <div class="type-card">
+            <div class="type-card-name">Array</div>
+            <div class="type-card-ex">[1, 2, 3]</div>
+          </div>
+          <div class="type-card">
+            <div class="type-card-name">Object</div>
+            <div class="type-card-ex">{ key: val }</div>
+          </div>
+          <div class="type-card">
+            <div class="type-card-name">null / undefined</div>
+            <div class="type-card-ex">нет значения</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="code-example">
+        <div class="code-header">
+          <span class="code-lang">JavaScript · Работа со строками и числами</span>
+          <button class="code-copy" onclick="copyCode(this)">Копировать</button>
+        </div>
+        <div class="code-body"><code><span class="c-kw">const</span> <span class="c-var">firstName</span> = <span class="c-str">'Анна'</span>;
+<span class="c-kw">const</span> <span class="c-var">lastName</span>  = <span class="c-str">'Иванова'</span>;
+
+<span class="c-cmt">// Конкатенация (склейка строк)</span>
+<span class="c-kw">const</span> <span class="c-var">full</span> = <span class="c-var">firstName</span> + <span class="c-str">' '</span> + <span class="c-var">lastName</span>;
+<span class="c-cmt">// → 'Анна Иванова'</span>
+
+<span class="c-cmt">// Шаблонные строки (template literals) — современный способ</span>
+<span class="c-kw">const</span> <span class="c-var">greeting</span> = <span class="c-str">`Привет, <span class="c-op">${</span><span class="c-var">firstName</span><span class="c-op">}</span>!`</span>;
+<span class="c-cmt">// → 'Привет, Анна!'</span>
+
+<span class="c-cmt">// Арифметика</span>
+<span class="c-kw">const</span> <span class="c-var">sum</span>  = <span class="c-num">10</span> + <span class="c-num">5</span>;  <span class="c-cmt">// 15</span>
+<span class="c-kw">const</span> <span class="c-var">diff</span> = <span class="c-num">10</span> - <span class="c-num">5</span>;  <span class="c-cmt">// 5</span>
+<span class="c-kw">const</span> <span class="c-var">mult</span> = <span class="c-num">10</span> * <span class="c-num">5</span>;  <span class="c-cmt">// 50</span>
+<span class="c-kw">const</span> <span class="c-var">div</span>  = <span class="c-num">10</span> / <span class="c-num">4</span>;  <span class="c-cmt">// 2.5</span></code></div>
+      </div>
+
+      <div class="tip">
+        <div class="tip-icon">⚠️</div>
+        <div class="tip-text">
+          <strong>Частая ошибка:</strong> смешивать типы. <code>'5' + 3</code> даст <code>'53'</code> (строку!), а не <code>8</code>. Перед арифметикой преобразуй строку в число: <code>Number('5') + 3 === 8</code> или <code>+('5') + 3 === 8</code>.
+        </div>
+      </div>
+
+      <div class="step-nav">
+        <button class="btn-prev" onclick="goStep(0)">← Назад</button>
+        <button class="btn-next" onclick="goStep(2)">Функции и DOM →</button>
+      </div>
+    </div>
+
+    <!-- ── STEP 2: Функции и DOM ── -->
+    <div class="lesson-step" id="step-2">
+      <div class="step-badge badge-js">JS · Урок 1</div>
+      <h1 class="step-heading">Функции<br/>и работа с DOM</h1>
+      <p class="step-lead">Функции — блоки кода, которые можно вызывать многократно. DOM (Document Object Model) — это представление HTML-страницы в виде объектов, которые JS может читать и изменять.</p>
+
+      <div class="theory-block">
+        <h3>⚙️ Функции: объявление и стрелочные</h3>
+        <ul>
+          <li><strong>function declaration</strong> — классический синтаксис, доступен до объявления</li>
+          <li><strong>arrow function (=&gt;)</strong> — современный компактный синтаксис</li>
+          <li>Функции могут принимать <strong>параметры</strong> и возвращать значение через <strong>return</strong></li>
+        </ul>
+      </div>
+
+      <div class="code-example">
+        <div class="code-header">
+          <span class="code-lang">JavaScript · Функции</span>
+          <button class="code-copy" onclick="copyCode(this)">Копировать</button>
+        </div>
+        <div class="code-body"><code><span class="c-cmt">// Классическое объявление</span>
+<span class="c-kw">function</span> <span class="c-fn">greet</span>(<span class="c-var">name</span>) {
+  <span class="c-kw">return</span> <span class="c-str">`Привет, <span class="c-op">${</span><span class="c-var">name</span><span class="c-op">}</span>!`</span>;
+}
+<span class="c-kw">console</span>.<span class="c-met">log</span>(<span class="c-fn">greet</span>(<span class="c-str">'Мир'</span>)); <span class="c-cmt">// → 'Привет, Мир!'</span>
+
+<span class="c-cmt">// Стрелочная функция</span>
+<span class="c-kw">const</span> <span class="c-fn">add</span> = (<span class="c-var">a</span>, <span class="c-var">b</span>) <span class="c-op">=&gt;</span> <span class="c-var">a</span> + <span class="c-var">b</span>;
+<span class="c-kw">console</span>.<span class="c-met">log</span>(<span class="c-fn">add</span>(<span class="c-num">3</span>, <span class="c-num">4</span>));     <span class="c-cmt">// → 7</span>
+
+<span class="c-cmt">// Функция с условием</span>
+<span class="c-kw">const</span> <span class="c-fn">isAdult</span> = (<span class="c-var">age</span>) <span class="c-op">=&gt;</span> {
+  <span class="c-kw">if</span> (<span class="c-var">age</span> <span class="c-op">&gt;=</span> <span class="c-num">18</span>) <span class="c-kw">return</span> <span class="c-str">'Совершеннолетний'</span>;
+  <span class="c-kw">return</span> <span class="c-str">'Несовершеннолетний'</span>;
+};</code></div>
+      </div>
+
+      <div class="theory-block">
+        <h3>🌐 Работа с DOM</h3>
+        <p>DOM — это дерево объектов, где каждый HTML-тег является узлом. JS получает доступ к элементам через <strong>document</strong> и умеет менять текст, стили, атрибуты и обрабатывать события.</p>
+      </div>
+
+      <div class="demo-box">
+        <div class="demo-label">Структура DOM-дерева</div>
+        <div class="demo-inner">
+          <div class="dom-demo">
+            <span class="dom-tag">&lt;body&gt;</span>
+            <div class="dom-el">
+              <span class="dom-tag">&lt;h1 </span><span class="dom-highlight">id="title"</span><span class="dom-tag">&gt;</span>
+              <span class="dom-text">Заголовок</span>
+              <span class="dom-tag">&lt;/h1&gt;</span>
+            </div>
+            <div class="dom-el">
+              <span class="dom-tag">&lt;button </span><span class="dom-highlight">id="btn"</span><span class="dom-tag">&gt;</span>
+              <span class="dom-text">Нажми меня</span>
+              <span class="dom-tag">&lt;/button&gt;</span>
+            </div>
+            <span class="dom-tag">&lt;/body&gt;</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="code-example">
+        <div class="code-header">
+          <span class="code-lang">JavaScript · Поиск элементов и обработка событий</span>
+          <button class="code-copy" onclick="copyCode(this)">Копировать</button>
+        </div>
+        <div class="code-body"><code><span class="c-cmt">// Найти элемент по ID</span>
+<span class="c-kw">const</span> <span class="c-var">title</span> = <span class="c-kw">document</span>.<span class="c-met">getElementById</span>(<span class="c-str">'title'</span>);
+<span class="c-kw">const</span> <span class="c-var">btn</span>   = <span class="c-kw">document</span>.<span class="c-met">querySelector</span>(<span class="c-str">'#btn'</span>);
+
+<span class="c-cmt">// Читать и менять содержимое</span>
+<span class="c-kw">console</span>.<span class="c-met">log</span>(<span class="c-var">title</span>.<span class="c-var">textContent</span>); <span class="c-cmt">// → 'Заголовок'</span>
+<span class="c-var">title</span>.<span class="c-var">textContent</span> = <span class="c-str">'Новый заголовок'</span>;
+
+<span class="c-cmt">// Менять стиль</span>
+<span class="c-var">title</span>.<span class="c-var">style</span>.<span class="c-var">color</span> = <span class="c-str">'#f7df1e'</span>;
+
+<span class="c-cmt">// Слушать клик</span>
+<span class="c-var">btn</span>.<span class="c-met">addEventListener</span>(<span class="c-str">'click'</span>, () <span class="c-op">=&gt;</span> {
+  <span class="c-var">title</span>.<span class="c-var">textContent</span> = <span class="c-str">'Кнопка нажата!'</span>;
+  <span class="c-var">btn</span>.<span class="c-var">style</span>.<span class="c-var">background</span> = <span class="c-str">'#f7df1e'</span>;
+});</code></div>
+      </div>
+
+      <div class="tip">
+        <div class="tip-icon">💡</div>
+        <div class="tip-text">
+          <strong>querySelector vs getElementById:</strong> <code>querySelector('#id')</code> гибче — принимает любой CSS-селектор (<code>'.class'</code>, <code>'div > p'</code>). <code>getElementById('id')</code> быстрее, но только для ID. В современном коде чаще используют <code>querySelector</code>.
+        </div>
+      </div>
+
+      <div class="step-nav">
+        <button class="btn-prev" onclick="goStep(1)">← Назад</button>
+        <button class="btn-next" onclick="goStep(3)">Проверь себя →</button>
+      </div>
+    </div>
+
+    <!-- ── STEP 3: Квиз ── -->
+    <div class="lesson-step" id="step-3">
+      <div class="step-badge badge-quiz">Проверка знаний</div>
+      <h1 class="step-heading">Проверь себя 🎯</h1>
+      <p class="step-lead">Ответь на вопросы по пройденному материалу. Можно ошибаться — это тренировка, правильные ответы сразу покажутся.</p>
+
+      <div class="mini-quiz" id="miniQuiz">
+
+        <div class="mq-item" id="mq0">
+          <div class="mq-q">1. Какой из способов объявления переменной следует использовать по умолчанию в современном JS?</div>
+          <div class="mq-options">
+            <div class="mq-opt" onclick="pickAnswer(0,0)"><div class="mq-circle">А</div><span><code>var</code></span></div>
+            <div class="mq-opt" onclick="pickAnswer(0,1)"><div class="mq-circle">Б</div><span><code>let</code></span></div>
+            <div class="mq-opt" onclick="pickAnswer(0,2)"><div class="mq-circle">В</div><span><code>const</code></span></div>
+          </div>
+          <div class="mq-feedback" id="fb0"></div>
+        </div>
+
+        <div class="mq-item" id="mq1">
+          <div class="mq-q">2. Что выведет код: <code>'5' + 3</code>?</div>
+          <div class="mq-options">
+            <div class="mq-opt" onclick="pickAnswer(1,0)"><div class="mq-circle">А</div><span><code>8</code> (число)</span></div>
+            <div class="mq-opt" onclick="pickAnswer(1,1)"><div class="mq-circle">Б</div><span><code>'53'</code> (строка)</span></div>
+            <div class="mq-opt" onclick="pickAnswer(1,2)"><div class="mq-circle">В</div><span>Ошибка выполнения</span></div>
+          </div>
+          <div class="mq-feedback" id="fb1"></div>
+        </div>
+
+        <div class="mq-item" id="mq2">
+          <div class="mq-q">3. Какой метод используется для поиска элемента по любому CSS-селектору?</div>
+          <div class="mq-options">
+            <div class="mq-opt" onclick="pickAnswer(2,0)"><div class="mq-circle">А</div><span><code>document.getElementById()</code></span></div>
+            <div class="mq-opt" onclick="pickAnswer(2,1)"><div class="mq-circle">Б</div><span><code>document.querySelector()</code></span></div>
+            <div class="mq-opt" onclick="pickAnswer(2,2)"><div class="mq-circle">В</div><span><code>document.findElement()</code></span></div>
+          </div>
+          <div class="mq-feedback" id="fb2"></div>
+        </div>
+
+        <div class="mq-item" id="mq3">
+          <div class="mq-q">4. Как правильно обработать клик на кнопку?</div>
+          <div class="mq-options">
+            <div class="mq-opt" onclick="pickAnswer(3,0)"><div class="mq-circle">А</div><span><code>btn.onClick = function() {}</code></span></div>
+            <div class="mq-opt" onclick="pickAnswer(3,1)"><div class="mq-circle">Б</div><span><code>btn.addEventListener('click', () => {})</code></span></div>
+            <div class="mq-opt" onclick="pickAnswer(3,2)"><div class="mq-circle">В</div><span><code>btn.click(() => {})</code></span></div>
+          </div>
+          <div class="mq-feedback" id="fb3"></div>
+        </div>
+
+      </div>
+
+      <div class="step-nav">
+        <button class="btn-prev" onclick="goStep(2)">← Назад</button>
+        <button class="btn-next" id="toResultBtn" onclick="goStep(4)" disabled>Посмотреть результат →</button>
+      </div>
+    </div>
+
+    <!-- ── STEP 4: Результат ── -->
+    <div class="lesson-step" id="step-4">
+      <div class="final-screen">
+        <div class="final-trophy">🏆</div>
+        <h1 class="final-title">Урок завершён!</h1>
+        <p class="final-sub">Ты изучил основы JavaScript: как подключать скрипты, работать с переменными и типами, писать функции и управлять DOM-элементами.</p>
+
+        <div class="final-score">
+          <span class="final-score-num" id="finalScore">0</span>
+          <span class="final-score-label">/ 4 правильных ответов</span>
+        </div>
+
+        <p class="final-sub" id="finalMsg">Ты готов к первому заданию!</p>
+
+        <div class="final-actions">
+          <a href="/frontend/pages/main/main.html" class="final-btn-primary">
+            Перейти к заданиям →
+          </a>
+          <button class="final-btn-sec" onclick="restartLesson()">
+            ↺ Пройти снова
+          </button>
+        </div>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<!-- AI FAB -->
+<button class="ai-fab" id="aiFab" onclick="toggleAiChat()" title="Спросить AI">🤖</button>
+
+<!-- AI CHAT -->
+<div class="ai-chat-popup" id="aiChatPopup">
+  <div class="ai-cp-header">
+    <div class="ai-cp-header-left">
+      <div class="ai-cp-avatar">🤖<span class="ai-cp-dot"></span></div>
+      <div>
+        <div class="ai-cp-name">ТестЛаб AI</div>
+        <div class="ai-cp-status" id="aiCpStatus">Онлайн</div>
+      </div>
+    </div>
+    <div style="display:flex;gap:4px">
+      <button class="ai-cp-btn" onclick="clearAiChat()">🗑</button>
+      <button class="ai-cp-btn" onclick="toggleAiChat()">✕</button>
+    </div>
+  </div>
+  <div class="ai-cp-messages" id="aiCpMessages">
+    <div class="ai-cp-row ai-cp-ai">
+      <div class="ai-cp-bubble ai-cp-bubble-ai">
+        <p>Привет! 👋 Я помогу разобраться с теорией урока.</p>
+        <p>Спроси что не понятно — объясню проще!</p>
+        <span class="ai-cp-time">сейчас</span>
+      </div>
+    </div>
+  </div>
+  <div class="ai-cp-typing" id="aiCpTyping" style="display:none">
+    <div class="ai-cp-bubble ai-cp-bubble-ai ai-cp-typing-bubble"><span></span><span></span><span></span></div>
+  </div>
+  <div class="ai-cp-input-area">
+    <textarea id="aiCpInput" class="ai-cp-input" placeholder="Напиши вопрос..." rows="1" maxlength="1000"
+      onkeydown="aiChatKey(event)" oninput="aiChatResize(this)"></textarea>
+    <button class="ai-cp-send" onclick="aiChatSend()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/>
+      </svg>
+    </button>
+  </div>
+  <div class="ai-cp-footer">Powered by <strong>Gemini AI</strong></div>
+</div>
+
+<script src="/frontend/pages/main/js/lesson.js"></script>
+</body>
+</html>

@@ -1,0 +1,387 @@
+<!doctype html>
+<html lang="ru" data-them="css">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>CSS · Урок — ТестЛаб</title>
+  <link rel="stylesheet" href="/frontend/pages/css/lesson.css">
+  <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;700;900&family=Mulish:wght@300;400;600&display=swap" rel="stylesheet"/>
+</head>
+<body>
+<div class="noise"></div>
+
+<header>
+  <div class="hdr">
+    <a href="/frontend/pages/main/courses.html" class="hdr__back">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+        <path d="M13 8H3M7 4L3 8l4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      Курсы
+    </a>
+    <div class="hdr__logo">
+      <span class="logo-dot"></span>
+      <span class="logo-txt">ТестЛаб</span>
+    </div>
+    <div class="lesson-progress">
+      <span class="lp-label">Прогресс урока</span>
+      <div class="lp-bar"><div class="lp-fill" id="lpFill" style="width:0%"></div></div>
+      <span class="lp-count" id="lpCount">0 / 4</span>
+    </div>
+  </div>
+</header>
+
+<div class="lesson-wrap">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="sidebar-title">Содержание</div>
+    <div class="step-list">
+      <div class="step-item active" data-step="0" onclick="goStep(0)">
+        <div class="step-icon" id="si0">1</div>
+        <span class="step-label">Что такое CSS</span>
+      </div>
+      <div class="step-item" data-step="1" onclick="goStep(1)">
+        <div class="step-icon" id="si1">2</div>
+        <span class="step-label">Селекторы и каскад</span>
+      </div>
+      <div class="step-item" data-step="2" onclick="goStep(2)">
+        <div class="step-icon" id="si2">3</div>
+        <span class="step-label">Box Model и Flexbox</span>
+      </div>
+      <div class="step-item" data-step="3" onclick="goStep(3)">
+        <div class="step-icon" id="si3">4</div>
+        <span class="step-label">Проверь себя</span>
+      </div>
+      <div class="step-item" data-step="4" onclick="goStep(4)">
+        <div class="step-icon" id="si4">🏁</div>
+        <span class="step-label">Результат</span>
+      </div>
+    </div>
+    <div class="sidebar-divider"></div>
+    <a href="/frontend/pages/main/main.html" class="sidebar-cta">Перейти к заданиям →</a>
+  </aside>
+
+  <main>
+
+    <!-- ── STEP 0: Что такое CSS ── -->
+    <div class="lesson-step visible" id="step-0">
+      <div class="step-badge badge-css">CSS · Урок 1</div>
+      <h1 class="step-heading">Что такое CSS<br/>и зачем он нужен?</h1>
+      <p class="step-lead">CSS — язык, который превращает скучный HTML в красивый интерфейс. Без него все сайты выглядели бы как текстовые документы из 90-х.</p>
+
+      <div class="theory-block">
+        <h3>🎨 CSS = внешний вид сайта</h3>
+        <p>HTML описывает <strong>структуру</strong> страницы. CSS отвечает за <strong>внешний вид</strong>: цвета, шрифты, размеры, отступы, анимации. Вместе они создают всё, что ты видишь в браузере.</p>
+        <p>CSS расшифровывается как <strong>Cascading Style Sheets</strong> — каскадные таблицы стилей. Слово «каскадные» означает, что правила накладываются друг на друга, и побеждает самое специфичное.</p>
+      </div>
+
+      <div class="tip">
+        <div class="tip-icon">🏠</div>
+        <div class="tip-text">
+          <strong>Аналогия:</strong> если HTML — это кирпичи и стены дома, то CSS — это покраска, обои и расстановка мебели. Структура и внешний вид разделены намеренно.
+        </div>
+      </div>
+
+      <div class="theory-block">
+        <h3>📎 Три способа подключить CSS</h3>
+        <ul>
+          <li><strong>Внешний файл</strong> — самый правильный: <code>&lt;link rel="stylesheet" href="style.css"&gt;</code> в &lt;head&gt;</li>
+          <li><strong>Тег &lt;style&gt;</strong> — прямо в HTML-документе, подходит для небольших проектов</li>
+          <li><strong>Атрибут style=""</strong> — инлайновые стили, только для исключений, не используй постоянно</li>
+        </ul>
+      </div>
+
+      <div class="code-example">
+        <div class="code-header">
+          <span class="code-lang">CSS · Первые стили</span>
+          <button class="code-copy" onclick="copyCode(this)">Копировать</button>
+        </div>
+        <div class="code-body"><code><span class="c-cmt">/* Выбираем тег h1 и задаём ему стили */</span>
+<span class="c-sel">h1</span> {
+  <span class="c-prop">color</span>: <span class="c-val">#e8ff57</span>;
+  <span class="c-prop">font-size</span>: <span class="c-num">2rem</span>;
+  <span class="c-prop">font-weight</span>: <span class="c-num">900</span>;
+}
+
+<span class="c-cmt">/* Выбираем по классу */</span>
+<span class="c-sel">.card</span> {
+  <span class="c-prop">background</span>: <span class="c-val">#13161e</span>;
+  <span class="c-prop">border-radius</span>: <span class="c-num">14px</span>;
+  <span class="c-prop">padding</span>: <span class="c-num">24px</span>;
+}</code></div>
+      </div>
+
+      <div class="step-nav">
+        <button class="btn-prev" disabled>← Назад</button>
+        <button class="btn-next" onclick="goStep(1)">Селекторы и каскад →</button>
+      </div>
+    </div>
+
+    <!-- ── STEP 1: Селекторы и каскад ── -->
+    <div class="lesson-step" id="step-1">
+      <div class="step-badge badge-css">CSS · Урок 1</div>
+      <h1 class="step-heading">Селекторы<br/>и каскад</h1>
+      <p class="step-lead">Селектор — это «адрес» элемента, которому ты хочешь задать стили. Понимание селекторов = умение точно нацеливаться на нужные элементы.</p>
+
+      <div class="theory-block">
+        <h3>🎯 Основные виды селекторов</h3>
+        <ul>
+          <li><strong>Тег</strong> — <code>p { }</code> — применится ко всем параграфам</li>
+          <li><strong>Класс</strong> — <code>.card { }</code> — к элементам с class="card"</li>
+          <li><strong>ID</strong> — <code>#header { }</code> — к конкретному элементу с id="header"</li>
+          <li><strong>Псевдокласс</strong> — <code>a:hover { }</code> — при наведении мышки</li>
+          <li><strong>Комбинация</strong> — <code>.card h2 { }</code> — h2 внутри .card</li>
+        </ul>
+      </div>
+
+      <div class="code-example">
+        <div class="code-header">
+          <span class="code-lang">CSS · Виды селекторов</span>
+          <button class="code-copy" onclick="copyCode(this)">Копировать</button>
+        </div>
+        <div class="code-body"><code><span class="c-cmt">/* Тег — специфичность 0-0-1 */</span>
+<span class="c-sel">p</span> { <span class="c-prop">color</span>: <span class="c-val">gray</span>; }
+
+<span class="c-cmt">/* Класс — специфичность 0-1-0 */</span>
+<span class="c-sel">.highlight</span> { <span class="c-prop">color</span>: <span class="c-val">#e8ff57</span>; }
+
+<span class="c-cmt">/* ID — специфичность 1-0-0 (самый сильный) */</span>
+<span class="c-sel">#title</span> { <span class="c-prop">color</span>: <span class="c-val">white</span>; }
+
+<span class="c-cmt">/* Псевдокласс — hover, focus, active */</span>
+<span class="c-sel">button:hover</span> { <span class="c-prop">background</span>: <span class="c-val">#5dffb0</span>; }
+
+<span class="c-cmt">/* Дочерний — p внутри .card */</span>
+<span class="c-sel">.card p</span> { <span class="c-prop">font-size</span>: <span class="c-num">0.9rem</span>; }</code></div>
+      </div>
+
+      <div class="theory-block">
+        <h3>🌊 Что такое каскад?</h3>
+        <p>Когда два правила конфликтуют, браузер определяет победителя по <strong>специфичности</strong>. Побеждает наиболее специфичный селектор. Если специфичность равна — побеждает то, что написано <strong>позже</strong> в файле.</p>
+        <p>Порядок силы: <strong>ID</strong> &gt; <strong>класс / псевдокласс</strong> &gt; <strong>тег</strong></p>
+      </div>
+
+      <div class="tip">
+        <div class="tip-icon">⚠️</div>
+        <div class="tip-text">
+          <strong>Не злоупотребляй ID для стилей.</strong> ID слишком специфичен — потом трудно перезаписать. Используй классы для стилизации, а ID только для JavaScript и якорей.
+        </div>
+      </div>
+
+      <div class="step-nav">
+        <button class="btn-prev" onclick="goStep(0)">← Назад</button>
+        <button class="btn-next" onclick="goStep(2)">Box Model и Flexbox →</button>
+      </div>
+    </div>
+
+    <!-- ── STEP 2: Box Model и Flexbox ── -->
+    <div class="lesson-step" id="step-2">
+      <div class="step-badge badge-css">CSS · Урок 1</div>
+      <h1 class="step-heading">Box Model<br/>и Flexbox</h1>
+      <p class="step-lead">Каждый элемент на странице — это прямоугольник. Понимание Box Model объясняет, почему элементы стоят там, где стоят. Flexbox — главный инструмент современной раскладки.</p>
+
+      <div class="theory-block">
+        <h3>📦 Box Model: контент → padding → border → margin</h3>
+        <p>Каждый HTML-элемент состоит из четырёх слоёв. Снаружи внутрь: <strong>margin</strong> (внешний отступ) → <strong>border</strong> (граница) → <strong>padding</strong> (внутренний отступ) → <strong>content</strong> (сам контент).</p>
+      </div>
+
+      <div class="demo-box">
+        <div class="demo-label">Визуальная модель Box Model</div>
+        <div class="demo-inner">
+          <div class="box-model-demo">
+            <div class="bm-margin">
+              <div class="bm-border">
+                <div class="bm-padding">
+                  <div class="bm-content">content</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="code-example">
+        <div class="code-header">
+          <span class="code-lang">CSS · Box Model</span>
+          <button class="code-copy" onclick="copyCode(this)">Копировать</button>
+        </div>
+        <div class="code-body"><code><span class="c-sel">.card</span> {
+  <span class="c-prop">width</span>: <span class="c-num">300px</span>;
+  <span class="c-prop">padding</span>: <span class="c-num">24px</span>;           <span class="c-cmt">/* внутренний отступ */</span>
+  <span class="c-prop">border</span>: <span class="c-num">1px</span> solid <span class="c-val">#333</span>;  <span class="c-cmt">/* граница */</span>
+  <span class="c-prop">margin</span>: <span class="c-num">16px</span>;          <span class="c-cmt">/* внешний отступ */</span>
+
+  <span class="c-cmt">/* ВАЖНО: с border-box width включает padding+border */</span>
+  <span class="c-prop">box-sizing</span>: <span class="c-val">border-box</span>;
+}</code></div>
+      </div>
+
+      <div class="theory-block">
+        <h3>↔️ Flexbox — одномерная раскладка</h3>
+        <p>Flexbox выстраивает элементы <strong>по одной оси</strong> (горизонтально или вертикально). Идеален для навбаров, карточек в строку, центрирования. Включается одной строкой: <code>display: flex</code>.</p>
+        <ul>
+          <li><strong>justify-content</strong> — выравнивание по главной оси (горизонтали)</li>
+          <li><strong>align-items</strong> — выравнивание по поперечной оси (вертикали)</li>
+          <li><strong>gap</strong> — расстояние между элементами</li>
+          <li><strong>flex-wrap</strong> — перенос элементов на новую строку</li>
+        </ul>
+      </div>
+
+      <div class="demo-box">
+        <div class="demo-label">Flexbox — justify-content: space-between</div>
+        <div class="demo-inner">
+          <div class="flex-demo space-between">
+            <div class="flex-box fb1">Лого</div>
+            <div class="flex-box fb2">Навигация</div>
+            <div class="flex-box fb3">Кнопка</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="code-example">
+        <div class="code-header">
+          <span class="code-lang">CSS · Flexbox навбар</span>
+          <button class="code-copy" onclick="copyCode(this)">Копировать</button>
+        </div>
+        <div class="code-body"><code><span class="c-sel">.navbar</span> {
+  <span class="c-prop">display</span>: <span class="c-val">flex</span>;
+  <span class="c-prop">justify-content</span>: <span class="c-val">space-between</span>;
+  <span class="c-prop">align-items</span>: <span class="c-val">center</span>;
+  <span class="c-prop">gap</span>: <span class="c-num">16px</span>;
+  <span class="c-prop">padding</span>: <span class="c-num">0 32px</span>;
+  <span class="c-prop">height</span>: <span class="c-num">64px</span>;
+}
+
+<span class="c-cmt">/* Все дочерние элементы стали flex-элементами */</span>
+<span class="c-sel">.navbar a</span> {
+  <span class="c-prop">color</span>: <span class="c-val">rgba(240,242,245,.6)</span>;
+  <span class="c-prop">text-decoration</span>: <span class="c-val">none</span>;
+  <span class="c-prop">transition</span>: <span class="c-val">color .2s</span>;
+}
+<span class="c-sel">.navbar a:hover</span> { <span class="c-prop">color</span>: <span class="c-val">#f0f2f5</span>; }</code></div>
+      </div>
+
+      <div class="step-nav">
+        <button class="btn-prev" onclick="goStep(1)">← Назад</button>
+        <button class="btn-next" onclick="goStep(3)">Проверь себя →</button>
+      </div>
+    </div>
+
+    <!-- ── STEP 3: Квиз ── -->
+    <div class="lesson-step" id="step-3">
+      <div class="step-badge badge-quiz">Проверка знаний</div>
+      <h1 class="step-heading">Проверь себя 🎯</h1>
+      <p class="step-lead">Ответь на вопросы по пройденному материалу. Можно ошибаться — это тренировка, правильные ответы сразу покажутся.</p>
+
+      <div class="mini-quiz" id="miniQuiz">
+
+        <div class="mq-item" id="mq0">
+          <div class="mq-q">1. Что означает аббревиатура CSS?</div>
+          <div class="mq-options">
+            <div class="mq-opt" onclick="pickAnswer(0,0,0)"><div class="mq-circle">А</div><span>Computer Style System</span></div>
+            <div class="mq-opt" onclick="pickAnswer(0,1,0)"><div class="mq-circle">Б</div><span>Cascading Style Sheets</span></div>
+            <div class="mq-opt" onclick="pickAnswer(0,2,0)"><div class="mq-circle">В</div><span>Color & Size Syntax</span></div>
+          </div>
+          <div class="mq-feedback" id="fb0"></div>
+        </div>
+
+        <div class="mq-item" id="mq1">
+          <div class="mq-q">2. Какой селектор имеет наибольшую специфичность?</div>
+          <div class="mq-options">
+            <div class="mq-opt" onclick="pickAnswer(1,0,0)"><div class="mq-circle">А</div><span>Тег: <code>p { }</code></span></div>
+            <div class="mq-opt" onclick="pickAnswer(1,1,0)"><div class="mq-circle">Б</div><span>Класс: <code>.text { }</code></span></div>
+            <div class="mq-opt" onclick="pickAnswer(1,2,0)"><div class="mq-circle">В</div><span>ID: <code>#title { }</code></span></div>
+          </div>
+          <div class="mq-feedback" id="fb1"></div>
+        </div>
+
+        <div class="mq-item" id="mq2">
+          <div class="mq-q">3. Какое свойство нужно задать элементу, чтобы его дети стали flex-элементами?</div>
+          <div class="mq-options">
+            <div class="mq-opt" onclick="pickAnswer(2,0,0)"><div class="mq-circle">А</div><span><code>flex: 1</code></span></div>
+            <div class="mq-opt" onclick="pickAnswer(2,1,0)"><div class="mq-circle">Б</div><span><code>display: flex</code></span></div>
+            <div class="mq-opt" onclick="pickAnswer(2,2,0)"><div class="mq-circle">В</div><span><code>position: flex</code></span></div>
+          </div>
+          <div class="mq-feedback" id="fb2"></div>
+        </div>
+
+        <div class="mq-item" id="mq3">
+          <div class="mq-q">4. Правильный порядок слоёв Box Model снаружи внутрь?</div>
+          <div class="mq-options">
+            <div class="mq-opt" onclick="pickAnswer(3,0,0)"><div class="mq-circle">А</div><span>padding → border → margin → content</span></div>
+            <div class="mq-opt" onclick="pickAnswer(3,1,0)"><div class="mq-circle">Б</div><span>margin → border → padding → content</span></div>
+            <div class="mq-opt" onclick="pickAnswer(3,2,0)"><div class="mq-circle">В</div><span>border → margin → content → padding</span></div>
+          </div>
+          <div class="mq-feedback" id="fb3"></div>
+        </div>
+
+      </div>
+
+      <div class="step-nav">
+        <button class="btn-prev" onclick="goStep(2)">← Назад</button>
+        <button class="btn-next" id="toResultBtn" onclick="goStep(4)" disabled>Посмотреть результат →</button>
+      </div>
+    </div>
+
+    <!-- ── STEP 4: Результат ── -->
+    <div class="lesson-step" id="step-4">
+      <div class="final-screen">
+        <div class="final-trophy">🎨</div>
+        <h1 class="final-title">Урок завершён!</h1>
+        <p class="final-sub">Ты разобрался с основами CSS: подключение, селекторы, каскад, Box Model и Flexbox. Это фундамент для любой красивой вёрстки.</p>
+        <div class="final-score">
+          <span class="final-score-num" id="finalScore">0</span>
+          <span class="final-score-label">/ 4 правильных ответов</span>
+        </div>
+        <p class="final-sub" id="finalMsg"></p>
+        <div class="final-actions">
+          <a href="/frontend/pages/main/main.html" class="final-btn-primary">Перейти к заданиям →</a>
+          <button class="final-btn-sec" onclick="restartLesson()">↺ Пройти снова</button>
+        </div>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<!-- AI FAB -->
+<button class="ai-fab" id="aiFab" onclick="toggleAiChat()" title="Спросить AI">🤖</button>
+
+<div class="ai-chat-popup" id="aiChatPopup">
+  <div class="ai-cp-header">
+    <div class="ai-cp-header-left">
+      <div class="ai-cp-avatar">🤖<span class="ai-cp-dot"></span></div>
+      <div><div class="ai-cp-name">ТестЛаб AI</div><div class="ai-cp-status" id="aiCpStatus">Онлайн</div></div>
+    </div>
+    <div style="display:flex;gap:4px">
+      <button class="ai-cp-btn" onclick="clearAiChat()">🗑</button>
+      <button class="ai-cp-btn" onclick="toggleAiChat()">✕</button>
+    </div>
+  </div>
+  <div class="ai-cp-messages" id="aiCpMessages">
+    <div class="ai-cp-row ai-cp-ai">
+      <div class="ai-cp-bubble ai-cp-bubble-ai">
+        <p>Привет! 👋 Я помогу разобраться с CSS.</p>
+        <p>Спроси что не понятно — объясню проще!</p>
+        <span class="ai-cp-time">сейчас</span>
+      </div>
+    </div>
+  </div>
+  <div class="ai-cp-typing" id="aiCpTyping" style="display:none">
+    <div class="ai-cp-bubble ai-cp-bubble-ai ai-cp-typing-bubble"><span></span><span></span><span></span></div>
+  </div>
+  <div class="ai-cp-input-area">
+    <textarea id="aiCpInput" class="ai-cp-input" placeholder="Напиши вопрос..." rows="1" maxlength="1000"
+      onkeydown="aiChatKey(event)" oninput="aiChatResize(this)"></textarea>
+    <button class="ai-cp-send" onclick="aiChatSend()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/>
+      </svg>
+    </button>
+  </div>
+  <div class="ai-cp-footer">Powered by <strong>Gemini AI</strong></div>
+</div>
+
+<script src="/frontend/pages/main/js/lesson.js"></script>
+</body>
+</html>

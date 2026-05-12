@@ -1,0 +1,472 @@
+<!doctype html>
+<html lang="ru" data-them="html">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Урок — ТестЛаб</title>
+  <link rel="stylesheet" href="/frontend/pages/css/lesson.css">
+  <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;700;900&family=Mulish:wght@300;400;600&display=swap" rel="stylesheet"/>
+</head>
+<body>
+<div class="noise"></div>
+
+<!-- HEADER -->
+<header>
+  <div class="hdr">
+    <a href="/frontend/pages/main/courses.html" class="hdr__back">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+        <path d="M13 8H3M7 4L3 8l4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      Курсы
+    </a>
+    <div class="hdr__logo">
+      <span class="logo-dot"></span>
+      <span class="logo-txt">ТестЛаб</span>
+    </div>
+    <div class="lesson-progress">
+      <span class="lp-label">Прогресс урока</span>
+      <div class="lp-bar"><div class="lp-fill" id="lpFill" style="width:0%"></div></div>
+      <span class="lp-count" id="lpCount">0 / 4</span>
+    </div>
+  </div>
+</header>
+
+<!-- LAYOUT -->
+<div class="lesson-wrap">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="sidebar-title">Содержание</div>
+    <div class="step-list">
+      <div class="step-item active" data-step="0" onclick="goStep(0)">
+        <div class="step-icon" id="si0">1</div>
+        <span class="step-label">Что такое семантика</span>
+      </div>
+      <div class="step-item" data-step="1" onclick="goStep(1)">
+        <div class="step-icon" id="si1">2</div>
+        <span class="step-label">Основные теги</span>
+      </div>
+      <div class="step-item" data-step="2" onclick="goStep(2)">
+        <div class="step-icon" id="si2">3</div>
+        <span class="step-label">Правильная структура</span>
+      </div>
+      <div class="step-item" data-step="3" onclick="goStep(3)">
+        <div class="step-icon" id="si3">4</div>
+        <span class="step-label">Проверь себя</span>
+      </div>
+      <div class="step-item" data-step="4" onclick="goStep(4)">
+        <div class="step-icon" id="si4">🏁</div>
+        <span class="step-label">Результат</span>
+      </div>
+    </div>
+
+    <div class="sidebar-divider"></div>
+
+    <a href="/frontend/pages/main/main.html" class="sidebar-cta" id="gotoTasksBtn">
+      Перейти к заданиям →
+    </a>
+  </aside>
+
+  <!-- CONTENT -->
+  <main>
+
+    <!-- ── STEP 0: Что такое семантика ── -->
+    <div class="lesson-step visible" id="step-0">
+      <div class="step-badge badge-html">HTML · Урок 1</div>
+      <h1 class="step-heading">Что такое<br/>семантическая разметка?</h1>
+      <p class="step-lead">Семантика — это смысл. Семантические теги говорят браузеру и поисковику, что именно находится на странице, а не просто как оно выглядит.</p>
+
+      <div class="theory-block">
+        <h3>🤔 Зачем это нужно?</h3>
+        <p>Без семантики весь контент можно обернуть в <strong>&lt;div&gt;</strong> — и страница будет выглядеть нормально. Но тогда:</p>
+        <ul>
+          <li>Поисковики не поймут, что главное на странице — и снизят рейтинг в поиске</li>
+          <li>Скринридеры (для слабовидящих) не смогут правильно прочитать содержимое</li>
+          <li>Другим разработчикам будет сложно понять код</li>
+        </ul>
+      </div>
+
+      <div class="tip">
+        <div class="tip-icon">💡</div>
+        <div class="tip-text">
+          <strong>Главное правило:</strong> спроси себя «Что это за контент?» — и выбери тег по смыслу. Шапка сайта — <code>&lt;header&gt;</code>, навигация — <code>&lt;nav&gt;</code>, статья — <code>&lt;article&gt;</code>.
+        </div>
+      </div>
+
+      <div class="theory-block">
+        <h3>📊 Семантика vs &lt;div&gt;</h3>
+        <p>Посмотри на два варианта одного и того же меню:</p>
+      </div>
+
+      <div class="code-example">
+        <div class="code-header">
+          <span class="code-lang">❌ Плохо — только div</span>
+          <button class="code-copy" onclick="copyCode(this)">Копировать</button>
+        </div>
+        <div class="code-body"><code><span class="c-tag">&lt;div</span> <span class="c-attr">class</span>=<span class="c-val">"header"</span><span class="c-tag">&gt;</span>
+  <span class="c-tag">&lt;div</span> <span class="c-attr">class</span>=<span class="c-val">"nav"</span><span class="c-tag">&gt;</span>
+    <span class="c-tag">&lt;div&gt;</span>Главная<span class="c-tag">&lt;/div&gt;</span>
+    <span class="c-tag">&lt;div&gt;</span>О нас<span class="c-tag">&lt;/div&gt;</span>
+  <span class="c-tag">&lt;/div&gt;</span>
+<span class="c-tag">&lt;/div&gt;</span>
+<span class="c-cmt">&lt;!-- Браузер понятия не имеет, что это шапка и меню --&gt;</span></code></div>
+      </div>
+
+      <div class="code-example">
+        <div class="code-header">
+          <span class="code-lang">✅ Хорошо — семантика</span>
+          <button class="code-copy" onclick="copyCode(this)">Копировать</button>
+        </div>
+        <div class="code-body"><code><span class="c-tag">&lt;header&gt;</span>
+  <span class="c-tag">&lt;nav&gt;</span>
+    <span class="c-tag">&lt;a</span> <span class="c-attr">href</span>=<span class="c-val">"/"</span><span class="c-tag">&gt;</span>Главная<span class="c-tag">&lt;/a&gt;</span>
+    <span class="c-tag">&lt;a</span> <span class="c-attr">href</span>=<span class="c-val">"/about"</span><span class="c-tag">&gt;</span>О нас<span class="c-tag">&lt;/a&gt;</span>
+  <span class="c-tag">&lt;/nav&gt;</span>
+<span class="c-tag">&lt;/header&gt;</span>
+<span class="c-cmt">&lt;!-- Сразу понятно: это шапка сайта с навигацией --&gt;</span></code></div>
+      </div>
+
+      <div class="step-nav">
+        <button class="btn-prev" disabled>← Назад</button>
+        <button class="btn-next" onclick="goStep(1)">Основные теги →</button>
+      </div>
+    </div>
+
+    <!-- ── STEP 1: Основные теги ── -->
+    <div class="lesson-step" id="step-1">
+      <div class="step-badge badge-html">HTML · Урок 1</div>
+      <h1 class="step-heading">Основные<br/>семантические теги</h1>
+      <p class="step-lead">HTML5 принёс нам набор тегов, которые описывают смысл блоков. Вот самые важные из них — те, что ты будешь использовать на каждом сайте.</p>
+
+      <div class="theory-block">
+        <h3>🏗️ Теги структуры страницы</h3>
+        <ul>
+          <li><strong>&lt;header&gt;</strong> — шапка страницы или раздела. Обычно содержит логотип, навигацию, заголовок.</li>
+          <li><strong>&lt;nav&gt;</strong> — блок с навигационными ссылками. Может быть внутри header или отдельно.</li>
+          <li><strong>&lt;main&gt;</strong> — главный контент страницы. На странице должен быть только один!</li>
+          <li><strong>&lt;footer&gt;</strong> — подвал: копирайт, контакты, ссылки.</li>
+          <li><strong>&lt;aside&gt;</strong> — боковая колонка, дополнительный контент, реклама.</li>
+        </ul>
+      </div>
+
+      <div class="theory-block">
+        <h3>📝 Теги контента</h3>
+        <ul>
+          <li><strong>&lt;article&gt;</strong> — самостоятельный материал: пост в блоге, новость, карточка товара.</li>
+          <li><strong>&lt;section&gt;</strong> — тематический раздел. Обязательно должен иметь заголовок.</li>
+          <li><strong>&lt;h1&gt;–&lt;h6&gt;</strong> — заголовки. h1 — один на странице, самый важный.</li>
+          <li><strong>&lt;p&gt;</strong> — параграф текста.</li>
+          <li><strong>&lt;figure&gt; + &lt;figcaption&gt;</strong> — изображение с подписью.</li>
+          <li><strong>&lt;time&gt;</strong> — дата или время с атрибутом datetime.</li>
+        </ul>
+      </div>
+
+      <div class="code-example">
+        <div class="code-header">
+          <span class="code-lang">html · Статья в блоге</span>
+          <button class="code-copy" onclick="copyCode(this)">Копировать</button>
+        </div>
+        <div class="code-body"><code><span class="c-tag">&lt;article&gt;</span>
+  <span class="c-tag">&lt;header&gt;</span>
+    <span class="c-tag">&lt;h2&gt;</span>10 советов по CSS Grid<span class="c-tag">&lt;/h2&gt;</span>
+    <span class="c-tag">&lt;time</span> <span class="c-attr">datetime</span>=<span class="c-val">"2025-05-01"</span><span class="c-tag">&gt;</span>1 мая 2025<span class="c-tag">&lt;/time&gt;</span>
+  <span class="c-tag">&lt;/header&gt;</span>
+
+  <span class="c-tag">&lt;p&gt;</span>CSS Grid — мощный инструмент...<span class="c-tag">&lt;/p&gt;</span>
+
+  <span class="c-tag">&lt;figure&gt;</span>
+    <span class="c-tag">&lt;img</span> <span class="c-attr">src</span>=<span class="c-val">"grid.png"</span> <span class="c-attr">alt</span>=<span class="c-val">"Схема Grid"</span><span class="c-tag">/&gt;</span>
+    <span class="c-tag">&lt;figcaption&gt;</span>Пример Grid-раскладки<span class="c-tag">&lt;/figcaption&gt;</span>
+  <span class="c-tag">&lt;/figure&gt;</span>
+<span class="c-tag">&lt;/article&gt;</span></code></div>
+      </div>
+
+      <div class="tip">
+        <div class="tip-icon">⚠️</div>
+        <div class="tip-text">
+          <strong>Частая ошибка:</strong> использовать <code>&lt;section&gt;</code> вместо <code>&lt;div&gt;</code> просто чтобы добавить «семантику». Section нужен только когда у блока есть смысловой заголовок. Иначе используй обычный <code>&lt;div&gt;</code>.
+        </div>
+      </div>
+
+      <div class="step-nav">
+        <button class="btn-prev" onclick="goStep(0)">← Назад</button>
+        <button class="btn-next" onclick="goStep(2)">Структура страницы →</button>
+      </div>
+    </div>
+
+    <!-- ── STEP 2: Правильная структура ── -->
+    <div class="lesson-step" id="step-2">
+      <div class="step-badge badge-html">HTML · Урок 1</div>
+      <h1 class="step-heading">Правильная структура<br/>страницы</h1>
+      <p class="step-lead">Посмотрим на полную структуру реальной страницы и разберём каждый элемент. А потом потренируемся расставлять теги сами.</p>
+
+      <div class="demo-box">
+        <div class="demo-label">Визуальная структура страницы</div>
+        <div class="demo-inner">
+          <div class="sem-demo">
+            <div class="sem-demo-header">
+              &lt;header&gt; — шапка (логотип + навигация)
+            </div>
+            <div class="sem-demo-main">
+              <div class="sem-demo-article">
+                &lt;main&gt;<br/>
+                &nbsp;&nbsp;&lt;article&gt; — основной контент&lt;/article&gt;<br/>
+              </div>
+              <div class="sem-demo-aside">
+                &lt;aside&gt;<br/>
+                боковая колонка
+              </div>
+            </div>
+            <div class="sem-demo-footer">
+              &lt;footer&gt; — подвал сайта
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="code-example">
+        <div class="code-header">
+          <span class="code-lang">html · Полная структура страницы</span>
+          <button class="code-copy" onclick="copyCode(this)">Копировать</button>
+        </div>
+        <div class="code-body"><code><span class="c-tag">&lt;body&gt;</span>
+
+  <span class="c-tag">&lt;header&gt;</span>
+    <span class="c-tag">&lt;a</span> <span class="c-attr">href</span>=<span class="c-val">"/"</span><span class="c-tag">&gt;</span>МойСайт<span class="c-tag">&lt;/a&gt;</span>
+    <span class="c-tag">&lt;nav&gt;</span>
+      <span class="c-tag">&lt;a</span> <span class="c-attr">href</span>=<span class="c-val">"/blog"</span><span class="c-tag">&gt;</span>Блог<span class="c-tag">&lt;/a&gt;</span>
+      <span class="c-tag">&lt;a</span> <span class="c-attr">href</span>=<span class="c-val">"/about"</span><span class="c-tag">&gt;</span>О нас<span class="c-tag">&lt;/a&gt;</span>
+    <span class="c-tag">&lt;/nav&gt;</span>
+  <span class="c-tag">&lt;/header&gt;</span>
+
+  <span class="c-tag">&lt;main&gt;</span>
+    <span class="c-tag">&lt;article&gt;</span>
+      <span class="c-tag">&lt;h1&gt;</span>Название статьи<span class="c-tag">&lt;/h1&gt;</span>
+      <span class="c-tag">&lt;p&gt;</span>Текст статьи...<span class="c-tag">&lt;/p&gt;</span>
+    <span class="c-tag">&lt;/article&gt;</span>
+
+    <span class="c-tag">&lt;aside&gt;</span>
+      <span class="c-tag">&lt;h2&gt;</span>Похожие статьи<span class="c-tag">&lt;/h2&gt;</span>
+    <span class="c-tag">&lt;/aside&gt;</span>
+  <span class="c-tag">&lt;/main&gt;</span>
+
+  <span class="c-tag">&lt;footer&gt;</span>
+    <span class="c-tag">&lt;p&gt;</span>© 2025 МойСайт<span class="c-tag">&lt;/p&gt;</span>
+  <span class="c-tag">&lt;/footer&gt;</span>
+
+<span class="c-tag">&lt;/body&gt;</span></code></div>
+      </div>
+
+      <!-- DRAG & DROP -->
+      <div class="drag-area" id="dragArea">
+        <div class="drag-title">🎯 Мини-практика: перетащи теги на правильные места</div>
+
+        <div class="drag-chips" id="dragChips">
+          <div class="drag-chip" draggable="true" data-tag="header" ondragstart="dragStart(event)">header</div>
+          <div class="drag-chip" draggable="true" data-tag="nav" ondragstart="dragStart(event)">nav</div>
+          <div class="drag-chip" draggable="true" data-tag="main" ondragstart="dragStart(event)">main</div>
+          <div class="drag-chip" draggable="true" data-tag="footer" ondragstart="dragStart(event)">footer</div>
+          <div class="drag-chip" draggable="true" data-tag="article" ondragstart="dragStart(event)">article</div>
+        </div>
+
+        <div style="display:flex;flex-direction:column;gap:8px">
+          <div class="drop-label">Шапка сайта:</div>
+          <div class="drop-zone" id="dz-header" data-answer="header" data-placeholder="Перетащи сюда тег..."
+            ondragover="dragOver(event)" ondrop="drop(event)" ondragleave="dragLeave(event)"></div>
+
+          <div class="drop-label">Основной контент:</div>
+          <div class="drop-zone" id="dz-main" data-answer="main" data-placeholder="Перетащи сюда тег..."
+            ondragover="dragOver(event)" ondrop="drop(event)" ondragleave="dragLeave(event)"></div>
+
+          <div class="drop-label">Навигационное меню:</div>
+          <div class="drop-zone" id="dz-nav" data-answer="nav" data-placeholder="Перетащи сюда тег..."
+            ondragover="dragOver(event)" ondrop="drop(event)" ondragleave="dragLeave(event)"></div>
+
+          <div class="drop-label">Подвал сайта:</div>
+          <div class="drop-zone" id="dz-footer" data-answer="footer" data-placeholder="Перетащи сюда тег..."
+            ondragover="dragOver(event)" ondrop="drop(event)" ondragleave="dragLeave(event)"></div>
+
+          <div class="drop-label">Самостоятельный материал (пост, статья):</div>
+          <div class="drop-zone" id="dz-article" data-answer="article" data-placeholder="Перетащи сюда тег..."
+            ondragover="dragOver(event)" ondrop="drop(event)" ondragleave="dragLeave(event)"></div>
+        </div>
+
+        <div style="margin-top:14px">
+          <button class="btn-next" onclick="checkDrag()" style="padding:11px 24px;font-size:.8rem">Проверить</button>
+        </div>
+      </div>
+
+      <div class="step-nav">
+        <button class="btn-prev" onclick="goStep(1)">← Назад</button>
+        <button class="btn-next" onclick="goStep(3)">Проверь себя →</button>
+      </div>
+    </div>
+
+    <!-- ── STEP 3: Проверь себя ── -->
+    <div class="lesson-step" id="step-3">
+      <div class="step-badge badge-quiz">Проверка знаний</div>
+      <h1 class="step-heading">Проверь себя 🎯</h1>
+      <p class="step-lead">Ответь на вопросы по пройденному материалу. Можно ошибаться — это просто тренировка, правильные ответы сразу покажутся.</p>
+
+      <div class="mini-quiz" id="miniQuiz">
+
+        <div class="mq-item" id="mq0">
+          <div class="mq-q">1. Для чего используется тег <code>&lt;nav&gt;</code>?</div>
+          <div class="mq-options">
+            <div class="mq-opt" onclick="pickAnswer(0, 0, 1)">
+              <div class="mq-circle">А</div>
+              <span>Для создания навигационного блока со ссылками</span>
+            </div>
+            <div class="mq-opt" onclick="pickAnswer(0, 1, 1)">
+              <div class="mq-circle">Б</div>
+              <span>Для нового абзаца текста</span>
+            </div>
+            <div class="mq-opt" onclick="pickAnswer(0, 2, 1)">
+              <div class="mq-circle">В</div>
+              <span>Для изображений и медиа</span>
+            </div>
+          </div>
+          <div class="mq-feedback" id="fb0"></div>
+        </div>
+
+        <div class="mq-item" id="mq1">
+          <div class="mq-q">2. Сколько тегов <code>&lt;main&gt;</code> должно быть на странице?</div>
+          <div class="mq-options">
+            <div class="mq-opt" onclick="pickAnswer(1, 0, 1)">
+              <div class="mq-circle">А</div>
+              <span>Сколько угодно, зависит от дизайна</span>
+            </div>
+            <div class="mq-opt" onclick="pickAnswer(1, 1, 2)">
+              <div class="mq-circle">Б</div>
+              <span>Ровно один — это главный контент страницы</span>
+            </div>
+            <div class="mq-opt" onclick="pickAnswer(1, 2, 1)">
+              <div class="mq-circle">В</div>
+              <span>Не меньше двух — для мобильной и десктопной версии</span>
+            </div>
+          </div>
+          <div class="mq-feedback" id="fb1"></div>
+        </div>
+
+        <div class="mq-item" id="mq2">
+          <div class="mq-q">3. В чём разница между <code>&lt;article&gt;</code> и <code>&lt;section&gt;</code>?</div>
+          <div class="mq-options">
+            <div class="mq-opt" onclick="pickAnswer(2, 0, 0)">
+              <div class="mq-circle">А</div>
+              <span>Никакой разницы, они взаимозаменяемы</span>
+            </div>
+            <div class="mq-opt" onclick="pickAnswer(2, 1, 2)">
+              <div class="mq-circle">Б</div>
+              <span>article — самостоятельный материал; section — тематический раздел с заголовком</span>
+            </div>
+            <div class="mq-opt" onclick="pickAnswer(2, 2, 0)">
+              <div class="mq-circle">В</div>
+              <span>article только для текстов, section для любого контента</span>
+            </div>
+          </div>
+          <div class="mq-feedback" id="fb2"></div>
+        </div>
+
+        <div class="mq-item" id="mq3">
+          <div class="mq-q">4. Что лучше использовать для боковой колонки с виджетами?</div>
+          <div class="mq-options">
+            <div class="mq-opt" onclick="pickAnswer(3, 0, 0)">
+              <div class="mq-circle">А</div>
+              <span>&lt;div class="sidebar"&gt;</span>
+            </div>
+            <div class="mq-opt" onclick="pickAnswer(3, 1, 0)">
+              <div class="mq-circle">Б</div>
+              <span>&lt;section class="sidebar"&gt;</span>
+            </div>
+            <div class="mq-opt" onclick="pickAnswer(3, 2, 2)">
+              <div class="mq-circle">В</div>
+              <span>&lt;aside&gt;</span>
+            </div>
+          </div>
+          <div class="mq-feedback" id="fb3"></div>
+        </div>
+
+      </div>
+
+      <div class="step-nav">
+        <button class="btn-prev" onclick="goStep(2)">← Назад</button>
+        <button class="btn-next" id="toResultBtn" onclick="goStep(4)" disabled>Посмотреть результат →</button>
+      </div>
+    </div>
+
+    <!-- ── STEP 4: Результат ── -->
+    <div class="lesson-step" id="step-4">
+      <div class="final-screen">
+        <div class="final-trophy">🏆</div>
+        <h1 class="final-title">Урок завершён!</h1>
+        <p class="final-sub">Ты изучил семантическую разметку HTML. Теперь ты знаешь, когда и какой тег использовать — и почему это важно.</p>
+
+        <div class="final-score">
+          <span class="final-score-num" id="finalScore">0</span>
+          <span class="final-score-label">/ 4 правильных ответов</span>
+        </div>
+
+        <p class="final-sub" id="finalMsg">Ты готов к первому заданию!</p>
+
+        <div class="final-actions">
+          <a href="/frontend/pages/main/main.html" class="final-btn-primary">
+            Перейти к заданиям →
+          </a>
+          <button class="final-btn-sec" onclick="restartLesson()">
+            ↺ Пройти снова
+          </button>
+        </div>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<!-- AI FAB -->
+<button class="ai-fab" id="aiFab" onclick="toggleAiChat()" title="Спросить AI">🤖</button>
+
+<!-- AI CHAT -->
+<div class="ai-chat-popup" id="aiChatPopup">
+  <div class="ai-cp-header">
+    <div class="ai-cp-header-left">
+      <div class="ai-cp-avatar">🤖<span class="ai-cp-dot"></span></div>
+      <div>
+        <div class="ai-cp-name">ТестЛаб AI</div>
+        <div class="ai-cp-status" id="aiCpStatus">Онлайн</div>
+      </div>
+    </div>
+    <div style="display:flex;gap:4px">
+      <button class="ai-cp-btn" onclick="clearAiChat()">🗑</button>
+      <button class="ai-cp-btn" onclick="toggleAiChat()">✕</button>
+    </div>
+  </div>
+  <div class="ai-cp-messages" id="aiCpMessages">
+    <div class="ai-cp-row ai-cp-ai">
+      <div class="ai-cp-bubble ai-cp-bubble-ai">
+        <p>Привет! 👋 Я помогу разобраться с теорией урока.</p>
+        <p>Спроси что не понятно — объясню проще!</p>
+        <span class="ai-cp-time">сейчас</span>
+      </div>
+    </div>
+  </div>
+  <div class="ai-cp-typing" id="aiCpTyping" style="display:none">
+    <div class="ai-cp-bubble ai-cp-bubble-ai ai-cp-typing-bubble">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+  <div class="ai-cp-input-area">
+    <textarea id="aiCpInput" class="ai-cp-input" placeholder="Напиши вопрос..." rows="1" maxlength="1000"
+      onkeydown="aiChatKey(event)" oninput="aiChatResize(this)"></textarea>
+    <button class="ai-cp-send" onclick="aiChatSend()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="22" y1="2" x2="11" y2="13"/>
+        <polygon points="22 2 15 22 11 13 2 9 22 2"/>
+      </svg>
+    </button>
+  </div>
+  <div class="ai-cp-footer">Powered by <strong>Gemini AI</strong></div>
+</div>
+
+<script src="/frontend/pages/main/js/lesson.js"></script>
+</body>
+</html>
