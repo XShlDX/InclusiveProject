@@ -65,23 +65,11 @@
 
     function enter() {
       welcome.classList.add('fade-out');
-    setTimeout(() => {
-      welcome.classList.add('hidden');
-      split.classList.remove('hidden');
-      split.classList.add('fade-in');
-    }, 600);
-  }
-
-  enterBtn.addEventListener('click', enter);
-
-  document.addEventListener('keydown', (e) => {
-  if (e.code === 'Enter' || e.code === 'Space') {
-    // только если split ещё не показан
-    if (!split.classList.contains('hidden')) return;
-    e.preventDefault(); // предотвращает прокрутку при Space
-    enter();
-  }
-});
-  </script> 
-</body>
+      setTimeout(() => {
+        welcome.classList.add('hidden');
+        split.classList.remove('hidden');
+        split.classList.add('fade-in');
+      }, 600);
+    });
+  </script>
 </html>
