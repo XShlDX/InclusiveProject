@@ -1,18 +1,4 @@
-let RequestData = {
-  async getHistory() {
-    return [];
-  },
-  async sendPrompt(prompt) {
-    return `Я локальный помощник KahoSound. Вопрос принят: "${prompt}". Подключите /frontend/modules/script.js, чтобы отвечал внешний AI-сервис.`;
-  }
-};
-
-try {
-  const module = await import('/frontend/modules/script.js');
-  if (module.RequestData) RequestData = module.RequestData;
-} catch (err) {
-  console.info('Внешний AI-модуль не найден, включён локальный режим чата.');
-}
+import { RequestData } from '/frontend/modules/script.js';
 
 // ── НАСТРОЙКИ ──────────────────────────────────────────
 const CHAT_CONFIG = {
@@ -120,11 +106,11 @@ function chatAutoResize(el) {
 }
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-//  ВЫЗОВ AI
+//  ВЫЗОВ AI  →  page = "incl"
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 async function callAI(messages) {
   const lastMessage = messages[messages.length - 1].content;
-  const response = await RequestData.sendPrompt(lastMessage);
+  const response = await RequestData.sendPrompt(lastMessage, "incl");
 
   if (typeof response === 'string') return response;
   if (response?.reply)              return response.reply;
@@ -213,8 +199,8 @@ function scrollToBottom() {
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 //  ЭКСПОРТ В WINDOW — чтобы onclick в HTML работал
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-window.toggleChat    = toggleChat;
-window.chatSend      = chatSend;
-window.chatHandleKey = chatHandleKey;
+window.toggleChat     = toggleChat;
+window.chatSend       = chatSend;
+window.chatHandleKey  = chatHandleKey;
 window.chatAutoResize = chatAutoResize;
-window.clearChat     = clearChat;
+window.clearChat      = clearChat;

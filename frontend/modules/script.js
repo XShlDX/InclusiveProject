@@ -1,7 +1,7 @@
 // БҰЛ ФАЙЛДІҢ ІШІНДЕ ЗАПРОСТАРДЫ ҚАБЫЛДАУҒА АРНАЛҒАН ФУНКЦИЯЛАР БОЛАДЫ
 // type="module" болу керек
 // import {RequestData} from "/frontend/modules/script.js" арқылы импорттау керек
-// ПРИМЕР const resp = await RequestData.sendPrompt("Сенің промптың");
+// ПРИМЕР const resp = await RequestData.sendPrompt("Сенің промптың", "incl");
 
 
 const API_URL = 'http://127.0.0.1:8000';
