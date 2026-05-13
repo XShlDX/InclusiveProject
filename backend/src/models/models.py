@@ -3,7 +3,13 @@ from sqlalchemy.orm import Mapped, sessionmaker, DeclarativeBase, mapped_column
 
 from src.services.config import config_obj
 
-engine = create_engine(config_obj.database_url, echo=False)
+engine = create_engine(
+    config_obj.database_url,
+    echo=False,
+    pool_pre_ping=True,       # проверяет соединение перед использованием
+    pool_recycle=300,          # пересоздаёт соединения каждые 5 минут
+    connect_args={"sslmode": "require"},  # обязательно для Neon
+)
 session = sessionmaker(engine)
 
 class Base(DeclarativeBase):
