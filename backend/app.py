@@ -23,11 +23,8 @@ app = FastAPI(
 app.add_middleware(GZipMiddleware, minimum_size=1000)
 
 origins = [
-    "http://localhost",
+    "https://quiz-spirit.vercel.app",
     "http://localhost:5000",
-    "http://127.0.0.1",
-    "http://127.0.0.1:5000",
-    "*",
 ]
 
 app.add_middleware(
