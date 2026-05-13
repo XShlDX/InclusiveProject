@@ -1,4 +1,4 @@
-import { RequestData } from '/frontend/modules/script.js';
+import { RequestData } from '/modules/script.js';
 
 /* =========================================
    HTML ESCAPE HELPER
