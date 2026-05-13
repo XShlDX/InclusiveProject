@@ -14,7 +14,6 @@
   <body class="page-scroll">
     <div class="noise"></div>
 
-    <!-- HEADER -->
     <header class="header">
       <div class="header__inner">
         <a href="/frontend/pages/home/index.html" class="header__back" aria-label="На главную">
@@ -41,12 +40,13 @@
           <a href="about.html">О нас</a>
         </nav>
 
-        <div
-          class="header__accessibility"
-          title="Настройки доступности"
-          aria-label="Меню доступности"
+        <a 
+          href="/frontend/pages/forInclusive/forinclusive.html" 
+          class="header__accessibility" 
+          title="Версия для Инклюзивных людей" 
+          aria-label="Версия для слабовидящих"
         >
-          <button class="a11y-btn" id="a11yBtn" aria-expanded="false">
+          <div class="a11y-btn">
             <svg
               width="24"
               height="24"
@@ -80,32 +80,11 @@
                 stroke-linecap="round"
               />
             </svg>
-          </button>
-          <div class="a11y-dropdown" id="a11yDropdown" role="menu">
-            <button
-              onclick="document.body.classList.toggle('large-text')"
-              role="menuitem"
-            >
-              🔠 Крупный шрифт
-            </button>
-            <button
-              onclick="document.body.classList.toggle('high-contrast')"
-              role="menuitem"
-            >
-              🌗 Контраст
-            </button>
-            <button
-              onclick="document.body.classList.toggle('dyslexia-font')"
-              role="menuitem"
-            >
-              🅰️ Шрифт дислексии
-            </button>
           </div>
-        </div>
+        </a>
       </div>
     </header>
 
-    <!-- MAIN -->
     <main class="page-main">
       <section class="hero">
         <div class="hero__glow"></div>
@@ -216,7 +195,6 @@
       </section>
     </main>
 
-    <!-- MODAL -->
     <div
       class="modal"
       id="modal"
@@ -245,68 +223,6 @@
       </div>
     </div>
 
-
-
-<!-- AI FAB -->
-<button class="ai-fab" id="chat-fab" onclick="toggleChat()" title="Спросить AI">
-  🤖
-  <span class="ai-fab-badge" id="chat-fab-badge" style="display:none">1</span>
-</button>
-
-<!-- AI CHAT POPUP -->
-<div class="ai-chat-popup" id="chat-popup">
-  <div class="ai-cp-header">
-    <div class="ai-cp-header-left">
-      <div class="ai-cp-avatar">🤖<span class="ai-cp-dot"></span></div>
-      <div>
-        <div class="ai-cp-name">ТестЛаб AI</div>
-        <div class="ai-cp-status" id="cp-status">Онлайн</div>
-      </div>
-    </div>
-    <div style="display:flex;gap:4px">
-      <button class="ai-cp-btn" onclick="clearChat()">🗑</button>
-      <button class="ai-cp-btn" onclick="toggleChat()">✕</button>
-    </div>
-  </div>
-
-<div class="ai-cp-messages" id="cp-messages">
-  <div class="cp-msg-row cp-ai">
-    <div class="cp-bubble cp-bubble-ai">
-      <p>Привет! 👋 Я помогу с заданиями по HTML и CSS.</p>
-      <p>Спроси что-нибудь!</p>
-      <span class="cp-time">сейчас</span>
-    </div>
-  </div>
-</div>
-
-<div class="ai-cp-typing" id="cp-typing" style="display:none">
-  <div class="cp-bubble cp-bubble-ai ai-cp-typing-bubble">
-    <span></span><span></span><span></span>
-  </div>
-</div>
-
-  <div class="ai-cp-input-area">
-    <textarea id="cp-input" class="ai-cp-input" placeholder="Напиши вопрос..." rows="1" maxlength="1000"
-      onkeydown="chatHandleKey(event)" oninput="chatAutoResize(this)"></textarea>
-    <button class="ai-cp-send" id="cp-send" onclick="chatSend()">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round">
-        <line x1="22" y1="2" x2="11" y2="13"/>
-        <polygon points="22 2 15 22 11 13 2 9 22 2"/>
-      </svg>
-    </button>
-  </div>
-  <div class="ai-cp-footer">Powered by <strong id="cp-provider">AI Assistant</strong></div>
-</div>
-
-<script type="module">
-  import { RequestData } from '/frontend/modules/script.js';
-  window.RequestData = RequestData;
-
-  // Грузим Chat.js только после того как RequestData готов
-  const script = document.createElement('script');
-  script.src = '/frontend/pages/forInclusive/Chat.js';
-  document.body.appendChild(script);
-</script>
 <script type="module" src="/frontend/pages/main/js/main.js"></script>
 
   </body>

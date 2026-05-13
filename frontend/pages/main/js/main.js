@@ -303,19 +303,19 @@ async function openModal(id) {
       tags: tagMap[id] ?? ['HTML'],
       desc: data.description ?? 'Ответь на все вопросы и нажми «Отправить».',
       quiz: data.questions.map(q => {
-  const options = q.options.map((o) => ({ text: o.text, originalIndex: o.index }));
-  for (let i = options.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [options[i], options[j]] = [options[j], options[i]];
-  }
-  return {
-    q: q.text,
-    options: options.map(o => o.text),
-    originalIndexes: options.map(o => o.originalIndex),
-    answer: null
-  };
-})
-};
+        const options = q.options.map((o) => ({ text: o.text, originalIndex: o.index }));
+        for (let i = options.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [options[i], options[j]] = [options[j], options[i]];
+        }
+        return {
+          q: q.text,
+          options: options.map(o => o.text),
+          originalIndexes: options.map(o => o.originalIndex),
+          answer: null
+        };
+      })
+    };
   } catch (err) {
     console.error('Ошибка загрузки:', err);
     document.querySelector('.modal__box').innerHTML = `
@@ -348,34 +348,3 @@ document.querySelectorAll('.card').forEach(card => {
 modalClose.addEventListener('click', closeModal);
 modalBackdrop.addEventListener('click', closeModal);
 document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
-
-/* =========================================
-   ACCESSIBILITY DROPDOWN
-========================================= */
-const a11yBtn = document.getElementById('a11yBtn');
-const a11yDropdown = document.getElementById('a11yDropdown');
-
-a11yBtn.addEventListener('click', () => {
-  const isOpen = a11yDropdown.classList.toggle('open');
-  a11yBtn.setAttribute('aria-expanded', isOpen);
-});
-
-document.addEventListener('click', e => {
-  if (!e.target.closest('.header__accessibility')) {
-    a11yDropdown.classList.remove('open');
-    a11yBtn.setAttribute('aria-expanded', false);
-  }
-});
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -1,45 +1,390 @@
-.cp-msg-row { 
-  display: flex; 
-  flex-direction: column; 
-  max-width: 85%; 
-  align-items: flex-start;
-}
-.cp-ai { align-self: flex-start; }
-.cp-user { align-self: flex-end; align-items: flex-end; }
-.cp-bubble { 
-  padding: 10px 14px; 
-  border-radius: 16px; 
-  font-size: 13px; 
-  line-height: 1.55;
-  width: fit-content;
-  max-width: 100%;
-}
-.cp-bubble p + p { margin-top: 4px; }
-.cp-bubble-ai { 
-  background: #1a1e28;
-  border: 1px solid rgba(240,242,245,0.1);
-  color: #f0f2f5;
-  border-bottom-left-radius: 4px;
-}
-.cp-bubble-user { 
-  background: #e8ff57;
-  color: #0b0d12; 
-  border-bottom-right-radius: 4px; 
-  font-weight: 600; 
-}
-.cp-time { 
-  display: block; 
-  font-size: 10px; 
-  color: rgba(255,255,255,.3); 
-  margin-top: 4px; 
-}
-.cp-user .cp-time { text-align: right; }
-.ai-cp-status.thinking { color: #e8ff57; }
-.ai-cp-messages {
+/* ================================================
+   FORM QUIZ — WRAPPER
+================================================ */
+.form-quiz {
   display: flex;
   flex-direction: column;
+  gap: 0;
+  padding-top: 8px;
+}
+
+/* ================================================
+   FORM QUIZ — HEADER
+================================================ */
+.form-quiz__header {
+  margin-bottom: 28px;
+}
+
+.form-quiz__title {
+  font-family: var(--font-display);
+  font-size: clamp(1.4rem, 3vw, 2rem);
+  font-weight: 900;
+  letter-spacing: -.03em;
+  line-height: 1.1;
+  margin-bottom: 10px;
+  background: linear-gradient(120deg, #fff 40%, var(--main-accent));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.form-quiz__desc {
+  font-size: .875rem;
+  font-weight: 300;
+  color: var(--text-muted);
+  line-height: 1.65;
+  margin-bottom: 10px;
+}
+
+.form-quiz__tags {
+  display: flex;
+  gap: 6px;
+}
+
+.form-quiz__required-note {
+  font-size: .78rem;
+  color: var(--text-muted);
+  font-weight: 400;
+}
+
+/* ================================================
+   FORM QUIZ — QUESTIONS LIST
+================================================ */
+.form-quiz__questions {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 28px;
+}
+
+/* ================================================
+   FORM QUESTION — CARD
+================================================ */
+.form-question {
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 20px 22px;
+  transition: border-color .2s;
+}
+
+.form-question--unanswered {
+  border-color: rgba(255, 108, 108, 0.55);
+  box-shadow: 0 0 0 3px rgba(255, 108, 108, 0.08);
+  animation: shake .35s ease;
+}
+
+.form-question--correct {
+  border-color: rgba(93, 255, 176, 0.4);
+  background: rgba(93, 255, 176, 0.04);
+}
+
+.form-question--wrong {
+  border-color: rgba(255, 108, 108, 0.4);
+  background: rgba(255, 108, 108, 0.04);
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  20%       { transform: translateX(-5px); }
+  40%       { transform: translateX(5px); }
+  60%       { transform: translateX(-4px); }
+  80%       { transform: translateX(4px); }
+}
+
+/* ================================================
+   FORM QUESTION — HEADER & TEXT
+================================================ */
+.form-question__header {
+  margin-bottom: 14px;
+}
+
+.form-question__text {
+  font-size: .9rem;
+  font-weight: 600;
+  color: var(--text-light);
+  line-height: 1.55;
+}
+
+.form-question__num {
+  font-family: var(--font-display);
+  font-size: .72rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  margin-right: 6px;
+  letter-spacing: .06em;
+}
+
+.form-question__required {
+  color: var(--main-accent);
+  font-size: .85rem;
+  margin-left: 3px;
+  font-weight: 700;
+}
+
+/* ================================================
+   FORM QUESTION — OPTIONS
+================================================ */
+.form-question__options {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* ================================================
+   FORM OPTION — LABEL ROW
+================================================ */
+.form-option {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 11px 14px;
+  border-radius: 10px;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: background .15s, border-color .15s;
+  user-select: none;
+}
+
+.form-option:hover {
+  background: rgba(240, 242, 245, 0.05);
+  border-color: var(--border);
+}
+
+/* Hide native radio */
+.form-option__radio {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+  pointer-events: none;
+}
+
+/* Custom circle */
+.form-option__circle {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: 2px solid rgba(240, 242, 245, 0.25);
+  flex-shrink: 0;
+  position: relative;
+  transition: border-color .15s, background .15s;
+}
+
+.form-option__circle::after {
+  content: '';
+  position: absolute;
+  inset: 3px;
+  border-radius: 50%;
+  background: var(--main-accent);
+  transform: scale(0);
+  transition: transform .15s cubic-bezier(.34, 1.56, .64, 1);
+}
+
+/* Checked state */
+.form-option__radio:checked ~ .form-option__circle {
+  border-color: var(--main-accent);
+}
+
+.form-option__radio:checked ~ .form-option__circle::after {
+  transform: scale(1);
+}
+
+/* Selected option highlight */
+.form-option:has(.form-option__radio:checked) {
+  background: rgba(232, 255, 87, 0.06);
+  border-color: rgba(232, 255, 87, 0.25);
+}
+
+/* Label text */
+.form-option__label {
+  font-size: .875rem;
+  font-weight: 400;
+  color: var(--text-muted);
+  line-height: 1.5;
+  transition: color .15s;
+}
+
+.form-option:has(.form-option__radio:checked) .form-option__label {
+  color: var(--text-light);
+}
+
+/* ================================================
+   RESULT STATES — correct / wrong options
+================================================ */
+.form-option--correct {
+  background: rgba(93, 255, 176, 0.1) !important;
+  border-color: rgba(93, 255, 176, 0.4) !important;
+}
+
+.form-option--correct .form-option__circle {
+  border-color: var(--incl-accent) !important;
+  background: rgba(93, 255, 176, 0.15);
+}
+
+.form-option--correct .form-option__circle::after {
+  background: var(--incl-accent);
+  transform: scale(1);
+}
+
+.form-option--correct .form-option__label {
+  color: var(--incl-accent) !important;
+  font-weight: 600;
+}
+
+.form-option--wrong {
+  background: rgba(255, 108, 108, 0.1) !important;
+  border-color: rgba(255, 108, 108, 0.4) !important;
+}
+
+.form-option--wrong .form-option__circle {
+  border-color: #ff6b6b !important;
+}
+
+.form-option--wrong .form-option__circle::after {
+  background: #ff6b6b;
+  transform: scale(1);
+}
+
+.form-option--wrong .form-option__label {
+  color: #ff8a8a !important;
+  font-weight: 600;
+}
+
+/* Disabled state after submit */
+.form-option:has(input:disabled) {
+  cursor: default;
+}
+
+.form-option:has(input:disabled):hover {
+  background: inherit;
+  border-color: transparent;
+}
+
+/* ================================================
+   FORM QUIZ — FOOTER
+================================================ */
+.form-quiz__footer {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding-top: 4px;
+  flex-wrap: wrap;
+}
+
+/* Secondary button */
+.btn-secondary {
+  background: none;
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+  font-family: var(--font-body);
+  font-size: .875rem;
+  font-weight: 600;
+  padding: 13px 24px;
+  border-radius: 100px;
+  cursor: pointer;
+  transition: color .2s, border-color .2s, background .2s;
+}
+
+.btn-secondary:hover {
+  color: var(--text-light);
+  border-color: rgba(240, 242, 245, 0.3);
+  background: rgba(240, 242, 245, 0.05);
+}
+
+/* ================================================
+   FORM QUIZ — RESULT BLOCK
+================================================ */
+.form-quiz__result {
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 28px 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   gap: 10px;
-  padding: 14px;
-  flex: 1;
-  overflow-y: auto;
+  text-align: center;
+  margin-bottom: 24px;
+  animation: fadeUp .4s ease both;
+}
+
+.form-result__icon {
+  font-size: 2.6rem;
+  line-height: 1;
+}
+
+.form-result__title {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-weight: 900;
+  letter-spacing: -.02em;
+  color: var(--text-light);
+}
+
+.form-result__score {
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+  margin-top: 4px;
+}
+
+.form-result__num {
+  font-family: var(--font-display);
+  font-size: 2.6rem;
+  font-weight: 900;
+  color: var(--main-accent);
+  letter-spacing: -.04em;
+  line-height: 1;
+}
+
+.form-result__denom {
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--text-muted);
+}
+
+.form-result__pct {
+  font-size: .85rem;
+  color: var(--text-muted);
+  font-weight: 400;
+}
+
+.form-result__bar {
+  width: 100%;
+  max-width: 280px;
+  height: 6px;
+  background: rgba(240, 242, 245, 0.1);
+  border-radius: 100px;
+  overflow: hidden;
+  margin-top: 4px;
+}
+
+.form-result__bar-fill {
+  height: 100%;
+  border-radius: 100px;
+  transition: width .8s cubic-bezier(.4, 0, .2, 1);
+}
+
+.form-result__exit-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: none;
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+  font-family: var(--font-body);
+  font-size: .82rem;
+  font-weight: 600;
+  padding: 10px 20px;
+  border-radius: 100px;
+  cursor: pointer;
+  transition: color .2s, border-color .2s;
+  margin-top: 8px;
+}
+
+.form-result__exit-btn:hover {
+  color: var(--text-light);
+  border-color: rgba(240, 242, 245, 0.3);
 }
