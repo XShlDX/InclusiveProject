@@ -35,53 +35,10 @@
         </div>
 
         <nav class="header__nav">
-          <a href="#">Задания</a>
+          <a href="#" class="active">Задания</a>
           <a href="courses.html">Курсы</a>
           <a href="about.html">О нас</a>
         </nav>
-
-        <a 
-          href="/frontend/pages/forInclusive/forinclusive.html" 
-          class="header__accessibility" 
-          title="Версия для Инклюзивных людей" 
-          aria-label="Версия для слабовидящих"
-        >
-          <div class="a11y-btn">
-            <svg
-              width="24"
-              height="24"
-              viewBox="0 0 28 28"
-              fill="none"
-              aria-hidden="true"
-            >
-              <circle cx="14" cy="5.5" r="3" fill="currentColor" />
-              <path
-                d="M4 12h20"
-                stroke="currentColor"
-                stroke-width="2.2"
-                stroke-linecap="round"
-              />
-              <path
-                d="M14 11v8"
-                stroke="currentColor"
-                stroke-width="2.2"
-                stroke-linecap="round"
-              />
-              <path
-                d="M14 19l-4 5.5"
-                stroke="currentColor"
-                stroke-width="2.2"
-                stroke-linecap="round"
-              />
-              <path
-                d="M14 19l4 5.5"
-                stroke="currentColor"
-                stroke-width="2.2"
-                stroke-linecap="round"
-              />
-            </svg>
-          </div>
-        </a>
       </div>
     </header>
 
@@ -94,136 +51,34 @@
       </section>
 
       <section class="cards" id="cards">
-        <article
-          class="card"
-          data-id="1"
-          tabindex="0"
-          role="button"
-          aria-label="Открыть задание 1"
-        >
+        <article class="card" data-id="1" tabindex="0" role="button">
           <div class="card__num">01</div>
           <div class="card__tags"><span class="tag tag--html">HTML</span></div>
           <h2 class="card__title">Семантическая разметка</h2>
-          <p class="card__desc">
-            Расставь правильные семантические теги для новостной статьи.
-          </p>
+          <p class="card__desc">Расставь правильные семантические теги для новостной статьи.</p>
           <div class="card__arrow">→</div>
         </article>
-
-        <article
-          class="card"
-          data-id="2"
-          tabindex="0"
-          role="button"
-          aria-label="Открыть задание 2"
-        >
-          <div class="card__num">02</div>
-          <div class="card__tags"><span class="tag tag--css">CSS</span></div>
-          <h2 class="card__title">Flexbox-раскладка</h2>
-          <p class="card__desc">
-            Создай адаптивный навбар с помощью только flexbox.
-          </p>
-          <div class="card__arrow">→</div>
-        </article>
-
-        <article
-          class="card"
-          data-id="3"
-          tabindex="0"
-          role="button"
-          aria-label="Открыть задание 3"
-        >
-          <div class="card__num">03</div>
-          <div class="card__tags">
-            <span class="tag tag--html">HTML</span
-            ><span class="tag tag--css">CSS</span>
-          </div>
-          <h2 class="card__title">Форма обратной связи</h2>
-          <p class="card__desc">
-            Свёрстай доступную форму с валидацией и стилями фокуса.
-          </p>
-          <div class="card__arrow">→</div>
-        </article>
-
-        <article
-          class="card"
-          data-id="4"
-          tabindex="0"
-          role="button"
-          aria-label="Открыть задание 4"
-        >
-          <div class="card__num">04</div>
-          <div class="card__tags"><span class="tag tag--css">CSS</span></div>
-          <h2 class="card__title">CSS Grid галерея</h2>
-          <p class="card__desc">
-            Построй фото-галерею с масонри-эффектом через CSS Grid.
-          </p>
-          <div class="card__arrow">→</div>
-        </article>
-
-        <article
-          class="card"
-          data-id="5"
-          tabindex="0"
-          role="button"
-          aria-label="Открыть задание 5"
-        >
-          <div class="card__num">05</div>
-          <div class="card__tags"><span class="tag tag--html">HTML</span></div>
-          <h2 class="card__title">Таблицы и доступность</h2>
-          <p class="card__desc">
-            Создай таблицу данных с правильными ARIA-атрибутами.
-          </p>
-          <div class="card__arrow">→</div>
-        </article>
-
-        <article
-          class="card"
-          data-id="6"
-          tabindex="0"
-          role="button"
-          aria-label="Открыть задание 6"
-        >
-          <div class="card__num">06</div>
-          <div class="card__tags"><span class="tag tag--css">CSS</span></div>
-          <h2 class="card__title">Анимация и переходы</h2>
-          <p class="card__desc">
-            Добавь плавные CSS-анимации к кнопкам и карточкам.
-          </p>
-          <div class="card__arrow">→</div>
-        </article>
+        <article class="card" data-id="2" tabindex="0" role="button"><div class="card__num">02</div><div class="card__tags"><span class="tag tag--css">CSS</span></div><h2 class="card__title">Flexbox-раскладка</h2><p class="card__desc">Создай адаптивный навбар с помощью только flexbox.</p><div class="card__arrow">→</div></article>
+        <article class="card" data-id="3" tabindex="0" role="button"><div class="card__num">03</div><div class="card__tags"><span class="tag tag--html">HTML</span><span class="tag tag--css">CSS</span></div><h2 class="card__title">Форма обратной связи</h2><p class="card__desc">Свёрстай доступную форму с валидацией и стилями фокуса.</p><div class="card__arrow">→</div></article>
+        <article class="card" data-id="4" tabindex="0" role="button"><div class="card__num">04</div><div class="card__tags"><span class="tag tag--css">CSS</span></div><h2 class="card__title">CSS Grid галерея</h2><p class="card__desc">Построй фото-галерею с масонри-эффектом через CSS Grid.</p><div class="card__arrow">→</div></article>
+        <article class="card" data-id="5" tabindex="0" role="button"><div class="card__num">05</div><div class="card__tags"><span class="tag tag--html">HTML</span></div><h2 class="card__title">Таблицы и доступность</h2><p class="card__desc">Создай таблицу данных с правильными ARIA-атрибутами.</p><div class="card__arrow">→</div></article>
+        <article class="card" data-id="6" tabindex="0" role="button"><div class="card__num">06</div><div class="card__tags"><span class="tag tag--css">CSS</span></div><h2 class="card__title">Анимация и переходы</h2><p class="card__desc">Добавь плавные CSS-анимации к кнопкам и карточкам.</p><div class="card__arrow">→</div></article>
       </section>
     </main>
 
-    <div
-      class="modal"
-      id="modal"
-      role="dialog"
-      aria-modal="true"
-      aria-labelledby="modalTitle"
-    >
+    <div class="modal" id="modal" role="dialog" aria-modal="true">
       <div class="modal__backdrop" id="modalBackdrop"></div>
       <div class="modal__box">
-        <button class="modal__close" id="modalClose" aria-label="Закрыть">
-          ✕
-        </button>
+        <button class="modal__close" id="modalClose">✕</button>
         <div class="modal__tag-row" id="modalTags"></div>
         <h2 class="modal__title" id="modalTitle"></h2>
         <p class="modal__desc" id="modalDesc"></p>
         <div class="modal__code-block">
-          <div class="modal__code-header">
-            <span id="modalCodeLang">html</span>
-            <button class="copy-btn" id="copyBtn">Копировать</button>
-          </div>
           <pre><code id="modalCode"></code></pre>
-        </div>
-        <div class="modal__footer">
-          <button class="btn-primary" id="modalStart">Начать задание</button>
         </div>
       </div>
     </div>
 
-<script type="module" src="/frontend/pages/main/js/main.js"></script>
-
+    <script type="module" src="/frontend/pages/main/js/main.js"></script>
   </body>
 </html>

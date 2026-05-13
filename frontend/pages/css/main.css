@@ -353,7 +353,7 @@ body.page-scroll {
 .header__nav {
   display: flex;
   gap: 28px;
-  flex: 1;
+  margin-left: auto;
 }
 
 .header__nav a {
@@ -365,6 +365,11 @@ body.page-scroll {
 }
 
 .header__nav a:hover { color: var(--text-light); }
+
+.header__nav a.active {
+  color: var(--main-accent);
+  font-weight: 700;
+}
 
 /* Accessibility button */
 .header__accessibility { margin-left: auto; position: relative; }
@@ -1256,9 +1261,124 @@ body.dyslexia-font { font-family: 'Comic Sans MS', 'Chalkboard SE', cursive; }
   .ai-fab { right: 16px; bottom: 20px; }
 }
 
+/* ================================================
+   MEDIA — 550px
+================================================ */
+@media (max-width: 550px) {
+  /* Header */
+  .header__inner {
+    padding: 0 20px;
+    gap: 16px;
+    height: 58px;
+  }
 
+  .header__nav {
+    gap: 16px;
+  }
 
+  .header__nav a {
+    font-size: .78rem;
+  }
 
+  /* Hero */
+  .page-main {
+    padding: 0 20px 80px;
+  }
 
+  .hero {
+    padding: 52px 0 40px;
+  }
 
+  .hero__sub {
+    font-size: .95rem;
+  }
 
+  /* Cards — 2 columns */
+  .cards {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+  }
+
+  /* Modal */
+  .modal__box {
+    padding: 24px 20px;
+    margin: 16px;
+    border-radius: 20px;
+  }
+
+  /* Task intro */
+  .task-intro__start-btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+/* ================================================
+   MEDIA — 400px
+================================================ */
+@media (max-width: 400px) {
+  /* Header — hide nav, keep logo + back */
+  .header__inner {
+    padding: 0 16px;
+    gap: 12px;
+    height: 54px;
+  }
+
+  .header__back span {
+    display: none; /* hide "На главную" text, keep arrow */
+  }
+
+  .header__nav {
+    gap: 10px;
+  }
+
+  .header__nav a {
+    font-size: .72rem;
+  }
+
+  .logo-text {
+    font-size: .85rem;
+  }
+
+  /* Hero */
+  .page-main {
+    padding: 0 16px 60px;
+  }
+
+  .hero {
+    padding: 40px 0 28px;
+  }
+
+  .hero__label {
+    font-size: .65rem;
+    padding: 5px 12px;
+  }
+
+  /* Cards — single column */
+  .cards {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .card {
+    padding: 20px;
+  }
+
+  /* Modal */
+  .modal__box {
+    padding: 20px 16px;
+    margin: 10px;
+    border-radius: 16px;
+  }
+
+  .task-intro__meta {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .task-intro__start-btn {
+    width: 100%;
+    padding: 14px 24px;
+    font-size: .82rem;
+  }
+}
