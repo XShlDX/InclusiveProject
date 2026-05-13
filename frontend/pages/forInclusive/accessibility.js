@@ -455,4 +455,14 @@
     areToneHintsMuted,
     announce
   };
+
+  // Экспортируем функции управления глобально —
+  // чтобы script.js мог вызывать их через window.toggleContrast() и т.д.
+  window.toggleContrast   = toggleContrast;
+  window.toggleSpacing    = toggleSpacing;
+  window.increaseFontSize = increaseFontSize;
+  window.decreaseFontSize = decreaseFontSize;
+  window.toggleHoverSpeak = toggleHoverSpeak;
+  window.toggleSpeech     = toggleSpeech;
+  window.toggleMic        = toggleMic;
 })();
