@@ -14,3 +14,5 @@ config_obj = Config()
 
 if config_obj.database_url.startswith("postgres://"):
     config_obj.database_url = config_obj.database_url.replace("postgres://", "postgresql://", 1)
+
+print(f"[CONFIG] DATABASE_URL starts with: {config_obj.database_url[:20]}")
