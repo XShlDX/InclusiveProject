@@ -4,13 +4,25 @@ from google.genai import types
 from src.services.config import config_obj
 from src.services.prompt import role_prompt_for_incl, build_role_prompt_for_regular
 
-client = genai.Client(api_key=config_obj.api_key)
+# Ленивая инициализация клиента и чатов — важно для serverless
+CHATS: dict = {}
+_client = None
 
-CHATS = {}  # пустой, заполнится в lifespan
 
-def init_chats():
+def get_client():
+    global _client
+    if _client is None:
+        _client = genai.Client(api_key=config_obj.api_key)
+    return _client
+
+
+def get_or_init_chats() -> dict:
+    if CHATS:
+        return CHATS
+
     from src.models.tasksDB import get_task
 
+    client = get_client()
     task = get_task(1)
     questions, answers, options = {}, {}, {}
 
@@ -41,7 +53,15 @@ def init_chats():
         )
     )
 
+    return CHATS
+
+
+def init_chats():
+    get_or_init_chats()
+
+
 async def response_ai_answer(prompt: str, page: str) -> str | None:
-    chat = CHATS.get(page, CHATS["incl"])
+    chats = get_or_init_chats()
+    chat = chats.get(page, chats.get("incl"))
     response = await chat.send_message(prompt)
     return response.text
