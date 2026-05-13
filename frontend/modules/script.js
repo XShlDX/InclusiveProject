@@ -1,7 +1,7 @@
 // БҰЛ ФАЙЛДІҢ ІШІНДЕ ЗАПРОСТАРДЫ ҚАБЫЛДАУҒА АРНАЛҒАН ФУНКЦИЯЛАР БОЛАДЫ
 // type="module" болу керек
 
-const API_URL = 'https://inclusive-api.vercel.app/';
+const API_URL = "https://inclusive-api.vercel.app";
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 // AI FUNCTIONS — вызов actions делегирован в Chat.js
