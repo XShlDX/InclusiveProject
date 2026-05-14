@@ -4,170 +4,21 @@
 
 'use strict';
 
-// Темы и вопросы держим рядом с логикой квиза: так их проще менять.
-const TOPICS = [
-  {
-    id: 'sound',
-    name: 'Физика звука',
-    icon: '🔊',
-    questions: [
-      {
-        text: 'Какая нота соответствует частоте ~440 Гц?',
-        answers: ['До', 'Ля', 'Соль', 'Ми'],
-        correct: 1
-      },
-      {
-        text: 'Какой орган человека отвечает за восприятие звука?',
-        answers: ['Глаз', 'Ухо', 'Нос', 'Язык'],
-        correct: 1
-      },
-      {
-        text: 'Что такое «тон»?',
-        answers: ['Амплитуда', 'Скорость', 'Частота', 'Длина волны'],
-        correct: 2
-      },
-      {
-        text: 'Сколько октав у пианино?',
-        answers: ['5', '6', '7', '8'],
-        correct: 2
-      }
-    ]
-  },
-  {
-    id: 'instruments',
-    name: 'Инструменты',
-    icon: '🎸',
-    questions: [
-      {
-        text: 'Сколько струн у классической гитары?',
-        answers: ['4', '5', '6', '7'],
-        correct: 2
-      },
-      {
-        text: 'Какой инструмент самый большой в симфоническом оркестре?',
-        answers: ['Виолончель', 'Контрабас', 'Арфа', 'Туба'],
-        correct: 1
-      },
-      {
-        text: 'Какой из этих инструментов является ударным?',
-        answers: ['Флейта', 'Тромбон', 'Барабан', 'Кларнет'],
-        correct: 2
-      },
-      {
-        text: 'Какой инструмент использует смычок?',
-        answers: ['Скрипка', 'Гитара', 'Труба', 'Фортепиано'],
-        correct: 0
-      }
-    ]
-  },
-  {
-    id: 'computers',
-    name: 'Компьютеры',
-    icon: '💻',
-    questions: [
-      {
-        text: 'Первый компьютер Apple?',
-        answers: ['IBM 6070', 'Macintosh', 'Apple II', 'Macbook M2'],
-        correct: 1
-      },
-      {
-        text: 'Основатель Facebook?',
-        answers: ['Марк Цукерберг', 'Элон Маск', 'Билл Гейтс', 'Стив Джобс'],
-        correct: 0
-      },
-      {
-        text: 'Какой язык программирования самый популярный в 2024 году?',
-        answers: ['Python', 'JavaScript', 'Java', 'C#'],
-        correct: 1
-      },
-      {
-        text: 'Какой из этих процессоров самый мощный?',
-        answers: ['Intel Core i9-13900K', 'AMD Ryzen 9 7950X', 'Apple M2 Max', 'NVIDIA Grace'],
-        correct: 2
-      }
-    ]
-  },
-  {
-    id: 'space',
-    name: 'Космос',
-    icon: '🚀',
-    questions: [
-      {
-        text: 'Какая планета самая большая в Солнечной системе?',
-        answers: ['Земля', 'Марс', 'Юпитер', 'Сатурн'],
-        correct: 2
-      },
-      {
-        text: 'Какая планета самая близкая к Солнцу?',
-        answers: ['Венера', 'Меркурий', 'Земля', 'Марс'],
-        correct: 1
-      },
-      {
-        text: 'Какой космический аппарат первым достиг поверхности Луны?',
-        answers: ['Аполлон-11', 'Луноход-1', 'Спутник-1', 'Восток-1'],
-        correct: 0
-      },
-      {
-        text: 'Сколько спутников у планеты Нептун?',
-        answers: ['13', '14', '15', '16'],
-        correct: 2
-      }
-    ]
-  },
-  {
-    id: 'avengers',
-    name: 'Мстители',
-    icon: '🛡️',
-    questions: [
-      {
-        text: 'Кто изображён на фото?',
-        image: 'images/iron_man.jpg',
-        imageAlt: 'Железный человек',
-        answers: ['Тони Старк', 'Стив Роджерс', 'Брюс Бэннер', 'Питер Паркер'],
-        correct: 0
-      },
-      {
-        text: 'Как зовут героя на фото?',
-        image: 'images/captain_america.jpg',
-        imageAlt: 'Капитан Америка',
-        answers: ['Тор', 'Стив Роджерс', 'Клинт Бартон', 'Сэм Уилсон'],
-        correct: 1
-      },
-      {
-        text: 'Какой герой держит молот Мьёльнир?',
-        image: 'images/thor.jpg',
-        imageAlt: 'Тор',
-        answers: ['Локи', 'Тор', 'Доктор Стрэндж', 'Соколиный глаз'],
-        correct: 1
-      },
-      {
-        text: 'Кто превращается в этого героя?',
-        image: 'images/hulk.jpg',
-        imageAlt: 'Халк',
-        answers: ['Питер Квилл', 'Брюс Бэннер', 'Скотт Лэнг', 'Баки Барнс'],
-        correct: 1
-      },
-      {
-        text: 'Кто изображён на фото?',
-        image: 'images/spider_man.jpg',
-        imageAlt: 'Человек-паук',
-        answers: ['Питер Паркер', 'Тони Старк', 'Стив Роджерс', 'Т’Чалла'],
-        correct: 0
-      }
-    ]
-  }
-];
-
 const TILE_TONES = [300, 400, 500, 600];
 const TILE_CLASSES = ['tile-red', 'tile-blue', 'tile-yellow', 'tile-green'];
 const TILE_ICONS = ['▲', '◆', '●', '■'];
 
+let TOPICS = [];
 let currentTopic = null;
 let currentQ = 0;
 let score = 0;
 let answered = false;
 
-document.addEventListener('DOMContentLoaded', initQuiz);
+// Темы и вопросы держим рядом с логикой квиза: так их проще менять.
+document.addEventListener('DOMContentLoaded', async () => {
+  TOPICS = await window.RequestData.getQuizTopics();
+  initQuiz();
+});
 
 function initQuiz() {
   buildSidebar();
@@ -187,13 +38,13 @@ function buildSidebar() {
   TOPICS.forEach(topic => {
     const el = document.createElement('button');
     el.className = 'nav-item';
-    el.id = 'nav-' + topic.id;
+    el.id = 'nav-' + (topic.topic_id || topic.id);
     el.type = 'button';
     el.innerHTML = `
       <span class="nav-item-icon">${topic.icon}</span>
       <span class="nav-item-name">${topic.name}</span>
     `;
-    el.addEventListener('click', () => startTopic(topic.id));
+    el.addEventListener('click', () => startTopic(topic.topic_id || topic.id));
     nav.appendChild(el);
   });
 }
@@ -212,7 +63,7 @@ function buildStartCards() {
       <div class="topic-card-icon">${topic.icon}</div>
       <div class="topic-card-title">${topic.name}</div>
     `;
-    card.addEventListener('click', () => startTopic(topic.id));
+    card.addEventListener('click', () => startTopic(topic.topic_id || topic.id));
     wrap.appendChild(card);
   });
 }
@@ -226,7 +77,7 @@ function showScreen(id) {
 }
 
 function startTopic(id) {
-  currentTopic = TOPICS.find(topic => topic.id === id);
+  currentTopic = TOPICS.find(topic => topic.topic_id === id || topic.id === id);
   if (!currentTopic) return;
 
   currentQ = 0;
@@ -260,7 +111,7 @@ function renderQuestionImage(question) {
   const image = document.getElementById('q-image');
   if (!image) return;
 
-  const shouldShowImage = currentTopic?.id === 'avengers' && Boolean(question.image);
+  const shouldShowImage = (currentTopic?.topic_id === 'avengers' || currentTopic?.id === 'avengers') && Boolean(question.image);
 
   if (!shouldShowImage) {
     image.hidden = true;
@@ -270,7 +121,7 @@ function renderQuestionImage(question) {
   }
 
   image.src = question.image;
-  image.alt = question.imageAlt || question.text;
+  image.alt = question.image_alt || question.imageAlt || question.text;
   image.hidden = false;
 }
 
@@ -280,17 +131,22 @@ function renderAnswers(question) {
 
   grid.innerHTML = '';
 
-  question.answers.forEach((answer, index) => {
+  // answers — массив объектов {id, text, index} от бэкенда
+  question.answers.forEach((answer, i) => {
+    const answerText = typeof answer === 'object' ? answer.text : answer;
+    const answerIndex = typeof answer === 'object' ? answer.index : i;
+
     const btn = document.createElement('button');
-    btn.className = `answer-tile ${TILE_CLASSES[index % TILE_CLASSES.length]}`;
+    btn.className = `answer-tile ${TILE_CLASSES[i % TILE_CLASSES.length]}`;
     btn.type = 'button';
+    btn.dataset.answerIndex = answerIndex;
     btn.innerHTML = `
-      <span class="tile-icon">${TILE_ICONS[index]}</span>
-      <span class="tile-text">${answer}</span>
+      <span class="tile-icon">${TILE_ICONS[i]}</span>
+      <span class="tile-text">${answerText}</span>
     `;
 
-    btn.addEventListener('mouseenter', () => playToneHint(index));
-    btn.addEventListener('click', () => selectAnswer(index));
+    btn.addEventListener('mouseenter', () => playToneHint(i));
+    btn.addEventListener('click', () => selectAnswer(answerIndex));
     grid.appendChild(btn);
   });
 }

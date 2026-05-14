@@ -8,8 +8,8 @@
   let audioCtx = null;
 
   const resultSounds = {
-    correct: new Audio('correct.mp3'),
-    error: new Audio('error.mp3')
+    correct: new Audio('/frontend/images/correct.mp3'),
+    error: new Audio('/frontend/images/error.mp3')
   };
 
   function getAudioCtx() {
