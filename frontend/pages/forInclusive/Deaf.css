@@ -12,7 +12,7 @@
   --yellow-l:#5fffd4;
   --green-l: #2ecc9e;
 
-  --sidebar-w: 260px;
+  --sidebar-w: 15rem;   /* rem масштабируется вместе с zoom */
   --bg:        #0d1f1e;
   --bg2:       #132625;
   --surface:   rgba(95,255,212,0.08);
@@ -37,8 +37,12 @@ html, body {
   font-family: 'Nunito', sans-serif;
   background: var(--bg);
   color: var(--text);
-  overflow: hidden;
+  /* overflow:hidden ломается при браузерном zoom — заменяем на clip */
+  overflow: clip;
 }
+
+/* При zoom > 100% браузер увеличивает px-размеры,
+   поэтому все ключевые размеры переводим в rem/% */
 
 html { font-size: var(--font-base, 18px); }
 
@@ -87,7 +91,10 @@ body {
   flex-direction: column;
   z-index: 100;
   transition: transform .3s ease;
-  overflow: hidden; /* важно — ничего не вылезает */
+  overflow: hidden;
+  /* При zoom сайдбар должен занять всю высоту viewport */
+  height: 100dvh;
+  height: 100vh; /* fallback */
 }
 
 .sidebar-logo {
@@ -262,7 +269,9 @@ body {
    ========================================================= */
 .main {
   margin-left: var(--sidebar-w);
-  height: 100vh;
+  height: 100dvh;
+  height: 100vh; /* fallback */
+  /* overflow:hidden → auto: при zoom контент не обрезается */
   overflow: hidden;
   position: relative;
 }
@@ -276,11 +285,18 @@ body {
   inset: 0;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  padding: 20px;
+  justify-content: flex-start; /* при zoom justify-content:center режет верх */
+  padding: clamp(16px, 3vh, 32px) clamp(12px, 2vw, 24px);
   overflow-y: auto;
+  overflow-x: hidden;
   animation: fadeUp .35s ease;
+  /* Минимальная высота = 100% контейнера, но может расти при zoom */
+  min-height: 100%;
 }
+/* Центрируем содержимое вертикально когда оно меньше экрана */
+.screen > * { flex-shrink: 0; }
+#screen-start  { justify-content: center; }
+#screen-result { justify-content: center; }
 .screen.active { display: flex; }
 @keyframes fadeUp {
   from { opacity: 0; transform: translateY(14px); }
@@ -367,7 +383,7 @@ body {
    ========================================================= */
 #screen-question {
   justify-content: flex-start;
-  padding: 0;
+  padding: 0 0 1rem;
 }
 .q-header {
   width: 100%;
@@ -405,13 +421,13 @@ body {
 }
 
 .q-card {
-  width: calc(100% - 32px);
+  width: calc(100% - 2rem);
   max-width: 920px;
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: var(--radius-lg);
-  padding: 28px 32px 18px;
-  margin: 16px auto 0;
+  padding: clamp(16px, 2.5vh, 30px) clamp(14px, 2.5vw, 32px) clamp(12px, 1.8vh, 20px);
+  margin: clamp(10px, 1.5vh, 18px) auto 0;
   text-align: center;
   backdrop-filter: blur(12px);
 }
@@ -435,19 +451,19 @@ body {
 .answers-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 12px;
-  width: calc(100% - 32px);
+  gap: clamp(8px, 1.2vh, 14px);
+  width: calc(100% - 2rem);
   max-width: 920px;
-  margin: 14px auto 0;
-  padding-bottom: 20px;
+  margin: clamp(8px, 1.2vh, 16px) auto 0;
+  padding-bottom: clamp(12px, 2vh, 24px);
 }
 
 .answer-tile {
   position: relative;
   display: flex;
   align-items: center;
-  gap: 14px;
-  padding: 20px 20px;
+  gap: clamp(8px, 1vw, 14px);
+  padding: clamp(12px, 1.8vh, 22px) clamp(12px, 1.5vw, 20px);
   border-radius: var(--radius);
   cursor: pointer;
   font-size: clamp(.84rem, 2.2vw, 1.06rem);
@@ -664,11 +680,11 @@ body {
 
 .chat-popup {
   position: fixed;
-  bottom: 100px;
+  bottom: clamp(80px, 11vh, 110px);
   right: 28px;
   z-index: 499;
-  width: 360px;
-  height: 520px;
+  width: min(360px, calc(100vw - 56px));
+  height: min(520px, 72vh);
   max-height: 75vh;
   background: linear-gradient(160deg, #132625 0%, #0a1817 100%);
   border: 1px solid var(--border);
@@ -1010,3 +1026,60 @@ body.voice-active .sidebar-logo-icon {
   overflow: hidden; clip: rect(0,0,0,0);
   border: 0;
 }
+
+/* =========================================================
+   БРАУЗЕРНЫЙ ZOOM — адаптация при 110%, 125%, 150%, 200%
+   При zoom браузер уменьшает эффективный viewport.
+   Используем max-width breakpoints которые срабатывают
+   когда zoom сжимает логический размер окна.
+   ========================================================= */
+
+/* zoom ~125%: sidebar начинает поджиматься */
+@media (max-width: 1100px) and (min-width: 701px) {
+  :root { --sidebar-w: 13rem; }
+  .sidebar-logo-text { font-size: .9rem; }
+  .nav-item { padding: 9px 10px; font-size: .72rem; }
+  .nav-item-icon { font-size: 16px; }
+  .sidebar-section-label { font-size: .58rem; padding: 12px 14px 6px; }
+  .a11y-group .nav-item { padding: 7px 4px; }
+}
+
+/* zoom ~150%: sidebar компактный */
+@media (max-width: 900px) and (min-width: 701px) {
+  :root { --sidebar-w: 11rem; }
+  .sidebar-logo-text { font-size: .82rem; }
+  .nav-item { padding: 8px 8px; gap: 8px; font-size: .68rem; }
+  .nav-item-icon { font-size: 14px; }
+  .answers-grid { grid-template-columns: 1fr; }
+  .q-card { padding: 14px 16px 10px; }
+  .q-header { padding: 10px 16px 8px; }
+}
+
+/* zoom ~175–200%: мобильный режим, сайдбар уходит */
+@media (max-width: 700px) {
+  .sidebar { transform: translateX(-100%); }
+  .sidebar.open { transform: translateX(0); }
+  .sidebar-overlay.open { display: block; }
+  .burger { display: flex; align-items: center; justify-content: center; }
+  .main { margin-left: 0; }
+  .answers-grid { grid-template-columns: 1fr; }
+  .q-card { padding: clamp(12px,3vw,18px) clamp(10px,3vw,16px); }
+  .result-card { padding: 20px 14px; }
+  .result-buttons { flex-direction: column; align-items: stretch; }
+  .btn-main, .btn-outline { width: 100%; justify-content: center; }
+}
+
+/* zoom 200%+ (очень маленький viewport) */
+@media (max-width: 480px) {
+  :root { --sidebar-w: 100%; }
+  .start-topics-preview { grid-template-columns: 1fr 1fr; gap: 8px; }
+  .topic-card { padding: 12px 8px; }
+  .topic-card-icon { font-size: 1.4rem; }
+  .q-text { font-size: clamp(.86rem, 4vw, 1rem); }
+  .chat-popup { right: 8px; left: 8px; width: auto; bottom: 74px; }
+  .chat-fab { right: 12px; bottom: 12px; width: 48px; height: 48px; font-size: 20px; }
+}
+
+/* Предотвращаем горизонтальный скролл при любом zoom */
+.screen { max-width: 100%; }
+.q-card, .answers-grid { max-width: min(920px, 100%); }
