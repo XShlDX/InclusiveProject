@@ -6,6 +6,9 @@
   <title>О нас — ТестЛаб</title>
   <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;700;900&family=Mulish:wght@300;400;600&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="/frontend/pages/css/about.css">
+  <style>
+    
+  </style>
 </head>
 <body>
 <div class="noise"></div>
@@ -25,8 +28,26 @@
       <a href="courses.html">Курсы</a>
       <a href="about.html" class="active">О нас</a>
     </nav>
+
+    <!-- Burger button (mobile only) -->
+    <button class="burger-btn" id="burgerBtn" aria-label="Открыть меню" aria-expanded="false">
+      <span class="burger-btn__line"></span>
+      <span class="burger-btn__line"></span>
+      <span class="burger-btn__line"></span>
+    </button>
   </div>
 </header>
+
+<!-- Mobile nav drawer -->
+<div class="mobile-nav" id="mobileNav" aria-hidden="true">
+  <div class="mobile-nav__backdrop" id="mobileNavBackdrop"></div>
+  <div class="mobile-nav__drawer">
+    <div class="mobile-nav__label">Навигация</div>
+    <a href="main.html"><span class="mnav-dot"></span>Задания</a>
+    <a href="courses.html"><span class="mnav-dot"></span>Курсы</a>
+    <a href="about.html" class="active"><span class="mnav-dot"></span>О нас</a>
+  </div>
+</div>
 
 <!-- HERO -->
 <div class="hero">

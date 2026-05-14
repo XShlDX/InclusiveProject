@@ -6,10 +6,10 @@
     <title>ТестЛаб — Задания</title>
     <link rel="stylesheet" href="/frontend/pages/css/main.css" />
     <link rel="stylesheet" href="/frontend/pages/main/css/quiz-styles.css"/>
-    <link
-      href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;700;900&family=Mulish:wght@300;400;600&display=swap"
-      rel="stylesheet"
-    />
+    <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;700;900&family=Mulish:wght@300;400;600&display=swap" rel="stylesheet"/>
+    <style>
+      
+    </style>
   </head>
   <body class="page-scroll">
     <div class="noise"></div>
@@ -39,8 +39,26 @@
           <a href="courses.html">Курсы</a>
           <a href="about.html">О нас</a>
         </nav>
+
+        <!-- Burger button (mobile only) -->
+        <button class="burger-btn" id="burgerBtn" aria-label="Открыть меню" aria-expanded="false">
+          <span class="burger-btn__line"></span>
+          <span class="burger-btn__line"></span>
+          <span class="burger-btn__line"></span>
+        </button>
       </div>
     </header>
+
+    <!-- Mobile nav drawer -->
+    <div class="mobile-nav" id="mobileNav" aria-hidden="true">
+      <div class="mobile-nav__backdrop" id="mobileNavBackdrop"></div>
+      <div class="mobile-nav__drawer">
+        <div class="mobile-nav__close-label">Навигация</div>
+        <a href="#" class="active"><span class="mnav-dot"></span>Задания</a>
+        <a href="courses.html"><span class="mnav-dot"></span>Курсы</a>
+        <a href="about.html"><span class="mnav-dot"></span>О нас</a>
+      </div>
+    </div>
 
     <main class="page-main">
       <section class="hero">
